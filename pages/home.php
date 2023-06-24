@@ -1,4 +1,7 @@
+
+
 <?php $current_page = 'home' ?>
+
 <section id="section-1">
   <!-- <figure> -->
   <!-- hero banner bg : set block height -->

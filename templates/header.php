@@ -15,11 +15,10 @@
   <link rel="stylesheet" type="text/css" href="assets/js/slick-1.8.1/slick/slick-theme.css" />
 
   <!-- CUSTOM CSS -->
-  <link rel="stylesheet" href="assets/css/index.css">
   <!-- PAGE SPECEFIC CSS -->
-  <link rel="stylesheet" href="assets/css/<?php $current_page ?>.css">
-
-  <title>Garage Vincent Parrot</title>
+  <link rel="stylesheet" href="/assets/styles/<?php echo $current_page ?>.css">
+  <!-- <link rel="stylesheet" href=" assets/styles/home.css"> -->
+    <title>Garage Vincent Parrot</title>
 </head>
 
 <body>
@@ -28,7 +27,7 @@
     <div class="container">
       <div class="row">
         <a href="index.php" class="logo-parrot">
-          <img src="assets/images/pictures/test.png" alt="logo Vincent Parrot garage">
+          <img src="assets/images/pictures/v_parrot_logo.png" alt="logo Vincent Parrot garage">
           <p>V.PARROT</p>
           <!-- <p>Mécanique</p> -->
         </a>

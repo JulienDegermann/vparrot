@@ -1,5 +1,9 @@
 
-//
-/packages *
 
+
+
+# login files
+*.log
+
+# UML diagrams
 *.drawio
