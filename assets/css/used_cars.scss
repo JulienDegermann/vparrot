@@ -1,0 +1,94 @@
+@import 'colors.scss';
+
+#section-1 {
+  .filter {
+    border: 1px solid $grey-100;
+    padding: 5px;
+    border-radius: 5px;
+
+    h2 {
+      text-align: center;
+    }
+
+    input[type="range"] {
+      background-color: red;
+      width: 100%;
+    }
+  }
+
+  .grid {
+    display: grid;
+    gap: 2em;
+
+    @media screen and (min-width: 1024px) and (max-width: 1199px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media screen and (min-width: 1200px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .car-vignette {
+    border: 1px solid $grey-100;
+    height: auto;
+    border-radius: 5px;
+    align-items: center;
+    transition: all .5s ease;
+
+    &:hover {
+      background: $grey-100;
+      box-shadow: $grey-100 0 0 20px;
+      transition: all .5s ease;
+
+      .text h2,
+      .text li {
+        color: #fff;
+        transition: all .5s ease;
+      }
+    }
+
+    .img {
+      max-width: 100%;
+
+      img {
+        width: 100%;
+        object-fit: cover;
+        aspect-ratio: 1;
+      }
+    }
+
+    .text {
+      max-width: 100%;
+      padding-left: 1em;
+
+      h2,
+      li {
+        transition: all .5s ease;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      li {
+        color: $grey-70;  
+      }
+
+      .price {
+        width: 50%;
+        font-size: 1.5em;
+        font-weight: bold;
+        margin-top: 1em;
+        color: $grey-100;
+      }
+
+      .button {
+        margin-left: 50%;
+        word-wrap:initial;
+        padding: 1em;
+      }
+    }
+  }
+
+}

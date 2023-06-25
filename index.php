@@ -7,11 +7,12 @@
 <!-- ----------------------------------------------------------- HEADER CALL -->
 <?php require_once 'templates/header.php'; ?>
 
+<!-- -------------------------------------------------------------- HOME.PHP -->
 <!-- ------------------------------------------------------ SERVICES SECTION -->
 <section id="section-1">
   <!-- HERO BANNER BACKGROUND -->
   <!-- <figure> -->
-  <img src="assets/images/pictures/garage.jpeg" alt="hero banner">
+  <img src="assets/images/pictures/repair.jpeg" alt="hero banner">
   <!-- </figure> -->
   <div class="container">
     <div class="row">
@@ -29,7 +30,8 @@
             <li>Pièces neuves ou reconditionnées</li>
 
           </ul>
-          <a class="workshop button" ref="workshop.php">Demander un devis</a>
+          <a class="button" href="http://localhost:8888/pages/contact.php">Demander un devis</a>
+
 
         </div>
         <div class="services">
@@ -42,7 +44,7 @@
             <li>Climatisation</li>
 
           </ul>
-          <a class="workshop button" a href="workshop.php">Demander un devis</a>
+          <a class="button" href="http://localhost:8888/pages/contact.php">Demander un devis</a>
 
         </div>
         <div class="services">
@@ -52,7 +54,7 @@
             <li>Véhicules révisés</li>
             <li>Garantie jusqu'à 12 mois</li>
           </ul>
-          <a class="workshop button" href="used_cars.php">Nos véhicules d'occasion</a>
+          <a class="button" href="http://localhost:8888/pages/used_cars.php">Nos véhicules d'occasion</a>
 
         </div>
       </div>
@@ -72,17 +74,32 @@
           [
             'name' => 'John',
             'note' => 5,
-            'comment' => '5 étoiles'
+            'comment' => 'Garage au top du top !!'
           ],
           [
-            'name' => 'John',
+            'name' => 'Patrice',
             'note' => 4,
-            'comment' => '4 étoiles'
+            'comment' => 'Réactif et prix dans la moyenne'
           ],
           [
-            'name' => 'Doe',
+            'name' => 'Martine',
             'note' => 3,
-            'comment' => '3 étoiles'
+            'comment' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa100aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa200'
+          ],
+          [
+            'name' => 'Alfred',
+            'note' => 2,
+            'comment' => 'Compétent mais désagréable, dommage'
+          ],
+          [
+            'name' => 'Barbie',
+            'note' => 1,
+            'comment' => 'Comportement déplacé et regard pesant…'
+          ],
+          [
+            'name' => 'Ken',
+            'note' => 0,
+            'comment' => 'Le personnel n\'a pas arrêté de reluquer ma copine !!'
           ]
         ];
         foreach ($notes as $note) {
@@ -105,7 +122,7 @@
           </div>
 
         <?php
-        }
+        };
         ?>
       </div>
     </div>

@@ -224,4 +224,93 @@ footer .phone {
 .slick-list {
   width: 100%;
   height: 100%;
-}/*# sourceMappingURL=index.css.map */
+}
+
+#section-1 address {
+  width: 100%;
+}
+#section-1 address * {
+  font-style: normal;
+  font-size: 1.5em;
+  text-align: center;
+}
+#section-1 address strong {
+  font-size: 1.9em;
+  font-weight: bold;
+  text-align: center;
+}
+#section-1 .phone {
+  font-size: 3em;
+  color: hsl(189.47, 61.29%, 18.24%);
+  margin-left: 50%;
+  transform: translateX(-50%);
+  display: inline-block;
+  width: -moz-max-content;
+  width: max-content;
+  font-weight: bold;
+  transform: translateX(-50%);
+  display: inline-block;
+}
+#section-1 iframe {
+  width: 100%;
+}
+#section-1 form {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  position: relative;
+}
+#section-1 label {
+  width: 50%;
+  max-width: 50%;
+  display: inline-block;
+  padding: 5px;
+}
+#section-1 label input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid hsla(189.47, 61.29%, 18.24%, 0.7);
+}
+#section-1 label[for=message] {
+  max-width: 100%;
+  width: 100%;
+}
+#section-1 label[for=message] textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid hsla(189.47, 61.29%, 18.24%, 0.7);
+}
+#section-1 .tos {
+  color: hsla(189.47, 61.29%, 18.24%, 0.7);
+  width: auto;
+  max-width: 100%;
+}
+#section-1 .tos input {
+  width: auto;
+  vertical-align: baseline;
+}
+#section-1 .tos a {
+  font-weight: bold;
+  color: hsl(189.47, 61.29%, 18.24%);
+}
+#section-1 input::-moz-placeholder, #section-1 textarea::-moz-placeholder {
+  color: hsla(189.47, 61.29%, 18.24%, 0.4);
+}
+#section-1 input::placeholder,
+#section-1 textarea::placeholder {
+  color: hsla(189.47, 61.29%, 18.24%, 0.4);
+}
+#section-1 input:focus,
+#section-1 textarea:focus {
+  background: hsla(48.76, 100%, 49.22%, 0.1);
+  color: hsl(189.47, 61.29%, 18.24%);
+  border: 1px solid hsl(189.47, 61.29%, 18.24%);
+}
+#section-1 input:focus-visible,
+#section-1 textarea:focus-visible {
+  outline: none;
+}
+#section-1 input[type=submit] {
+  margin-left: 100%;
+  transform: translateX(-100%);
+}/*# sourceMappingURL=contact.css.map */

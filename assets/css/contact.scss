@@ -1,0 +1,107 @@
+@import 'index.scss';
+
+#section-1 {
+  address {
+    width: 100%;
+
+    * {
+      font-style: normal;
+      font-size: 1.5em;
+      text-align: center;
+    }
+
+    strong {
+      font-size: 1.9em;
+      font-weight: bold;
+      text-align: center;
+    }
+  }
+
+  .phone {
+    font-size: 3em;
+    color: hsl(189.47, 61.29%, 18.24%);
+    margin-left: 50%;
+    transform: translateX(-50%);
+    display: inline-block;
+    width: max-content;
+    font-weight: bold;
+
+    transform: translateX(-50%);
+    display: inline-block;
+  }
+
+  iframe {
+    width: 100%;
+  }
+
+  form {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  label {
+    width: 50%;
+    max-width: 50%;
+    display: inline-block;
+    padding: 5px;
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid $grey-70;
+    }
+  }
+
+  label[for="message"] {
+    max-width: 100%;
+    width: 100%;
+
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid $grey-70;
+
+    }
+  }
+
+  .tos {
+    color: $grey-70;
+    width: auto;
+    max-width: 100%;
+
+    input {
+      width: auto;
+      vertical-align: baseline;
+    }
+
+    a {
+      font-weight: bold;
+      color: $grey-100;
+    }
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: $grey-40;
+  }
+
+  input:focus,
+  textarea:focus {
+    background: $yellow-10;
+    color: $grey-100;
+    border: 1px solid $grey-100;
+  }
+
+  input:focus-visible,
+  textarea:focus-visible {
+    outline: none;
+  }
+
+  input[type="submit"] {
+    margin-left: 100%;
+    transform: translateX(-100%);    
+  }
+
+}
