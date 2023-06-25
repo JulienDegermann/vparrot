@@ -1,5 +1,3 @@
-
-
 // mobile menu calls through burger menu
 $('.menu').click(() => {
   console.log('click')
@@ -7,7 +5,34 @@ $('.menu').click(() => {
   $('header').toggleClass('hidden')
 })
 
-
+// slick slide services
+$('.show-services').slick({
+  infinite: true,
+  autoplay: true,
+  slidesToShow: 3,
+  arrows: false,
+  slidesToScroll: 1,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        infinite: true,
+        arrows: true
+      }
+    },
+    {
+      breakpoint: 520,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        infinite: true,
+        arrows: false
+      }
+    }
+  ]
+});
 
 // slick slide comments
 $('.comments-slider').slick({
@@ -32,8 +57,9 @@ $('.comments-slider').slick({
         slidesToShow: 2,
         slidesToScroll: 1,
         infinite: true,
-        arrows: false 
+        arrows: false
       }
     }
   ]
 });
+

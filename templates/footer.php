@@ -25,7 +25,7 @@
 
 <!------------------------------------------------------------ SCRIPTS CALLS -->
 <!-- jQuery -->
-<script src="assets/js/jquery_3.7.0.js"></script>
+<script src="assets/js/jQuery_v3.7.0.js"></script>
 <!-- Slick JS (sliders) -->
 <script type="text/javascript" src=" assets/js/slick-1.8.1/slick/slick.min.js"></script>
 <!--  -->

@@ -1,0 +1,65 @@
+#section-1 {
+  height: 100vh;
+  position: relative;
+  margin: 0 auto 120px;
+}
+#section-1 .container {
+  position: absolute;
+  top: 120px;
+  margin: auto;
+  height: 100%;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+#section-1 .row {
+  align-items: flex-end;
+}
+#section-1 img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+}
+#section-1 .row h1 {
+  color: hsl(0, 100%, 49.8%);
+}
+#section-1 .show-services {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 100%;
+  height: 50%;
+}
+#section-1 .services {
+  height: 100%;
+  background-color: hsla(189.47, 61.29%, 18.24%, 0.4);
+  margin-left: 1em;
+  margin-right: 1em;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 5px;
+}
+#section-1 .services * {
+  height: auto;
+  text-align: center;
+}
+#section-1 .services h2 {
+  color: hsl(48.76, 100%, 49.22%);
+  margin: 0;
+}
+#section-1 .services .button.workshop {
+  align-self: flex-end;
+}
+#section-1 .services li {
+  padding: 0.3em;
+  color: #fff;
+}
+
+#section-2 * {
+  text-align: center;
+}
+#section-2 .comment-note svg {
+  fill: hsl(48.76, 100%, 49.22%);
+}/*# sourceMappingURL=home.css.map */
