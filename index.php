@@ -1,17 +1,17 @@
 <!-- --------------------------------------------------------- PHP FUNCTIONS -->
 <!-- PAGE NAME -->
-<?php $current_page = 'home' ?>
+<?php $current_page = 'home'; ?>
 
 <!-- ----------------------------------------------------------------------- -->
 
 <!-- ----------------------------------------------------------- HEADER CALL -->
-<?php require_once 'templates/header.php' ?>
+<?php require_once 'templates/header.php'; ?>
 
 <!-- ------------------------------------------------------ SERVICES SECTION -->
 <section id="section-1">
   <!-- HERO BANNER BACKGROUND -->
   <!-- <figure> -->
-  <img src="assets/images/pictures/car.jpeg" alt="hero banner">
+  <img src="assets/images/pictures/garage.jpeg" alt="hero banner">
   <!-- </figure> -->
   <div class="container">
     <div class="row">
@@ -66,55 +66,45 @@
 <section id="section-2">
   <div class="container">
     <div class="row">
-      <!-- 
-        NOTE THANKS TO JS OR PHP
-        note = x;
-          .note-element.append(star-filled x X)
-          AND
-          .note-element.append(star x 5-X)
-        }
-      -->
       <div class="comments-slider">
         <?php
         $notes = [
           [
             'name' => 'John',
             'note' => 5,
-            'comment' => 'je suis très content'
+            'comment' => '5 étoiles'
           ],
           [
             'name' => 'John',
-            'note' => 5,
-            'comment' => 'je suis très content'
-          ],
-          [
-            'name' => 'John',
-            'note' => 5,
-            'comment' => 'je suis très content'
+            'note' => 4,
+            'comment' => '4 étoiles'
           ],
           [
             'name' => 'Doe',
             'note' => 3,
-            'comment' => 'je suis content'
+            'comment' => '3 étoiles'
           ]
-          ];
-        foreach($notes as $note) {
-          ?>
+        ];
+        foreach ($notes as $note) {
+        ?>
           <div class="comment">
-          <h3 class="comment-title"><?php echo $note['name']?></h 3>
-          <div class="comment-note">
-            <?php require 'assets/images/icons/star-filled.svg' ?>
-            <?php require 'assets/images/icons/star-filled.svg' ?>
-            <?php require 'assets/images/icons/star.svg' ?>
-            <?php require 'assets/images/icons/star.svg' ?>
-            <?php require 'assets/images/icons/star.svg' ?>
-          </div>
-          <p class="comment-text">
-          <?php echo $note['comment']?>
-          </p>
-        </div>
+            <h3 class="comment-title"><?php echo $note['name'] ?></h 3>
+              <div class="comment-note">
 
-      <?php 
+                <?php
+                for ($i = 1; $i <= $note['note']; $i++) {
+                  require 'assets/images/icons/star-filled.svg';
+                };
+                for ($i = 0; $i < (5 - $note['note']); $i++) {
+                  require 'assets/images/icons/star.svg';
+                }; ?>
+              </div>
+              <p class="comment-text">
+                <?php echo $note['comment']; ?>
+              </p>
+          </div>
+
+        <?php
         }
         ?>
       </div>
@@ -124,4 +114,4 @@
 <!-- ----------------------------------------------------------------------- -->
 
 <!-- ----------------------------------------------------------- FOOTER CALL -->
-<?php require_once 'templates/footer.php' ?>
+<?php require_once 'templates/footer.php'; ?>
