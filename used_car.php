@@ -1,106 +1,13 @@
 <!-- --------------------------------------------------------- PHP FUNCTIONS -->
 <!-- PAGE NAME -->
 <?php $current_page = 'used_car'; ?>
-<?php
-//BDD
-$cars = [
-  [
-    'id' => 1,
-    'marque' => 'Renault',
-    'modèle' => 'Clio',
-    'kilométrage' => 50000,
-    'année' => 2017,
-    'carburant' => 'Essence',
-    'prix' => 8000
-  ],
-  [
-    'id' => 2,
-    'marque' => 'Volkswagen',
-    'modèle' => 'Golf',
-    'kilométrage' => 80000,
-    'année' => 2015,
-    'carburant' => 'Diesel',
-    'prix' => 10000
-  ],
-  [
-    'id' => 3,
-    'marque' => 'Ford',
-    'modèle' => 'Fiesta',
-    'kilométrage' => 35000,
-    'année' => 2018,
-    'carburant' => 'Essence',
-    'prix' => 7000
-  ],
-  [
-    'id' => 4,
-    'marque' => 'BMW',
-    'modèle' => 'Serie 3',
-    'kilométrage' => 100000,
-    'année' => 2014,
-    'carburant' => 'Diesel',
-    'prix' => 12000
-  ],
-  [
-    'id' => 5,
-    'marque' => 'Toyota',
-    'modèle' => 'Corolla',
-    'kilométrage' => 60000,
-    'année' => 2016,
-    'carburant' => 'Essence',
-    'prix' => 9000
-  ],
-  [
-    'id' => 6,
-    'marque' => 'Audi',
-    'modèle' => 'A4',
-    'kilométrage' => 70000,
-    'année' => 2015,
-    'carburant' => 'Diesel',
-    'prix' => 15000
-  ],
-  [
-    'id' => 7,
-    'marque' => 'Peugeot',
-    'modèle' => '308',
-    'kilométrage' => 45000,
-    'année' => 2019,
-    'carburant' => 'Essence',
-    'prix' => 8500
-  ],
-  [
-    'id' => 8,
-    'marque' => 'Mercedes-Benz',
-    'modèle' => 'Classe C',
-    'kilométrage' => 90000,
-    'année' => 2013,
-    'carburant' => 'Diesel',
-    'prix' => 11000
-  ],
-  [
-    'id' => 9,
-    'marque' => 'Fiat',
-    'modèle' => '500',
-    'kilométrage' => 25000,
-    'année' => 2020,
-    'carburant' => 'Essence',
-    'prix' => 7500
-  ],
-  [
-    'id' => 10,
-    'marque' => 'Nissan',
-    'modèle' => 'Qashqai',
-    'kilométrage' => 55000,
-    'année' => 2017,
-    'carburant' => 'Diesel',
-    'prix' => 9500
-  ]
-];
 
 
-?>
+<?php // cars BDD
+require_once 'lib/cars_list.php'; ?>
 
 <!-- ----------------------------------------------------------- HEADER CALL -->
-<?php require_once '../templates/header.php'; ?>
+<?php require_once 'templates/header.php'; ?>
 
 <section id="section-1">
 
@@ -111,25 +18,36 @@ $cars = [
 
       <?php
       $error = false;
-      var_dump($_GET['id']);
+      // check if there is ?id=x in url
       if (isset($_GET['id'])) {
-        $car = $cars[$_GET['id']];
+        // save the id in $id
+        $id = $_GET['id'];
+
+        // get the car ad which match with the id from url
+
+        // check if there is a car in $cars at id $id
+        $car = getCarsById($cars, $id);
+
+        if (!$car) {
+          $error = true;
       ?>
-        <h1><?php echo $car['marque'] ?>
-        </h1>
+          <h1>ERROR 404 : PAGE INTROUVABLE.</h1>
+
+        <?php
+        } else {
+          $car = $cars[$_GET['id']];
+        ?>
+          <h1><?php echo $car['marque'] . ' ' . $car['modèle'] ?>
+
+
+          <?php
+        }
+          ?>
+          </h1>
+        <?php }; ?>
     </div>
   </div>
 </section>
-<?php 
-} else {
-  $error = true;
-  ?>
-  <h1>ERROR 404 : PAGE NOT FOUND.</h1>
-  <?php
-};
-?>
-
-
 
 <!-- ----------------------------------------------------------- FOOTER CALL -->
-<?php require_once '../templates/footer.php'; ?>
+<?php require_once 'templates/footer.php'; ?>

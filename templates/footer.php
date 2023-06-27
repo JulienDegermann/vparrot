@@ -25,13 +25,13 @@
 
 <!------------------------------------------------------------ SCRIPTS CALLS -->
 <!-- jQuery -->
-<script src="<?php __DIR__ ;?>assets/js/jQuery_v3.7.0.js"></script>
+<script src="assets/js/jQuery_v3.7.0.js"></script>
 <!-- Slick JS (sliders) -->
-<script type="text/javascript" src="<?php echo __DIR__?>assets/js/slick-1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript" src="assets/js/slick-1.8.1/slick/slick.min.js"></script>
 <!--  -->
-<script src="<?php __DIR__ ;?>assets/js/index.js"></script>
+<script src="assets/js/index.js"></script>
 <!-- page scpecific JS -->
-<script src="<?php __DIR__ ;?>assets/js/<?php $current_page ?>.js"></script>
+<script src="assets/js/<?php $current_page ?>.js"></script>
 
 
 </body>
