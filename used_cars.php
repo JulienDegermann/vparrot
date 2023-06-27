@@ -32,6 +32,7 @@
           <?php
           $cars = [
             [
+              'id' => 1,
               'marque' => 'Renault',
               'modèle' => 'Clio',
               'kilométrage' => 50000,
@@ -40,6 +41,7 @@
               'prix' => 8000
             ],
             [
+              'id' => 2,
               'marque' => 'Volkswagen',
               'modèle' => 'Golf',
               'kilométrage' => 80000,
@@ -48,6 +50,7 @@
               'prix' => 10000
             ],
             [
+              'id' => 3,
               'marque' => 'Ford',
               'modèle' => 'Fiesta',
               'kilométrage' => 35000,
@@ -56,6 +59,7 @@
               'prix' => 7000
             ],
             [
+              'id' => 4,
               'marque' => 'BMW',
               'modèle' => 'Serie 3',
               'kilométrage' => 100000,
@@ -64,6 +68,7 @@
               'prix' => 12000
             ],
             [
+              'id' => 5,
               'marque' => 'Toyota',
               'modèle' => 'Corolla',
               'kilométrage' => 60000,
@@ -72,6 +77,7 @@
               'prix' => 9000
             ],
             [
+              'id' => 6,
               'marque' => 'Audi',
               'modèle' => 'A4',
               'kilométrage' => 70000,
@@ -80,6 +86,7 @@
               'prix' => 15000
             ],
             [
+              'id' => 7,
               'marque' => 'Peugeot',
               'modèle' => '308',
               'kilométrage' => 45000,
@@ -88,6 +95,7 @@
               'prix' => 8500
             ],
             [
+              'id' => 8,
               'marque' => 'Mercedes-Benz',
               'modèle' => 'Classe C',
               'kilométrage' => 90000,
@@ -96,6 +104,7 @@
               'prix' => 11000
             ],
             [
+              'id' => 9,
               'marque' => 'Fiat',
               'modèle' => '500',
               'kilométrage' => 25000,
@@ -104,6 +113,7 @@
               'prix' => 7500
             ],
             [
+              'id' => 10,
               'marque' => 'Nissan',
               'modèle' => 'Qashqai',
               'kilométrage' => 55000,
@@ -126,7 +136,7 @@
                     <li>Kilométrage: <?php echo $car['kilométrage']; ?> kms</li>
                     <li class="price"><?php echo $car['prix']; ?> €</li>
                   </ul>
-                  <a href="#" class="button">+ d'infos</a>
+                  <a href="http://localhost:8888/pages/used_car.php?id=<?php echo $car['id']?>" class="button">+ d'infos</a>
                 </div>
               </div>
             </div>
