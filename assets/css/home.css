@@ -13,6 +13,11 @@ header .row li * {
   color: #fff;
   fill: #fff;
 }
+@media screen and (max-width: 1023px) {
+  header .row li * {
+    color: hsl(189.47, 61.29%, 18.24%);
+  }
+}
 
 #section-1 {
   height: 100vh;
@@ -36,8 +41,11 @@ header .row li * {
   width: 100%;
 }
 #section-1 .row h1 {
-  color: hsl(0, 100%, 49.8%);
   padding: 0;
+  -webkit-text-stroke: 1px;
+  -webkit-text-stroke-color: hsl(48.76, 100%, 49.22%);
+  font-size: 4em;
+  color: transparent;
 }
 #section-1 .show-services {
   display: flex;

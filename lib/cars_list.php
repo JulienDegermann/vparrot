@@ -1,4 +1,3 @@
-<?php $current_page = 'used_car'; ?>
 <?php
 //BDD
 $cars = [

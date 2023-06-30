@@ -19,7 +19,7 @@
 }
 @media screen and (max-width: 519px) {
   .container {
-    width: 100%;
+    width: 95%;
   }
 }
 @media screen and (min-width: 520px) and (max-width: 1023px) {
@@ -142,52 +142,17 @@ header .header-nav {
 }
 header ul {
   display: flex;
-}
-@media screen and (min-width: 1024px) {
-  header ul {
-    gap: 20px;
-  }
-}
-@media screen and (max-width: 1023px) {
-  header ul {
-    display: flex;
-    gap: 0;
-    flex-direction: column;
-    position: absolute;
-    top: 120px;
-    left: 0;
-    width: 100%;
-    text-align: center;
-  }
+  gap: 20px;
 }
 header li {
   display: flex;
   width: 100px;
+  aspect-ratio: 1;
+  border-radius: 50%;
   align-items: center;
   justify-content: center;
   box-shadow: 0 0 5px hsl(48.76, 100%, 49.22%);
-}
-@media screen and (min-width: 1024px) {
-  header li {
-    aspect-ratio: 1;
-    transition: all 0.5s ease;
-    border-radius: 50%;
-  }
-}
-@media screen and (max-width: 1023px) {
-  header li {
-    width: 100%;
-    height: -moz-max-content;
-    height: max-content;
-    border-radius: 0;
-    background: hsl(48.76, 100%, 49.22%);
-    aspect-ratio: auto;
-    padding: 1em;
-    border-bottom: 2px solid hsla(189.47, 61.29%, 18.24%, 0.1);
-  }
-  header li:last-of-type {
-    border: none;
-  }
+  transition: all 0.5s ease;
 }
 header li a {
   display: inline-flex;
@@ -220,17 +185,6 @@ header li:hover svg {
 @media screen and (max-width: 1023px) {
   header .hidden {
     display: none;
-  }
-}
-@media screen and (max-width: 1023px) {
-  header .menu {
-    border: none;
-    background: none;
-    height: auto;
-    padding: 0;
-  }
-  header .menu svg {
-    fill: #fff;
   }
 }
 @media screen and (min-width: 1024px) {
@@ -287,4 +241,56 @@ footer .phone {
 .slick-list {
   width: 100%;
   height: 100%;
-}/*# sourceMappingURL=index.css.map */
+}
+
+.active {
+  background-color: hsl(48.76, 100%, 49.22%);
+}
+
+.bloc-4 {
+  height: 100%;
+  margin-top: 1em;
+}
+.bloc-4 li {
+  padding: 1em;
+  border: 1px solid hsla(189.47, 61.29%, 18.24%, 0.7);
+}
+.bloc-4 li:hover {
+  cursor: pointer;
+}
+
+.bloc-3-4 > * {
+  display: none;
+}
+
+.garage > .garage,
+.employee > .employee,
+.messages > .messages,
+.comments > .comments {
+  display: initial;
+}
+
+form {
+  width: 100%;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+label,
+fieldset {
+  width: 50%;
+  max-width: 50%;
+  display: inline-block;
+  padding: 5px;
+}
+label input,
+fieldset input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid hsla(189.47, 61.29%, 18.24%, 0.7);
+}
+
+fieldset {
+  width: 100%;
+  max-width: 100%;
+}/*# sourceMappingURL=admin.css.map */

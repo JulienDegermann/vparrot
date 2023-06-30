@@ -1,0 +1,60 @@
+@import 'index.scss';
+
+.active {
+  background-color: $yellow-100;
+}
+
+.bloc-4 {
+  height: 100%;
+  margin-top: 1em;
+
+  li {
+    padding: 1em;
+    border: 1px solid $grey-70;
+  }
+
+  li:hover {
+    cursor: pointer;
+  }
+}
+
+.bloc-3-4>* {
+  display: none;
+}
+
+.garage>.garage,
+.employee>.employee,
+.messages>.messages,
+.comments>.comments {
+  display: initial;
+}
+
+
+form {
+  // display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+
+
+label,
+fieldset {
+  width: 50%;
+  max-width: 50%;
+  display: inline-block;
+  padding: 5px;
+
+
+  input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid $grey-70;
+  }
+}
+
+fieldset {
+  width: 100%;
+  max-width: 100%;
+}

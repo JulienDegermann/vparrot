@@ -22,7 +22,7 @@
   @extend %padding;
 
   @media screen and (max-width: 519px) {
-    width: 95%;
+    width: 100%;
   }
 
   @media screen and (min-width: 520px) and (max-width: 1023px) {
@@ -163,18 +163,50 @@ header {
 
   ul {
     display: flex;
-    gap: 20px;
+
+    @media screen and (min-width: 1024px) {
+      gap: 20px;
+    }
+
+    @media screen and (max-width: 1023px) {
+      display: flex;
+      gap: 0;
+      flex-direction: column;
+      position: absolute;
+      top: 120px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+    }
   }
 
   li {
     display: flex;
     width: 100px;
-    aspect-ratio: 1;
-    border-radius: 50%;
     align-items: center;
     justify-content: center;
     box-shadow: 0 0 5px $yellow-100;
-    transition: all .5s ease;
+
+    @media screen and (min-width: 1024px) {
+      aspect-ratio: 1;
+      transition: all .5s ease;
+      border-radius: 50%;
+    }
+
+    @media screen and (max-width: 1023px) {
+      width: 100%;
+      height: max-content;
+      border-radius: 0;
+      background: $yellow-100;
+      aspect-ratio: auto;
+      padding: 1em;
+      border-bottom: 2px solid $grey-10;
+
+      &:last-of-type {
+        border: none;
+      }
+
+    }
 
     a {
       display: inline-flex;
@@ -218,6 +250,17 @@ header {
   }
 
   .menu {
+    @media screen and (max-width: 1023px) {
+      border: none;
+      background: none;
+      height: auto;
+      padding: 0;
+
+      svg {
+        fill: #fff;
+      }
+    }
+
     @media screen and (min-width: 1024px) {
       display: none;
     }
@@ -230,6 +273,7 @@ header {
 footer {
   background: $grey-40;
   padding: 2em 0;
+  position: relative;
 
   * {
     color: $grey-100;
@@ -245,6 +289,25 @@ footer {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+  }
+
+  .copyrights {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+
+    * {
+      color: $grey-40;
+      transition: all .25s ease;
+    }
+
+    a:hover {
+      color: $grey-100;
+      text-decoration: underline;
+      transition: all .25s ease;
+    }
   }
 
   .contact-button {

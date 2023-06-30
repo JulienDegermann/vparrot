@@ -15,10 +15,18 @@ header {
   }
 
   .row li * {
-    color:#fff;
+    color: #fff;
     fill: #fff;
   }
+
+  @media screen and (max-width: 1023px) {
+   .row li * {
+      color: $grey-100
+    } 
+  }
 }
+
+
 
 #section-1 {
   height: 100vh;
@@ -46,8 +54,11 @@ header {
   }
 
   .row h1 {
-    color: $red;
     padding: 0;
+    -webkit-text-stroke: 1px;
+    -webkit-text-stroke-color: $yellow-100;
+    font-size: 4em;
+    color: transparent;
   }
 
   .show-services {

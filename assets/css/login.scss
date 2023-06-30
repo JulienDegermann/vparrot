@@ -1,0 +1,27 @@
+@import 'index.scss';
+
+#section-1 {
+  h1 {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .row {
+    flex-wrap: wrap;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    border: $grey-100 1px solid;
+    padding: 20px;
+    margin: auto;
+    height: max-content;
+
+  }
+
+  input {
+    padding: 10px;
+    margin: 10px;
+  }
+}
