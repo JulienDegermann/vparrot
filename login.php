@@ -56,7 +56,7 @@
               <input type="email" name="email" id="email" placeholder="Votre email" required>
             </label>
             <label for="password">
-              <input type="password" name="password" id="password" minlength="10" required>
+              <input type="password" name="password" id="password" required>
             </label>
             <label for="passord_memory" class="tos">
               <input type="checkbox" id="TOpassord_memoryS" name="passord_memory">

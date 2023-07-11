@@ -46,7 +46,7 @@ $hours = [
 
 $phone = '05 81 23 45 67';
 
-$email = '';
+$email = 'contact@parrot.com';
 
 $address_input = [
   'name' => 'Garage V. PARROT',
@@ -61,10 +61,10 @@ function address($address_input)
   <address>
     <p>
       <strong>
-        <?php echo $address_input['name'] ;?>
+        <?= $address_input['name']; ?>
       </strong> <br>
-      <?php echo $address_input['street_number'] . ' ' . $address_input['street_name'] ;?><br>
-      <?php echo $address_input['zip_code'] . ' ' . $address_input['city'] ;?>
+      <?= $address_input['street_number'] . ' ' . $address_input['street_name']; ?><br>
+      <?= $address_input['zip_code'] . ' ' . $address_input['city']; ?>
     </p>
   </address>
 <?php };

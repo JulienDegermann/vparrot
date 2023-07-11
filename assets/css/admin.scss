@@ -1,12 +1,20 @@
 @import 'index.scss';
 
+// DYNAMIC DISPLAY MENU
 .active {
   background-color: $yellow-100;
+  font-weight: bold;
 }
 
+// ASIDE MENU
 .bloc-4 {
   height: 100%;
   margin-top: 1em;
+
+  ul {
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
 
   li {
     padding: 1em;
@@ -18,43 +26,74 @@
   }
 }
 
-.bloc-3-4>* {
-  display: none;
-}
+// DETAILS DISPLAY SELECTOR
+.bloc-3-4 {
+  &>* {
+    display: none;
+  }
 
-.garage>.garage,
-.employee>.employee,
-.messages>.messages,
-.comments>.comments {
-  display: initial;
-}
+  &.garage>.garage,
+  &.employee>.employee,
+  &.messages>.messages,
+  &.comments>.comments,
+  &.cars>.cars {
+    display: block;
+  }
 
-
-form {
-  // display: flex;
-  width: 100%;
-  flex-wrap: wrap;
-  position: relative;
-}
-
-
-
-label,
-fieldset {
-  width: 50%;
-  max-width: 50%;
-  display: inline-block;
-  padding: 5px;
-
-
-  input {
+  form {
+    // display: flex;
     width: 100%;
-    padding: 10px;
-    border: 1px solid $grey-70;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  fieldset {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  label {
+    width: 50%;
+    max-width: 50%;
+    display: inline-block;
+    padding: 5px;
+
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid $grey-70;
+    }
+  }
+
+  .button {
+    width: max-content;
+    height: max-content;
+    align-self: center;
+    border: none;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+
+    tr {
+      height: 2em;
+    }
+
+    th,
+    td {
+      border: 1px solid $grey-70;
+      padding: 0 1em;
+      width: auto;
+    }
+
+    .center {
+      text-align: center;
+    }
   }
 }
 
-fieldset {
-  width: 100%;
-  max-width: 100%;
-}

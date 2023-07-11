@@ -97,6 +97,8 @@ section {
   color: $grey-100;
   text-transform: uppercase;
   font-weight: bold;
+  cursor: pointer;
+
 }
 
 // ----------------------------------------------------------------------- TEXTS
@@ -143,6 +145,7 @@ header {
       text-align: center;
       font-weight: bold;
       font-size: 1.2em;
+      height: max-content;
     }
   }
 

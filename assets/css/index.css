@@ -91,6 +91,7 @@ section {
   color: hsl(189.47, 61.29%, 18.24%);
   text-transform: uppercase;
   font-weight: bold;
+  cursor: pointer;
 }
 
 h1,
@@ -127,6 +128,8 @@ header .row > a p {
   text-align: center;
   font-weight: bold;
   font-size: 1.2em;
+  height: -moz-max-content;
+  height: max-content;
 }
 header .row a img {
   width: auto;

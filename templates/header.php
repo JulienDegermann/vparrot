@@ -1,3 +1,20 @@
+<?php
+// session opening on each page load and define auto-destroy session after 3600s
+ini_set('session.save_path', 'session_files/'); 
+
+session_start();
+$_SESSION['last_activity'] = time();
+
+var_dump('session en cours : ' . session_id());
+
+if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 2)) {
+  session_destroy();
+} else {
+  $_SESSION['last_activity'] = time();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -5,6 +22,9 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ------------------------------------------------------------- FAVICON -->
+  <link rel="icon" type="image/x-icon" href="assets/images/favicons/favicon.ico">
 
   <!-- ----------------------------------------------------------------- CEO -->
   <meta name="description" content="Le garage V.Parrot vous accueille à Toulouse 6 jours sur 7 15 annnées d'expertise dans la réparation et l'entretien de votre véhicule" />
@@ -18,8 +38,14 @@
   <!-- PAGE SPECEFIC CSS -->
   <link rel="stylesheet" href="/assets/css/index.css">
   <link rel="stylesheet" href="/assets/css/<?php echo $current_page ?>.css">
+  <?php if ($current_page == 'used_car') : echo ('<link rel="stylesheet" href="/assets/css/contact_form.css">');
+  endif ?>
+
+
   <title>Garage Vincent Parrot</title>
 </head>
+
+
 
 <body <!------------------------------------------------------------ HEADER START-->
   <header>

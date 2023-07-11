@@ -1,95 +1,108 @@
 <?php
 //BDD
+
+define('_CAR_IMAGE_PATH_', 'uploads/images/');
+
 $cars = [
   [
     'id' => 1,
-    'marque' => 'Renault',
-    'modèle' => 'Clio',
-    'kilométrage' => 50000,
-    'année' => 2017,
-    'carburant' => 'Essence',
-    'prix' => 8000
+    'brand' => 'Renault',
+    'model' => 'Clio',
+    'mileage' => 50000,
+    'year' => 2017,
+    'energy' => 'Essence',
+    'price' => 8000,
+    'image' => 'peugeot'
   ],
   [
     'id' => 2,
-    'marque' => 'Volkswagen',
-    'modèle' => 'Golf',
-    'kilométrage' => 80000,
-    'année' => 2015,
-    'carburant' => 'Diesel',
-    'prix' => 10000
+    'brand' => 'Volkswagen',
+    'model' => 'Golf',
+    'mileage' => 80000,
+    'year' => 2015,
+    'energy' => 'Diesel',
+    'price' => 10000,
+    'image' => 'peugeot'
   ],
   [
     'id' => 3,
-    'marque' => 'Ford',
-    'modèle' => 'Fiesta',
-    'kilométrage' => 35000,
-    'année' => 2018,
-    'carburant' => 'Essence',
-    'prix' => 7000
+    'brand' => 'Ford',
+    'model' => 'Fiesta',
+    'mileage' => 35000,
+    'year' => 2018,
+    'energy' => 'Essence',
+    'price' => 7000,
+    'image' => 'peugeot'
   ],
   [
     'id' => 4,
-    'marque' => 'BMW',
-    'modèle' => 'Serie 3',
-    'kilométrage' => 100000,
-    'année' => 2014,
-    'carburant' => 'Diesel',
-    'prix' => 12000
+    'brand' => 'BMW',
+    'model' => 'Serie 3',
+    'mileage' => 100000,
+    'year' => 2014,
+    'energy' => 'Diesel',
+    'price' => 12000,
+    'image' => 'peugeot'
   ],
   [
     'id' => 5,
-    'marque' => 'Toyota',
-    'modèle' => 'Corolla',
-    'kilométrage' => 60000,
-    'année' => 2016,
-    'carburant' => 'Essence',
-    'prix' => 9000
+    'brand' => 'Toyota',
+    'model' => 'Corolla',
+    'mileage' => 60000,
+    'year' => 2016,
+    'energy' => 'Essence',
+    'price' => 9000,
+    'image' => 'peugeot'
   ],
   [
     'id' => 6,
-    'marque' => 'Audi',
-    'modèle' => 'A4',
-    'kilométrage' => 70000,
-    'année' => 2015,
-    'carburant' => 'Diesel',
-    'prix' => 15000
+    'brand' => 'Audi',
+    'model' => 'A4',
+    'mileage' => 70000,
+    'year' => 2015,
+    'energy' => 'Diesel',
+    'price' => 15000,
+    'image' => 'peugeot'
   ],
   [
     'id' => 7,
-    'marque' => 'Peugeot',
-    'modèle' => '308',
-    'kilométrage' => 45000,
-    'année' => 2019,
-    'carburant' => 'Essence',
-    'prix' => 8500
+    'brand' => 'Peugeot',
+    'model' => '308',
+    'mileage' => 45000,
+    'year' => 2019,
+    'energy' => 'Essence',
+    'price' => 8500,
+    'image' => 'peugeot'
   ],
   [
     'id' => 8,
-    'marque' => 'Mercedes-Benz',
-    'modèle' => 'Classe C',
-    'kilométrage' => 90000,
-    'année' => 2013,
-    'carburant' => 'Diesel',
-    'prix' => 11000
+    'brand' => 'Mercedes-Benz',
+    'model' => 'Classe C',
+    'mileage' => 90000,
+    'year' => 2013,
+    'energy' => 'Diesel',
+    'price' => 11000,
+    'image' => 'peugeot'
   ],
   [
     'id' => 9,
-    'marque' => 'Fiat',
-    'modèle' => '500',
-    'kilométrage' => 25000,
-    'année' => 2020,
-    'carburant' => 'Essence',
-    'prix' => 7500
+    'brand' => 'Fiat',
+    'model' => '500',
+    'mileage' => 25000,
+    'year' => 2020,
+    'energy' => 'Essence',
+    'price' => 7500,
+    'image' => 'peugeot'
   ],
   [
     'id' => 10,
-    'marque' => 'Nissan',
-    'modèle' => 'Qashqai',
-    'kilométrage' => 55000,
-    'année' => 2017,
-    'carburant' => 'Diesel',
-    'prix' => 9500
+    'brand' => 'Nissan',
+    'model' => 'Qashqai',
+    'mileage' => 55000,
+    'year' => 2017,
+    'energy' => 'Diesel',
+    'price' => 9500,
+    'image' => 'peugeot'
   ]
 ];
 

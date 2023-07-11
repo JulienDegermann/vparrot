@@ -1,6 +1,66 @@
+@import 'index.scss';
+
 #section-1 {
   svg {
     width: 20px;
     vertical-align: middle;
+  }
+
+  .row a {
+    height: max-content;
+  }
+
+  .row a:hover {
+    text-decoration: underline;
+  }
+
+  .bloc-2 {
+
+    .main-picture,
+    .picture-min {
+      max-width: 100%;
+      width: 100%;
+    }
+
+    .picture-min {
+      height: auto;
+
+      .slick-track {
+        display: flex;
+        justify-content: space-between;
+
+        img {
+          max-width: 20%;
+          object-fit: contain;
+        }
+      }
+    }
+  }
+
+  .form_wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: $grey-70;
+    padding: 2em;
+    box-shadow: 0 0 15px $grey-100;
+    border-radius: 5px;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+
+    form {
+      height: max-content;
+      width: 80%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+    }
+
+    &.hidden {
+      display: none;
+    }
   }
 }

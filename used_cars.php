@@ -4,6 +4,7 @@
 
 <!-- ----------------------------------------------------------- HEADER CALL -->
 <?php require_once 'templates/header.php'; ?>
+<?php require_once 'classes/class_cars.php'; ?>
 
 <!-- ----------------------------------------------------------- CONTACT.PHP -->
 
@@ -34,23 +35,9 @@
           require_once 'lib/cars_list.php';
 
           foreach ($cars as $key => $car) {
-          ?>
-            <div class="car-vignette">
-              <div class="img">
-                <img src="../assets/images/pictures/car.jpeg" alt="main picture">
-              </div>
-              <div class="text">
-                <h2><?php echo $car['marque'] . " " . $car['modèle']; ?></h2>
-                <div>
-                  <ul>
-                    <li>Année: <?php echo $car['année']; ?></li>
-                    <li>Kilométrage: <?php echo $car['kilométrage']; ?> kms</li>
-                    <li class="price"><?php echo $car['prix']; ?> €</li>
-                  </ul>
-                  <a href="used_car.php?id=<?php echo $key ?>" class="button">+ d'infos</a>
-                </div>
-              </div>
-            </div>
+            $carObject = new Cars($car['id'], $car['brand'], $car['model'], $car['mileage'], $car['year'], $car['energy'], $car['price'], $key);
+            $carObject->display_list();
+            ?>
           <?php
           }; ?>
         </div>

@@ -42,7 +42,7 @@ header .row li * {
 }
 #section-1 .row h1 {
   padding: 0;
-  -webkit-text-stroke: 1px;
+  -webkit-text-stroke: 3px;
   -webkit-text-stroke-color: hsl(48.76, 100%, 49.22%);
   font-size: 4em;
   color: transparent;
@@ -83,6 +83,25 @@ header .row li * {
 #section-2 * {
   text-align: center;
 }
+#section-2 > .container .row > h2 {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 0;
+}
+#section-2 > .container .row > button {
+  width: auto;
+  margin-bottom: 1em;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  font-size: 1em;
+}
+#section-2 > .container .row > button:hover {
+  font-weight: bold;
+}
+#section-2 .comments-slider {
+  margin: 1.5em auto;
+}
 #section-2 .comment-note svg {
   fill: hsl(48.76, 100%, 49.22%);
   width: 40px;
@@ -93,4 +112,49 @@ header .row li * {
   padding: 0 5px;
   text-transform: lowercase;
   word-wrap: break-word;
+}
+#section-2 #add-comment {
+  border: none;
+  background: none;
+}
+#section-2 #new-comment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1.5em auto;
+}
+#section-2 #new-comment h2 {
+  margin-bottom: 1em;
+}
+#section-2 #new-comment.hidden {
+  display: none;
+}
+#section-2 #new-comment > * {
+  width: 50%;
+  max-width: 400px;
+  text-align: left;
+}
+#section-2 #new-comment label > input,
+#section-2 #new-comment label > textarea,
+#section-2 #new-comment fieldset {
+  width: 100%;
+  text-align: left;
+  padding: 1em;
+  margin-bottom: 1em;
+}
+#section-2 #new-comment fieldset {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  border: none;
+}
+#section-2 #new-comment fieldset legend {
+  text-align: left;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translateY(-50%);
+}
+#section-2 #add-comment:hover {
+  text-decoration: underline;
 }/*# sourceMappingURL=home.css.map */

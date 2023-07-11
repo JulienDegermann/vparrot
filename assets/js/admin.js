@@ -1,9 +1,3 @@
-
-
-
-
-
-
 //.each((element) => {
 //$('.admin-nav li').each((element) => {
 //console.log(element.addClass('bonjour'));
@@ -16,7 +10,7 @@ $('.admin-nav li').each(function () {
     $('.admin-nav li').removeClass('active'); 
     $(this).addClass('active');
 
-    $('#display').removeClass('garage employee comments messages');
+    $('#display').removeClass('garage employee comments messages cars');
     $('#display').addClass(($(this).attr('id')));
   });
 });

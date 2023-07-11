@@ -1,11 +1,17 @@
 <!-- --------------------------------------------------------- PHP FUNCTIONS -->
 <!-- PAGE NAME -->
-<?php $current_page = 'home'; ?>
+<?php
+$current_page = 'home';
+require_once 'classes/class_comments.php';
+?>
+
 
 <!-- ----------------------------------------------------------------------- -->
 
 <!-- ----------------------------------------------------------- HEADER CALL -->
-<?php require_once 'templates/header.php'; ?>
+<?php require_once 'templates/header.php';
+require_once 'lib/users.php';
+?>
 
 <!-- -------------------------------------------------------------- HOME.PHP -->
 <!-- ------------------------------------------------------ SERVICES SECTION -->
@@ -68,64 +74,76 @@
 <section id="section-2">
   <div class="container">
     <div class="row">
-      <div class="comments-slider">
+      <h2>Votre avis compte</h2> <br>
+      <button type="button" id="add-comment"">ajoutez-le</button>
+
+      <div class=" comments-slider">
         <?php
-        $notes = [
-          [
-            'name' => 'John',
-            'note' => 5,
-            'comment' => 'Garage au top du top !!'
-          ],
-          [
-            'name' => 'Patrice',
-            'note' => 4,
-            'comment' => 'Réactif et prix dans la moyenne'
-          ],
-          [
-            'name' => 'Martine',
-            'note' => 3,
-            'comment' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa100aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa200'
-          ],
-          [
-            'name' => 'Alfred',
-            'note' => 2,
-            'comment' => 'Compétent mais désagréable, dommage'
-          ],
-          [
-            'name' => 'Barbie',
-            'note' => 1,
-            'comment' => 'Comportement déplacé et regard pesant…'
-          ],
-          [
-            'name' => 'Ken',
-            'note' => 0,
-            'comment' => 'Le personnel n\'a pas arrêté de reluquer ma copine !!'
-          ]
-        ];
-        foreach ($notes as $note) {
+        foreach ($users['client'] as $user) {
+
+
+          $current_comment = new Comments($user['id'], $user['first_name'], $user['note']['note'], $user['note']['comment']);
+          $current_comment->display_list();
         ?>
           <div class="comment">
-            <h3 class="comment-title"><?php echo $note['name'] ?></h 3>
-              <div class="comment-note">
+            <h3 class="comment-title">
+              <?php echo $user['first_name'] . ' ' .  $user['last_name'] ?>
+            </h3>
+            <div class="comment-note">
 
-                <?php
-                for ($i = 1; $i <= $note['note']; $i++) {
-                  require 'assets/images/icons/star-filled.svg';
-                };
-                for ($i = 0; $i < (5 - $note['note']); $i++) {
-                  require 'assets/images/icons/star.svg';
-                }; ?>
-              </div>
-              <p class="comment-text">
-                <?php echo $note['comment']; ?>
-              </p>
+              <?php
+              for ($i = 1; $i <= $user['note']['note']; $i++) {
+                require 'assets/images/icons/star-filled.svg';
+              };
+              for ($i = 0; $i < (5 - $user['note']['note']); $i++) {
+                require 'assets/images/icons/star.svg';
+              }; ?>
+            </div>
+            <p class="comment-text">
+              <?= $user['note']['comment']; ?>
+            </p>
           </div>
 
         <?php
         };
         ?>
-      </div>
     </div>
+  </div>
+  <div id="new-comment" class="row hidden">
+    <h2>Ajouter un commentaire</h2>
+
+    <form action="config/comment_config.php" method="post">
+      <label for="name">Votre nom :
+        <input type="text" id="name" name="name">
+      </label>
+      <fieldset>
+        <legend>Note :</legend>
+        <label for="1">1
+          <input type="radio" id="1" name="note" value="1">
+        </label>
+        <label for="2">2
+          <input type="radio" id="2" name="note" value="2">
+        </label>
+        <label for="3">3
+          <input type="radio" id="3" name="note" value="3">
+        </label>
+        <label for="4">4
+          <input type="radio" id="4" name="note" value="4">
+        </label>
+        <label for="5">5
+          <input type="radio" id="5" name="note" value="5">
+        </label>
+
+        </label>
+      </fieldset>
+
+      <label for="comment">Commentaire :
+        <textarea name="comment" id="comment" placeholder="Votre commentaire…"></textarea>
+      </label>
+      <input type="submit" class="button" value="Envoyer">
+    </form>
+  </div>
+
   </div>
 </section>
 <!-- ----------------------------------------------------------------------- -->

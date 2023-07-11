@@ -34,8 +34,8 @@
 
       <div class="copyrights">
         <p>
-          <a href="">mentions légales</a> -
-          <a href="">politique de confidentialité</a> -
+          <a href="legal_notice.php">mentions légales</a> -
+          <a href="privacy_policy.php">politique de confidentialité</a> -
           &copy; Julien Degermann 2023
         </p>
       </div>
@@ -59,7 +59,11 @@
 <!--  -->
 <script src="assets/js/index.js"></script>
 <!-- page scpecific JS -->
-<script src="assets/js/<?php echo $current_page ?>.js"></script>
+<?php
+if (file_exists("assets/js/$current_page.js")) :
+  echo '<script src="assets/js/'.$current_page.'.js"></script>';
+endif;
+?>
 
 </body>
 
