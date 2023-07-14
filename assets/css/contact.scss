@@ -1,4 +1,4 @@
-@import 'colors.scss';
+@import 'colors.scss'; // to delete when all is OK ?
 
 
 #section-1 {
@@ -10,6 +10,7 @@
 
   address {
     width: 100%;
+    text-align: center;
 
     * {
       font-style: normal;
@@ -25,7 +26,7 @@
   }
 
   .phone {
-    font-size: 3em;
+    font-size: 2em;
     color: hsl(189.47, 61.29%, 18.24%);
     margin-left: 50%;
     transform: translateX(-50%);
@@ -39,6 +40,19 @@
 
   iframe {
     width: 100%;
+    margin-top: 1em;
+
+    @media screen and (max-width: 519px) {
+      max-height: 250px;
+    }
+  }
+
+  .bloc-2:last-of-type {
+    align-self: center;
+  }
+
+  h3 {
+    text-align: center;
   }
 
   form {
@@ -49,10 +63,17 @@
   }
 
   label {
-    width: 50%;
-    max-width: 50%;
     display: inline-block;
     padding: 5px;
+
+    @media screen and (max-width: 1023px) {
+      width: 100%;
+      max-width: 100%;
+    }
+    @media screen and (min-width: 1024px) {
+      width: 50%;
+      max-width: 50%;
+    }
 
     input {
       width: 100%;

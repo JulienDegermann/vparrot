@@ -1,6 +1,10 @@
 <!-- --------------------------------------------------------- PHP FUNCTIONS -->
-<?php require_once 'lib/workshop_datas.php'; ?>
-<?php require_once 'lib/users.php'; ?>
+<?php
+session_start();
+require_once 'lib/workshop_datas.php';
+require_once 'lib/users.php';
+// require_once 'config/login_config.php';
+?>
 
 <!-- PAGE NAME -->
 <?php $current_page = 'login'; ?>
@@ -51,7 +55,7 @@
       <div class="container">
         <div class="row">
           <h1>Connexion</h1>
-          <form action="admin.php" method="post">
+          <form action="config/login_config.php" method="post">
             <label for="email">
               <input type="email" name="email" id="email" placeholder="Votre email" required>
             </label>
@@ -62,9 +66,58 @@
               <input type="checkbox" id="TOpassord_memoryS" name="passord_memory">
               Mémorier la connexion
             </label>
+            <?php
+            if (isset($_SESSION['error']) && $_SESSION['error'] != '') {
+
+            ?>
+
+              <p class="error"><?= $_SESSION['error']; ?></p>
+
+            <?php
+            }
+            ?>
             <input class="button" type="submit" value="Se connecter">
           </form>
         </div>
       </div>
     </section>
-<?php require_once 'templates/footer.php'; ?>
+    </main>
+  <!----------------------------------------------------------------- MAIN END -->
+  <!------------------------------------------------------------- FOOTER START -->
+  <footer>
+    <div class="container">
+      <div class="row">
+
+
+
+        <div class="copyrights">
+          <p>
+            <a href="legal_notice.php">mentions légales</a> -
+            <a href="privacy_policy.php">politique de confidentialité</a> -
+            &copy; Julien Degermann 2023
+          </p>
+        </div>
+
+
+      </div>
+    </div>
+  </footer>
+  <!--------------------------------------------------------------- FOOTER END -->
+  <!------------------------------------------------------------ SCRIPTS CALLS -->
+  <!-- jQuery -->
+  <script src="assets/js/jQuery_v3.7.0.js"></script>
+
+  <!-- Slick JS (sliders) -->
+  <script type="text/javascript" src="assets/js/slick-1.8.1/slick/slick.min.js"></script>
+  <!--  -->
+  <script src="assets/js/index.js"></script>
+  <!-- page scpecific JS -->
+  <?php
+  if (file_exists("assets/js/$current_page.js")) :
+    echo '<script src="assets/js/' . $current_page . '.js"></script>';
+  endif;
+  ?>
+
+</body>
+
+</html>

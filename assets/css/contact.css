@@ -5,6 +5,7 @@
 }
 #section-1 address {
   width: 100%;
+  text-align: center;
 }
 #section-1 address * {
   font-style: normal;
@@ -17,7 +18,7 @@
   text-align: center;
 }
 #section-1 .phone {
-  font-size: 3em;
+  font-size: 2em;
   color: hsl(189.47, 61.29%, 18.24%);
   margin-left: 50%;
   transform: translateX(-50%);
@@ -30,6 +31,18 @@
 }
 #section-1 iframe {
   width: 100%;
+  margin-top: 1em;
+}
+@media screen and (max-width: 519px) {
+  #section-1 iframe {
+    max-height: 250px;
+  }
+}
+#section-1 .bloc-2:last-of-type {
+  align-self: center;
+}
+#section-1 h3 {
+  text-align: center;
 }
 #section-1 form {
   display: flex;
@@ -38,10 +51,20 @@
   position: relative;
 }
 #section-1 label {
-  width: 50%;
-  max-width: 50%;
   display: inline-block;
   padding: 5px;
+}
+@media screen and (max-width: 1023px) {
+  #section-1 label {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+@media screen and (min-width: 1024px) {
+  #section-1 label {
+    width: 50%;
+    max-width: 50%;
+  }
 }
 #section-1 label input {
   width: 100%;

@@ -16,6 +16,11 @@
 #section-1 .filter h2 {
   text-align: center;
 }
+@media screen and (max-width: 519px) {
+  #section-1 .filter h2 {
+    font-size: 1.2em;
+  }
+}
 #section-1 .filter input[type=range] {
   background-color: red;
   width: 100%;

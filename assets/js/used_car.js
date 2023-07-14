@@ -18,6 +18,6 @@ $('.picture-min img').each(function () {
 });
 
 
-$('#form_call').click(() => {
+$('#form_call, .close').click(() => {
   $('.form_wrapper').toggleClass('hidden');
 })

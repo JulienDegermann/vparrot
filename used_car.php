@@ -24,23 +24,25 @@ if (isset($_GET['id'])) {
   <section id="section-1">
     <div class="container">
       <div class="row">
-      <a href="used_cars.php">
-        <?php require 'assets/images/icons/arrow_prev.svg'; ?>
-        retour
-      </a>
-        <?php
-        if (!$car) {
-          $error = true;
-          header('location: 404.php');
-          exit();
-        } else {
-          $car = $cars[$_GET['id']];
-          $carObject = new Cars($car['id'], $car['brand'], $car['model'], $car['mileage'], $car['year'], $car['energy'], $car['price'], $key=0);
-          $carObject->display_item();
-        }}?>
+        <a href="used_cars.php">
+          <?php require 'assets/images/icons/arrow_prev.svg'; ?>
+          retour
+        </a>
+      <?php
+      if (!$car) {
+        $error = true;
+        header('location: 404.php');
+        exit();
+      } else {
+        $car = $cars[$_GET['id']];
+        $carObject = new Cars($car['id'], $car['brand'], $car['model'], $car['mileage'], $car['year'], $car['energy'], $car['price'], $key = 0);
+        $carObject->display_item();
+      }
+    } ?>
       </div>
       <div class="form_wrapper hidden">
-      <?php require_once 'templates/contact_form.php'; ?>
+        <button type="button" class="close"> <?php include_once 'assets/images/icons/close.svg'; ?></button>
+        <?php require_once 'templates/contact_form.php'; ?>
       </div>
     </div>
   </section>

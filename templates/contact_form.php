@@ -1,4 +1,4 @@
-
+<h3>Formulaire de contact</h3>
 <form action="" method="post">
   <label for="first-name">
     <input type="text" name="first-name" id="first-name" placeholder="Votre prénom">

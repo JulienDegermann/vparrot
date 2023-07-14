@@ -6,6 +6,8 @@ ini_set('session.save_path', 'session_files/');
 
 session_start();
 $_SESSION['last_activity'] = time();
+$_SESSION['role'] = 'client';
+
 
 if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 2)) {
   session_destroy();

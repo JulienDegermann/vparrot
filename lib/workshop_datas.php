@@ -59,13 +59,11 @@ $address_input = [
 function address($address_input)
 { ?>
   <address>
-    <p>
       <strong>
         <?= $address_input['name']; ?>
       </strong> <br>
       <?= $address_input['street_number'] . ' ' . $address_input['street_name']; ?><br>
       <?= $address_input['zip_code'] . ' ' . $address_input['city']; ?>
-    </p>
   </address>
 <?php };
 ?>

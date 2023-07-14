@@ -1,5 +1,11 @@
 @import 'colors.scss';
 
+h3 {
+  text-align: center;
+  margin: auto;
+  margin-bottom: 1em;
+}
+
 form {
   display: flex;
   width: 100%;
@@ -8,10 +14,18 @@ form {
 }
 
 label {
-  width: 50%;
-  max-width: 50%;
   display: inline-block;
   padding: 5px;
+
+  @media screen and (max-width: 1023px) {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  @media screen and (min-width: 1024px) {
+    width: 50%;
+    max-width: 50%;
+  }
 
   input {
     width: 100%;
@@ -67,5 +81,5 @@ textarea:focus-visible {
 
 input[type="submit"] {
   margin-left: 100%;
-  transform: translateX(-100%);    
+  transform: translateX(-100%);
 }

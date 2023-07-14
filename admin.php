@@ -1,4 +1,30 @@
 <?php
+session_start();
+if (isset($_SESSION['last_activity']) && ((time() - $_SESSION['last_activity']) > 2)) {
+  session_unset();
+  session_destroy();
+  header('Location: login.php');
+} else {
+  $_SESSION['last_activity'] = time();
+}
+
+
+if ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'employee') {
+} else {
+  header('Location: login.php');
+  exit();
+}
+
+
+
+$_SESSION['last_activity'] = time();
+if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 2)) {
+  session_destroy();
+} else {
+  $_SESSION['last_activity'] = time();
+}
+
+// echo $_SESSION['role'];
 $current_page = 'admin';
 // session opening on each page load and define auto-destroy session after 3600s
 require_once 'data_base/data_base_connect.php';
@@ -7,17 +33,6 @@ require_once 'lib/workshop_datas.php';
 require_once 'lib/users.php';
 require 'classes/class_users.php';
 require 'classes/class_comments.php';
-
-ini_set('session.save_path', 'session_files/');
-
-session_start();
-$_SESSION['last_activity'] = time();
-
-if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 2)) {
-  session_destroy();
-} else {
-  $_SESSION['last_activity'] = time();
-}
 ?>
 
 <!DOCTYPE html>
@@ -65,6 +80,8 @@ if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 
         </button>
       </div>
     </div>
+    <p>Connecté en tant que <?= $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name']; ?></p>
+    <button type="button">Se déconnecter</button>
   </header>
   <!------------------------------------------------------------- HEADER END -->
 
@@ -103,7 +120,14 @@ if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 
 
     ?>
     <!-- ----------------------------------------------------------- HEADER CALL -->
-    <section id="section-1">
+
+
+    <section class="mobile_only">
+      <h1>ERREUR</h1>
+      <p>Cette page est conçu pour être affichée sur un écran plus grand. Veuillez-vous connecter sur une tablette ou un ordinateur</p>
+    </section>
+
+    <section id="section-1" class="desktop_only">
       <div class="container">
         <div class="row">
 
@@ -125,16 +149,18 @@ if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 
             <!-- ------------------------------------------- GARAGE INFORMATIONS -->
             <div class="garage">
               <h1>Informations générales</h1>
-              <form action="infos.php" method="post">
+              <form action="config/admin_config.php" method="post">
                 <fieldset>
-                  <label for="name">Nom établissement :
-                    <input type="text" name="name" id="name" value="<?= $address_input['name']; ?>">
+                  <label for="company_name">Nom établissement :
+                    <input type="text" name="company_name" id="company_name" value="<?php if (isset($_POST['company_name'])) {
+                                                                                      echo $_POST['company_name'];
+                                                                                    } ?>">
                   </label>
-                  <label for="tel">Téléphone :
-                    <input type="tel" name="tel" maxlength="10" minlength="10" id="tel" value="<?= $phone; ?>">
+                  <label for="company_tel">Téléphone :
+                    <input type="tel" name="company_tel" maxlength="10" minlength="10" id="company_tel" value="<?= $phone; ?>">
                   </label>
-                  <label for="email">E-mail :
-                    <input type="email" name="email" id="email" value="<?= $email; ?>">
+                  <label for="company_email">E-mail :
+                    <input type="email" name="company_email" id="company_email" value="<?= $email; ?>">
                   </label>
                 </fieldset>
                 <fieldset>
@@ -163,16 +189,16 @@ if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 
               <h1>Comptes employés</h1>
               <div>
                 <h2>Créer un compte employé</h2>
-                <form action="" method="post">
+                <form action="config/admin_config.php" method="post">
                   <fieldset>
-                    <label for="first_name">Prénom :
-                      <input type="text" name="first_name" id="first_name">
+                    <label for="employee_first_name">Prénom :
+                      <input type="text" name="employee_first_name" id="employee_first_name">
                     </label>
-                    <label for="last_name">Nom :
-                      <input type="tel" name="last_name" id="last_name">
+                    <label for="employee_last_name">Nom :
+                      <input type="text" name="employee_last_name" id="employee_last_name">
                     </label>
-                    <label for="password">Mot de passe :
-                      <input type="password" name="password" id="password">
+                    <label for="employee_password">Mot de passe :
+                      <input type="password" name="employee_password" id="employee_password">
                     </label>
                   </fieldset>
                   <input class="button" type="submit" value="Enregistrer">
@@ -207,7 +233,7 @@ if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 
                     <tr>
                       <th>Nom</th>
                       <th>Prénom</th>
-                      <th>E-mail</th>
+                      <th class="desktop_only">E-mail</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
@@ -265,6 +291,7 @@ if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 
                 <thead>
                   <tr>
                     <th>Prénom</th>
+
                     <th>Note</th>
                     <th>Commentaire</th>
                   </tr>
@@ -289,7 +316,7 @@ if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 
 
               <div>
                 <h2>Ajouter un véhicule</h2>
-                <form action="" method="post" enctype="multipart/form-data">
+                <form action="admin_config" method="post" enctype="multipart/form-data">
                   <fieldset>
                     <label for="brand">Marque :
                       <input type="text" name="brand" id="brand">
@@ -306,8 +333,8 @@ if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 
                     <label for="price">Prix :
                       <input type="number" name="price" id="price">
                     </label>
-                    <label for="photo">Photo principale :
-                      <input type="file" name="photo" id="photo" accept="">
+                    <label for="main_picture">Photo principale :
+                      <input type="file" name="main_picture" id="main_picture" accept="image/jpeg, image/jpg, image/png">
                     </label>
                   </fieldset>
                   <input class="button" type="submit" value="Enregistrer">
