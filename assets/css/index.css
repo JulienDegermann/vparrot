@@ -1,4 +1,4 @@
-.row > *, .row, .container {
+section .row > *, .row, .container {
   padding-left: 0.9em;
   padding-right: 0.9em;
 }
@@ -43,47 +43,45 @@ section {
   display: flex;
   flex-wrap: wrap;
 }
-.row > * {
-  width: auto;
-  float: left;
+
+@media screen and (max-width: 1023px) {
+  section .row {
+    display: block;
+  }
+}
+section .row > * {
+  width: 100%;
 }
 
-.bloc-2 {
-  width: 50%;
+@media screen and (min-width: 1024px) {
+  section .row .bloc-2 {
+    width: 50%;
+  }
+  section .row .bloc-3 {
+    width: 33.33333%;
+  }
+  section .row .bloc-2-3 {
+    width: 66.66667%;
+  }
+  section .row .bloc-4 {
+    width: 25%;
+  }
+  section .row .bloc-3-4 {
+    width: 75%;
+  }
+  section .row .bloc-5 {
+    width: 20%;
+  }
+  section .row .bloc-2-5 {
+    width: 40%;
+  }
+  section .row .bloc-3-5 {
+    width: 60%;
+  }
+  section .row .bloc-4-5 {
+    width: 80%;
+  }
 }
-
-.bloc-3 {
-  width: 33.33333%;
-}
-
-.bloc-2-3 {
-  width: 66.66667%;
-}
-
-.bloc-4 {
-  width: 25%;
-}
-
-.bloc-3-4 {
-  width: 75%;
-}
-
-.bloc-5 {
-  width: 20%;
-}
-
-.bloc-2-5 {
-  width: 40%;
-}
-
-.bloc-3-5 {
-  width: 60%;
-}
-
-.bloc-4-5 {
-  width: 80%;
-}
-
 .button {
   padding: 1em 2em;
   border: none;
@@ -92,6 +90,7 @@ section {
   text-transform: uppercase;
   font-weight: bold;
   cursor: pointer;
+  font-size: 1em;
 }
 
 h1,
@@ -110,7 +109,7 @@ h4 {
   width: 100%;
   max-width: 1000px;
   margin: 0 auto 1em;
-  font-size: 3em;
+  font-size: 2em;
   height: auto;
 }
 
@@ -244,7 +243,7 @@ header li:hover svg {
 
 footer {
   background: hsla(189.47, 61.29%, 18.24%, 0.4);
-  padding: 2em 0;
+  padding: 2em 0 3em;
   position: relative;
 }
 footer * {
@@ -253,6 +252,30 @@ footer * {
 }
 footer .row {
   justify-content: space-between;
+}
+@media screen and (max-width: 1023px) {
+  footer .row > * {
+    width: 100%;
+  }
+}
+@media screen and (min-width: 1024px) {
+  footer .row > * {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 1023px) {
+  footer .row .planning {
+    order: 2;
+  }
+  footer .row .contact {
+    order: 1;
+  }
+  footer .row .contact .contact-button {
+    order: 2;
+  }
+  footer .row .contact .phone {
+    order: 1;
+  }
 }
 footer .contact {
   display: flex;
@@ -266,6 +289,9 @@ footer .copyrights {
   left: 50%;
   transform: translateX(-50%);
   font-size: 14px;
+  width: 100%;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 footer .copyrights * {
   color: hsla(189.47, 61.29%, 18.24%, 0.4);
@@ -277,9 +303,12 @@ footer .copyrights a:hover {
   transition: all 0.25s ease;
 }
 footer .contact-button {
-  font-size: 1.5em;
-  padding: 1em 2em;
   margin-bottom: 1em;
+}
+@media screen and (max-width: 1023px) {
+  footer .contact-button {
+    margin-top: 1em;
+  }
 }
 footer .phone {
   font-size: 3em;

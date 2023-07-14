@@ -1,7 +1,17 @@
+@media screen and (max-width: 1023px) {
+  #section-1 .container.row {
+    display: block;
+  }
+}
 #section-1 .filter {
   border: 1px solid hsl(189.47, 61.29%, 18.24%);
   padding: 5px;
   border-radius: 5px;
+}
+@media screen and (max-width: 1023px) {
+  #section-1 .filter {
+    margin-bottom: 2em;
+  }
 }
 #section-1 .filter h2 {
   text-align: center;

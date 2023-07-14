@@ -1,6 +1,7 @@
 <!----------------------------------------------------------------- MAIN END -->
 <?php require_once 'lib/workshop_datas.php'; ?>
 <!------------------------------------------------------------- FOOTER START -->
+</main>
 <footer>
   <div class="container">
     <div class="row">
@@ -35,7 +36,7 @@
       <div class="copyrights">
         <p>
           <a href="legal_notice.php">mentions légales</a> -
-          <a href="privacy_policy.php">politique de confidentialité</a> -
+          <a href="privacy_policy.php">politique de confidentialité</a> <br>
           &copy; Julien Degermann 2023
         </p>
       </div>

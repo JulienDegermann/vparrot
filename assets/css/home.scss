@@ -26,25 +26,27 @@ header {
   }
 }
 
-
-
 #section-1 {
   height: 100vh;
   position: relative;
   margin: 0 auto 120px;
 
   .container {
-    position: absolute;
-    top: 100px;
     margin: auto;
-    // background: red;
-    height: 100%;
-    left: 50%;
-    transform: translate(-50%, 0);
+    // position: absolute;
+    // top: 100px;
+    // height: 100%;
+    // left: 50%;
+    // transform: translateX(-50%);
   }
 
   .row {
     align-items: flex-end;
+    position: absolute;
+    bottom: -100px;
+    height: auto;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   // banner img
@@ -57,7 +59,7 @@ header {
     padding: 0;
     -webkit-text-stroke: 3px;
     -webkit-text-stroke-color: $yellow-100;
-    font-size: 4em;
+    font-size: 3em;
     color: transparent;
   }
 
@@ -66,8 +68,7 @@ header {
     justify-content: space-between;
     width: 100%;
     max-width: 100%;
-    height: 50%;
-    max-height: 350px;
+    height: 350px;
   }
 
   .services {
@@ -112,9 +113,8 @@ header {
 
   &>.container .row>button {
     width: auto;
+    margin: auto;
     margin-bottom: 1em;
-    margin-left: 50%;
-    transform: translateX(-50%);
     cursor: pointer;
     font-size: 1em;
 

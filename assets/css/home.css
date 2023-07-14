@@ -25,15 +25,15 @@ header .row li * {
   margin: 0 auto 120px;
 }
 #section-1 .container {
-  position: absolute;
-  top: 100px;
   margin: auto;
-  height: 100%;
-  left: 50%;
-  transform: translate(-50%, 0);
 }
 #section-1 .row {
   align-items: flex-end;
+  position: absolute;
+  bottom: -100px;
+  height: auto;
+  left: 50%;
+  transform: translateX(-50%);
 }
 #section-1 img {
   -o-object-fit: cover;
@@ -44,7 +44,7 @@ header .row li * {
   padding: 0;
   -webkit-text-stroke: 3px;
   -webkit-text-stroke-color: hsl(48.76, 100%, 49.22%);
-  font-size: 4em;
+  font-size: 3em;
   color: transparent;
 }
 #section-1 .show-services {
@@ -52,8 +52,7 @@ header .row li * {
   justify-content: space-between;
   width: 100%;
   max-width: 100%;
-  height: 50%;
-  max-height: 350px;
+  height: 350px;
 }
 #section-1 .services {
   height: 100%;
@@ -90,9 +89,8 @@ header .row li * {
 }
 #section-2 > .container .row > button {
   width: auto;
+  margin: auto;
   margin-bottom: 1em;
-  margin-left: 50%;
-  transform: translateX(-50%);
   cursor: pointer;
   font-size: 1em;
 }

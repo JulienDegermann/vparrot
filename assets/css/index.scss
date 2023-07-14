@@ -44,51 +44,60 @@ section {
   @extend %padding;
   display: flex;
   flex-wrap: wrap;
+}
 
-  // ------------------------------------------------------------------------------- WIDTH AUTO FOR EACH .ROW CHILDREN ‼️
+section .row {
+  @media screen and (max-width: 1023px) {
+    display: block;
+  }
+
   &>* {
-    width: auto;
-    float: left;
+    width: 100%;
     @extend %padding;
   }
 }
 
-.bloc-2 {
-  width: 50%;
-}
+// ------------------------------------------------------------------------------- WIDTH AUTO FOR EACH .ROW CHILDREN ‼️
 
-.bloc-3 {
-  width: 33.33333%;
-}
+@media screen and (min-width: 1024px) {
+  section .row {
+    .bloc-2 {
+      width: 50%;
+    }
 
-.bloc-2-3 {
-  width: 66.66667%;
-}
+    .bloc-3 {
+      width: 33.33333%;
+    }
 
-.bloc-4 {
-  width: 25%;
-}
+    .bloc-2-3 {
+      width: 66.66667%;
+    }
 
-.bloc-3-4 {
-  width: 75%;
-}
+    .bloc-4 {
+      width: 25%;
+    }
 
-.bloc-5 {
-  width: 20%;
-}
+    .bloc-3-4 {
+      width: 75%;
+    }
 
-.bloc-2-5 {
-  width: 40%;
-}
+    .bloc-5 {
+      width: 20%;
+    }
 
-.bloc-3-5 {
-  width: 60%;
-}
+    .bloc-2-5 {
+      width: 40%;
+    }
 
-.bloc-4-5 {
-  width: 80%;
-}
+    .bloc-3-5 {
+      width: 60%;
+    }
 
+    .bloc-4-5 {
+      width: 80%;
+    }
+  }
+}
 
 .button {
   padding: 1em 2em;
@@ -98,7 +107,7 @@ section {
   text-transform: uppercase;
   font-weight: bold;
   cursor: pointer;
-
+  font-size: 1em;
 }
 
 // ----------------------------------------------------------------------- TEXTS
@@ -120,7 +129,7 @@ h4 {
   width: 100%;
   max-width: 1000px;
   margin: 0 auto 1em;
-  font-size: 3em;
+  font-size: 2em;
   height: auto;
 }
 
@@ -275,8 +284,9 @@ header {
 // ---------------------------------------------------------------------- FOOTER
 footer {
   background: $grey-40;
-  padding: 2em 0;
+  padding: 2em 0 3em;
   position: relative;
+
 
   * {
     color: $grey-100;
@@ -285,6 +295,34 @@ footer {
 
   .row {
     justify-content: space-between;
+
+    &>* {
+      @media screen and (max-width: 1023px) {
+        width: 100%;
+      }
+
+      @media screen and (min-width: 1024px) {
+        width: 50%;
+      }
+    }
+
+    @media screen and (max-width: 1023px) {
+      .planning {
+        order: 2;
+      }
+
+      .contact {
+        order: 1;
+
+        .contact-button {
+          order: 2;
+        }
+
+        .phone {
+          order: 1
+        }
+      }
+    }
   }
 
   .contact {
@@ -300,6 +338,9 @@ footer {
     left: 50%;
     transform: translateX(-50%);
     font-size: 14px;
+    width: 100%;
+    padding-left: 1em;
+    padding-right: 1em;
 
     * {
       color: $grey-40;
@@ -314,9 +355,11 @@ footer {
   }
 
   .contact-button {
-    font-size: 1.5em;
-    padding: 1em 2em;
     margin-bottom: 1em;
+
+    @media screen and (max-width: 1023px) {
+      margin-top: 1em;
+    }
   }
 
   .phone {

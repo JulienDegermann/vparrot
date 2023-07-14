@@ -2,8 +2,11 @@
 
 
 
-# login files
+# log files
 *.log
 
 # UML diagrams
 *.drawio
+
+# DB informations
+data_base_connect.php

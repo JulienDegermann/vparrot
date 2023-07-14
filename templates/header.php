@@ -1,11 +1,11 @@
 <?php
 // session opening on each page load and define auto-destroy session after 3600s
-ini_set('session.save_path', 'session_files/'); 
+require_once 'data_base/data_base_connect.php';
+
+ini_set('session.save_path', 'session_files/');
 
 session_start();
 $_SESSION['last_activity'] = time();
-
-var_dump('session en cours : ' . session_id());
 
 if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 2)) {
   session_destroy();
@@ -13,6 +13,9 @@ if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 
   $_SESSION['last_activity'] = time();
 }
 
+require_once 'lib/workshop_datas.php';
+require_once 'lib/users.php';
+require_once 'lib/cars_list.php';
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +50,7 @@ if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 
 
 
 
-<body <!------------------------------------------------------------ HEADER START-->
+<body> <!------------------------------------------------------------ HEADER START-->
   <header>
     <div class="container">
       <div class="row">
@@ -66,14 +69,6 @@ if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 
                 <p>Accueil</p>
               </a>
             </li>
-            <!-- <li class="none">
-              <a href="http://localhost:8888/workshop.php" class="header-nav-link">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
-                  <path d="M705-128 447-388q-23 8-46 13t-47 5q-97.083 0-165.042-67.667Q121-505.333 121-602q0-31 8.158-60.388Q137.316-691.777 152-718l145 145 92-86-149-149q25.915-15.158 54.957-23.579Q324-840 354-840q99.167 0 168.583 69.417Q592-701.167 592-602q0 24-5 47t-13 46l259 258q11 10.957 11 26.478Q844-209 833-198l-76 70q-10.696 11-25.848 11T705-128Zm28-57 40-40-273-273q16-21 24-49.5t8-54.5q0-75-55.5-127T350-782l101 103q9 9 9 22t-9 22L319-511q-9 9-22 9t-22-9l-97-96q3 77 54.668 127T354-430q25 0 53-8t49-24l277 277ZM476-484Z" />
-                </svg>
-                <p>Atelier</p>
-              </a>
-            </li> -->
             <li>
               <a href="used_cars.php" class="header-nav-link">
                 <!-- <img src="assets/images/icons/car.svg" alt="car icon"> -->

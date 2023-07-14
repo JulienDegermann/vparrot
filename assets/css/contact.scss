@@ -1,6 +1,13 @@
-@import 'index.scss';
+@import 'colors.scss';
+
 
 #section-1 {
+  @media screen and (max-width: 1023px) {
+    .bloc-2:last-of-type {
+      margin-top: 2em;
+    }
+  }
+
   address {
     width: 100%;
 
@@ -101,7 +108,7 @@
 
   input[type="submit"] {
     margin-left: 100%;
-    transform: translateX(-100%);    
+    transform: translateX(-100%);
   }
 
 }

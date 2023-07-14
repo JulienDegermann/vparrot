@@ -5,7 +5,6 @@ $current_page = 'home';
 require_once 'classes/class_comments.php';
 ?>
 
-
 <!-- ----------------------------------------------------------------------- -->
 
 <!-- ----------------------------------------------------------- HEADER CALL -->
@@ -75,7 +74,7 @@ require_once 'lib/users.php';
   <div class="container">
     <div class="row">
       <h2>Votre avis compte</h2> <br>
-      <button type="button" id="add-comment"">ajoutez-le</button>
+      <button type="button" id="add-comment">ajoutez-le</button>
 
       <div class=" comments-slider">
         <?php
@@ -83,7 +82,7 @@ require_once 'lib/users.php';
 
 
           $current_comment = new Comments($user['id'], $user['first_name'], $user['note']['note'], $user['note']['comment']);
-          $current_comment->display_list();
+          $current_comment->display_item();
         ?>
           <div class="comment">
             <h3 class="comment-title">

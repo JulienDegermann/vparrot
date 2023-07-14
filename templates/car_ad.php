@@ -11,7 +11,7 @@
   </div>
 </div>
 <div class="bloc-2">
-<h2>Informations sur le véhciule</h2>
+<h2>Informations sur le véhicule</h2>
 <p>Marque: <?= $this->brand;?></p>
 <p>Modèle: <?= $this->model;?></p>
 <p>Année de 1ère mise en cicrulation: <?= $this->year;?></p>
