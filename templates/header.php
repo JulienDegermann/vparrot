@@ -9,7 +9,8 @@ $_SESSION['last_activity'] = time();
 $_SESSION['role'] = 'client';
 
 
-if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 2)) {
+if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 60 * 15)) {
+  session_unset();
   session_destroy();
 } else {
   $_SESSION['last_activity'] = time();

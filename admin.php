@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['last_activity']) && ((time() - $_SESSION['last_activity']) > 2)) {
+if (isset($_SESSION['last_activity']) && ((time() - $_SESSION['last_activity']) > 15 * 60)) {
   session_unset();
   session_destroy();
   header('Location: login.php');
@@ -8,25 +8,21 @@ if (isset($_SESSION['last_activity']) && ((time() - $_SESSION['last_activity']) 
   $_SESSION['last_activity'] = time();
 }
 
-
 if ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'employee') {
 } else {
   header('Location: login.php');
   exit();
 }
 
-
-
 $_SESSION['last_activity'] = time();
-if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 2)) {
+if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > (15 * 60))) {
   session_destroy();
 } else {
   $_SESSION['last_activity'] = time();
 }
 
-// echo $_SESSION['role'];
 $current_page = 'admin';
-// session opening on each page load and define auto-destroy session after 3600s
+
 require_once 'data_base/data_base_connect.php';
 require_once 'lib/cars_list.php';
 require_once 'lib/workshop_datas.php';
@@ -57,7 +53,7 @@ require 'classes/class_comments.php';
   <!-- CUSTOM CSS -->
   <!-- PAGE SPECEFIC CSS -->
   <link rel="stylesheet" href="assets/css/index.css">
-  <link rel="stylesheet" href="assets/css/<?php echo $current_page ?>.css">
+  <link rel="stylesheet" href="assets/css/<?= $current_page ?>.css">
   <?php if ($current_page == 'used_car') : echo ('<link rel="stylesheet" href="/assets/css/contact_form.css">');
   endif ?>
 
@@ -80,64 +76,33 @@ require 'classes/class_comments.php';
         </button>
       </div>
     </div>
-    <p>Connecté en tant que <?= $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name']; ?></p>
-    <button type="button">Se déconnecter</button>
+    <div class="logout">
+      <p>Bonjour <?= $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name']; ?></p>
+      <button id="logout" type="button" class="button">Se déconnecter</button>
+    </div>
   </header>
   <!------------------------------------------------------------- HEADER END -->
 
   <!------------------------------------------------------------- MAIN START -->
   <main>
-    <!-- --------------------------------------------------------- PHP FUNCTIONS -->
-    <!-- PAGE NAME -->
-    <?php
-
-    // if (isset($_POST['email']) && isset($_POST['password'])) {
-    //   $error = '';
-    //   if ($_POST['email'] === 'admin@admin.com' && $_POST['password'] === 'root') {
-    //     var_dump(('vous êtes connecté en tant qu\'admin'));
-    //     $error = 'connected';
-    //   }
-
-    //   foreach ($users['employee'] as $user) {
-    //     if ($_POST['email'] === $user['email'] && $_POST['password'] === $user['password']) {
-    //       var_dump('vous êtes connecté en tant que : ' . $user['first_name'] . ' ' . $user['last_name']);
-    //       $error = 'connected';
-    //     }
-    //   }
-    //   if ($error != 'connected') {
-    // 
-    ?>
-    <!-- <p class="error">e-mail ou mot de passe incorrect</p> -->
-    <?php
-    //     require_once 'login.php';
-    //   }
-    // } else {
-    //   $error = 'erreur de connexion';
-    // }
-
-
-    // cars BDD
-
-    ?>
     <!-- ----------------------------------------------------------- HEADER CALL -->
-
-
     <section class="mobile_only">
       <h1>ERREUR</h1>
       <p>Cette page est conçu pour être affichée sur un écran plus grand. Veuillez-vous connecter sur une tablette ou un ordinateur</p>
     </section>
-
     <section id="section-1" class="desktop_only">
       <div class="container">
         <div class="row">
-
           <aside class="bloc-4">
             <nav class="admin-nav">
-              <ul class="admin">
-                <li id="garage" class="active">Informations sur le garage</li>
-                <li id="employee">Comptes employé</li>
-              </ul>
-
+              <!-- if is admin -> display admin functions -->
+              <?php if ($_SESSION['role'] === 'admin') { ?>
+                <ul class="admin">
+                  <li id="garage" class="active">Informations sur le garage</li>
+                  <li id="employee">Comptes employé</li>
+                </ul>
+              <?php
+              } ?>
               <ul>
                 <li id="messages">Messages clients</li>
                 <li id="comments">Commentaires clients</li>
@@ -239,10 +204,14 @@ require 'classes/class_comments.php';
                   </thead>
                   <tbody>
                     <?php
-                    foreach ($users['employee'] as $key => $employee) {
+                    $employee_bdd = "SELECT * FROM users WHERE role='employee'";
+                    foreach ($bdd->query($employee_bdd) as $employee) {
+                      var_dump($employee['first_name']);
                       $userObject = new Users($employee['id'], $employee['first_name'], $employee['last_name'], $employee['email'], $employee['key'] = 0);
                       $userObject->display_list();
+                      $bdd = null;
                     }
+
                     ?>
                   </tbody>
                 </table>

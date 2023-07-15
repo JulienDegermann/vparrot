@@ -11,8 +11,17 @@ section .row > *, .row, .container {
   text-align: left;
   box-sizing: border-box;
   color: hsl(189.47, 61.29%, 18.24%);
+  font-family: "Ubuntu", sans-serif;
 }
 
+@font-face {
+  font-family: "Tektur";
+  src: url("../fonts/Tektur/Tektur-Regular.ttf");
+}
+@font-face {
+  font-family: "Ubuntu";
+  src: url("../fonts/Ubuntu/Ubuntu-Regular.ttf");
+}
 .container {
   margin: auto;
 }
@@ -101,6 +110,7 @@ h4 {
   height: auto;
   margin-bottom: 1em;
   margin-top: 0;
+  font-family: "Tektur", serif;
 }
 
 h1 {

@@ -14,7 +14,6 @@ $('.show-services').slick({
         slidesToShow: 2,
         slidesToScroll: 1,
         infinite: true,
-        arrows: true
       }
     },
     {
@@ -23,7 +22,6 @@ $('.show-services').slick({
         slidesToShow: 1,
         slidesToScroll: 1,
         infinite: true,
-        arrows: false
       }
     }
   ]

@@ -2,6 +2,14 @@
 
 $users = [
     'admin' => [
+        'id' => 0,
+        'last_name' => 'admin',
+        'first_name' => 'admin',
+        'function' => 'admin',
+        'email' => 'admin@example.com',
+        'password' => 'admin'
+    ],
+    [
         'id' => 1,
         'last_name' => 'TAYLOR',
         'first_name' => 'Daniel',

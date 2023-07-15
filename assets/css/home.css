@@ -43,10 +43,25 @@ header .row li * {
 }
 #section-1 .row h1 {
   padding: 0;
-  -webkit-text-stroke: 3px;
+  -webkit-text-stroke: 1px;
   -webkit-text-stroke-color: hsl(48.76, 100%, 49.22%);
-  font-size: 3em;
   color: transparent;
+  margin: 0 auto;
+}
+@media screen and (max-width: 519px) {
+  #section-1 .row h1 {
+    font-size: 3em;
+  }
+}
+@media screen and (min-width: 520px) and (max-width: 1023px) {
+  #section-1 .row h1 {
+    font-size: 5em;
+  }
+}
+@media screen and (min-width: 1024px) {
+  #section-1 .row h1 {
+    font-size: 10em;
+  }
 }
 #section-1 .show-services {
   width: 100%;

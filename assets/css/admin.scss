@@ -11,6 +11,23 @@
   }
 }
 
+header {
+  position: relative;
+}
+
+.logout {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+  p {
+    text-transform: capitalize;
+    text-align: center;
+    margin-bottom: .5em;
+  }
+}
+
+
 // DYNAMIC DISPLAY MENU
 .active {
   background-color: $yellow-100;
