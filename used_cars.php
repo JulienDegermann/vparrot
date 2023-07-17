@@ -1,6 +1,8 @@
 <!-- --------------------------------------------------------- PHP FUNCTIONS -->
 <!-- PAGE NAME -->
-<?php $current_page = 'used_cars'; ?>
+<?php $current_page = 'used_cars'; 
+$current_pageFR='Véhicules d\'occasion';
+?>
 
 <!-- ----------------------------------------------------------- HEADER CALL -->
 <?php require_once 'templates/header.php'; ?>

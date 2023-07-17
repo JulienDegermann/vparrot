@@ -17,7 +17,7 @@ let autoLogout;
 
 // check if delay > lastActivity
 setInterval(() => {
-  autoLogout = new Date().getTime() - lastActivity  > delayTime ? logout() : null;
+  autoLogout = new Date().getTime() - lastActivity > delayTime ? logout() : null;
 }, 1000)
 
 
@@ -44,4 +44,18 @@ function update() {
 
 $('aside li').click(() => {
   update();
+})
+
+
+$('input[type="time"]').each(() => {
+  min = '06:00';
+  max = '21:00' 
+  $(this).on('input', function () {
+    const selectedTime = this.value;
+    const isValidTime = selectedTime >= min && selectedTime <= max;
+
+    if (!isValidTime) {
+      this.value = '';
+    }
+  })
 })

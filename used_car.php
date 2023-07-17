@@ -1,6 +1,7 @@
 <!-- --------------------------------------------------------- PHP FUNCTIONS -->
 <!-- PAGE NAME -->
 <?php $current_page = 'used_car';
+$current_pageFR = 'Véhicules d\'occasion';
 
 // cars BDD
 require_once 'lib/cars_list.php';

@@ -2,7 +2,9 @@
 <!-- PAGE NAME -->
 <?php
 $current_page = 'home';
+$current_pageFR = 'Accueil';
 require_once 'classes/class_comments.php';
+require_once 'lib/workshop_datas.php';
 ?>
 
 <!-- ----------------------------------------------------------------------- -->
@@ -25,45 +27,34 @@ require_once 'lib/users.php';
         15 ans d'expertise
       </h1>
       <div class="show-services">
-        <div class="services">
-          <h2>Réparation</h2>
-          <ul>
-            <li>Moteur</li>
-            <li>Embrayage & boite de vitesses</li>
-            <li>Carrosserie</li>
-            <li>Diagnostic</li>
-            <li>Pièces neuves ou reconditionnées</li>
+        <?php
+        $req = "SELECT * FROM services;";
+        foreach ($bdd->query($req) as $service) {
+        ?>
 
-          </ul>
-          <a class="button" href="http://localhost:8888/pages/contact.php">Demander un devis</a>
+          <div class="services">
+            <h2><?= $service['title']; ?></h2>
+            <ul>
+              <?php
+              $contents = json_decode($service['content']);
+              foreach ($contents as $content) { ?>
+                <li><?= $content; ?> </li>
+              <?php
+              }
+              ?>
+            </ul>
 
+            <?php if ($service['title'] == 'Véhicules d\'occasion') { ?>
+              <a class="button" href="used_cars.php">Nos occasions</a>
 
-        </div>
-        <div class="services">
-          <h2>Entretien</h2>
-          <ul>
-            <li>Pneus</li>
-            <li>Révision</li>
-            <li>Freinage</li>
-            <li>Vidange</li>
-            <li>Climatisation</li>
-
-          </ul>
-          <a class="button" href="http://localhost:8888/pages/contact.php">Demander un devis</a>
-
-        </div>
-        <div class="services">
-          <h2>Véhicules d'occasion</h2>
-          <ul>
-            <li>Véhicules particuliers & utilitaires</li>
-            <li>Véhicules révisés</li>
-            <li>Garantie jusqu'à 12 mois</li>
-          </ul>
-          <a class="button" href="http://localhost:8888/pages/used_cars.php">Nos véhicules d'occasion</a>
-
-        </div>
+            <?php } else { ?>
+              <a class="button" href="contact.php">Demander un devis</a>
+            <?php } ?>
+          </div>
+        <?php }
+        ?>
       </div>
-
+      <?php //$bdd = null; ?>
     </div>
   </div>
 </section>
@@ -106,42 +97,42 @@ require_once 'lib/users.php';
         <?php
         };
         ?>
+      </div>
     </div>
-  </div>
-  <div id="new-comment" class="row hidden">
-    <h2>Ajouter un commentaire</h2>
+    <div id="new-comment" class="row hidden">
+      <h2>Ajouter un commentaire</h2>
 
-    <form action="config/comment_config.php" method="post">
-      <label for="name">Votre nom :
-        <input type="text" id="name" name="name">
-      </label>
-      <fieldset>
-        <legend>Note :</legend>
-        <label for="1">1
-          <input type="radio" id="1" name="note" value="1">
+      <form action="config/comment_config.php" method="post">
+        <label for="name">Votre nom :
+          <input type="text" id="name" name="name">
         </label>
-        <label for="2">2
-          <input type="radio" id="2" name="note" value="2">
-        </label>
-        <label for="3">3
-          <input type="radio" id="3" name="note" value="3">
-        </label>
-        <label for="4">4
-          <input type="radio" id="4" name="note" value="4">
-        </label>
-        <label for="5">5
-          <input type="radio" id="5" name="note" value="5">
-        </label>
+        <fieldset>
+          <legend>Note :</legend>
+          <label for="1">1
+            <input type="radio" id="1" name="note" value="1">
+          </label>
+          <label for="2">2
+            <input type="radio" id="2" name="note" value="2">
+          </label>
+          <label for="3">3
+            <input type="radio" id="3" name="note" value="3">
+          </label>
+          <label for="4">4
+            <input type="radio" id="4" name="note" value="4">
+          </label>
+          <label for="5">5
+            <input type="radio" id="5" name="note" value="5">
+          </label>
 
-        </label>
-      </fieldset>
+          </label>
+        </fieldset>
 
-      <label for="comment">Commentaire :
-        <textarea name="comment" id="comment" placeholder="Votre commentaire…"></textarea>
-      </label>
-      <input type="submit" class="button" value="Envoyer">
-    </form>
-  </div>
+        <label for="comment">Commentaire :
+          <textarea name="comment" id="comment" placeholder="Votre commentaire…"></textarea>
+        </label>
+        <input type="submit" class="button" value="Envoyer">
+      </form>
+    </div>
 
   </div>
 </section>

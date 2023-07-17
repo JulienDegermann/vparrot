@@ -271,9 +271,7 @@ header li:hover svg {
 }
 
 main {
-  height: -webkit-fill-available;
-  height: -moz-available;
-  height: stretch;
+  height: auto;
 }
 
 footer {

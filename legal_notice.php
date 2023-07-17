@@ -1,5 +1,6 @@
 <?php
 $current_page = 'legal_notice';
+$current_pageFR = 'mentions légales';
 require_once 'templates/header.php';
 require_once 'lib/workshop_datas.php';
 require_once 'lib/users.php';

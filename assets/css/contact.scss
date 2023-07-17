@@ -2,8 +2,14 @@
 
 
 #section-1 {
-  @media screen and (max-width: 1023px) {
-    .bloc-2:last-of-type {
+  .bloc-2:first-of-type {
+    text-align: center;
+  }
+
+  .bloc-2:last-of-type {
+    align-self: center;
+
+    @media screen and (max-width: 1023px) {
       margin-top: 2em;
     }
   }
@@ -28,14 +34,9 @@
   .phone {
     font-size: 2em;
     color: hsl(189.47, 61.29%, 18.24%);
-    margin-left: 50%;
-    transform: translateX(-50%);
-    display: inline-block;
-    width: max-content;
     font-weight: bold;
-
-    transform: translateX(-50%);
-    display: inline-block;
+    // display: inline-block;
+    // width: max-content;
   }
 
   iframe {
@@ -45,10 +46,6 @@
     @media screen and (max-width: 519px) {
       max-height: 250px;
     }
-  }
-
-  .bloc-2:last-of-type {
-    align-self: center;
   }
 
   h3 {
@@ -70,6 +67,7 @@
       width: 100%;
       max-width: 100%;
     }
+
     @media screen and (min-width: 1024px) {
       width: 50%;
       max-width: 50%;

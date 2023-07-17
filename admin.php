@@ -1,22 +1,14 @@
 <?php
 session_start();
-if (isset($_SESSION['last_activity']) && ((time() - $_SESSION['last_activity']) > 15 * 60)) {
-  session_unset();
-  session_destroy();
-  header('Location: login.php');
-} else {
-  $_SESSION['last_activity'] = time();
-}
-
 if ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'employee') {
 } else {
   header('Location: login.php');
   exit();
 }
-
-$_SESSION['last_activity'] = time();
-if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > (15 * 60))) {
+if (isset($_SESSION['last_activity']) && ((time() - $_SESSION['last_activity']) > 15 * 60)) {
+  session_unset();
   session_destroy();
+  header('Location: login.php');
 } else {
   $_SESSION['last_activity'] = time();
 }
@@ -57,7 +49,7 @@ require 'classes/class_comments.php';
   <?php if ($current_page == 'used_car') : echo ('<link rel="stylesheet" href="/assets/css/contact_form.css">');
   endif ?>
 
-  <title>Garage Vincent Parrot : Admin</title>
+  <title><?= ucfirst($current_page); ?> - Garage Vincent Parrot</title>
 </head>
 
 
@@ -114,38 +106,67 @@ require 'classes/class_comments.php';
             <!-- ------------------------------------------- GARAGE INFORMATIONS -->
             <div class="garage">
               <h1>Informations générales</h1>
-              <form action="config/admin_config.php" method="post">
+              <form action="config/admin_company_config.php" method="post">
+                <?php
+                $req = " SELECT * FROM company JOIN address ON company.address_id = address.id;";
+                foreach ($bdd->query($req) as $company) { ?>
+                
                 <fieldset>
-                  <label for="company_name">Nom établissement :
-                    <input type="text" name="company_name" id="company_name" value="<?php if (isset($_POST['company_name'])) {
-                                                                                      echo $_POST['company_name'];
-                                                                                    } ?>">
+                  <legend>Entreprise : </legend>
+                  <label for="company_name">Nom :
+                    <input type="text" name="company_name" id="company_name" value="<?= $company['name']; ?>">
                   </label>
                   <label for="company_tel">Téléphone :
-                    <input type="tel" name="company_tel" maxlength="10" minlength="10" id="company_tel" value="<?= $phone; ?>">
+                    <input type="tel" name="company_tel" maxlength="10" minlength="10" id="company_tel" value="<?= $company['phone']; ?>">
                   </label>
                   <label for="company_email">E-mail :
-                    <input type="email" name="company_email" id="company_email" value="<?= $email; ?>">
+                    <input type="email" name="company_email" id="company_email" value="<?= $company['email']; ?>">
                   </label>
                 </fieldset>
                 <fieldset>
                   <legend>Adresse</legend>
                   <label for="street_number">N° de rue :
-                    <input type="number" name="street_number" id="street_number" value="<?= $address_input['street_number']; ?>">
+                    <input type="number" name="street_number" id="street_number" value="<?= $company['street_number']; ?>">
                   </label>
                   <label for="street_name">Rue :
-                    <input type="text" name="street_name" id="street_name" value="<?= $address_input['street_name']; ?>">
+                    <input type="text" name="street_name" id="street_name" value="<?= $company['street_name']; ?>">
                   </label>
 
                   <label for="city">Ville :
-                    <input type="text" name="city" id="city" value="<?= $address_input['city']; ?>">
+                    <input type="text" name="city" id="city" value="<?= $company['city']; ?>">
                   </label>
                   <label for="zip_code">Code postal :
-                    <input type="number" name="zip_code" id="zip_code" value="<?= $address_input['zip_code']; ?>">
+                    <input type="number" name="zip_code" id="zip_code" value="<?= $company['zip_code']; ?>">
                   </label>
                 </fieldset>
+                <fieldset id="opening_setting" >
+                  <legend>
+                    Horaires d'ouverture :
+                  </legend>
+                  <?php 
+                  $req = " SELECT * FROM openings;";
+                  foreach ($bdd->query($req) as $key => $opening) { ?>
+                  <p>
+                    <span><?= $opening['day']; ?> :</span>
+                    <label for="am_opening_<?= $key + 1; ?>">Ouverture matin : <br>
+                      <input type="time" min="06:00" max="21:00" id="am_opening_<?= $key + 1; ?>" name="am_opening_<?= $key + 1; ?>" value="<?= $opening['am_opening']; ?>">
+                    </label>
+                    <label for="am_closure_<?= $key + 1; ?>">Fermeture matin : <br>
+                      <input type="time" min="06:00" max="21:00" id="am_closure_<?= $key + 1; ?>" name="am_closure_<?= $key + 1; ?>" value="<?= $opening['am_closure']; ?>">
+                    </label>
+                    <label for="pm_opening_<?= $key + 1; ?>">Ouverture après-midi : <br>
+                      <input type="time" min="06:00" max="21:00" id="pm_opening_<?= $key + 1; ?>" name="pm_opening_<?= $key + 1; ?>" value="<?= $opening['pm_opening']; ?>">
+                    </label>
+                    <label for="pm_closure_<?= $key + 1; ?>">Fermeture après-midi : <br>
+                      <input type="time" min="06:00" max="21:00" id="pm_closure_<?= $key + 1; ?>" name="pm_closure_<?= $key + 1; ?>" value="<?= $opening['pm_closure']; ?>">
+                    </label>
+                  </p>
+                  <?php } ?>
+                </fieldset>
                 <input class="button" type="submit" value="Enregistrer">
+                <?php } ?>
               </form>
+
             </div>
             <!-- --------------------------------------------------------------- -->
 
@@ -176,7 +197,6 @@ require 'classes/class_comments.php';
                     $_POST['last_name'] != '' &&
                     $_POST['password'] != ''
                   ) {
-                    var_dump('nom ' . $_POST['first_name'] . ' ' . $_POST['last_name'] . ' ' . $_POST['password']);
                     $users['employee'][] = [
                       'id' => uniqid(),
                       'last_name' => $_POST['last_name'],
@@ -185,8 +205,6 @@ require 'classes/class_comments.php';
                       'function' => 'employee',
                       'email' => strtolower($_POST['first_name'] . '.' . $_POST['last_name'] . '@example.com')
                     ];
-                  } else {
-                    var_dump('un champ requis est manquant');
                   }
                   ?>
                 </form>
@@ -206,7 +224,6 @@ require 'classes/class_comments.php';
                     <?php
                     $employee_bdd = "SELECT * FROM users WHERE role='employee'";
                     foreach ($bdd->query($employee_bdd) as $employee) {
-                      var_dump($employee['first_name']);
                       $userObject = new Users($employee['id'], $employee['first_name'], $employee['last_name'], $employee['email'], $employee['key'] = 0);
                       $userObject->display_list();
                       $bdd = null;

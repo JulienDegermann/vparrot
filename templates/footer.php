@@ -1,5 +1,8 @@
 <!----------------------------------------------------------------- MAIN END -->
-<?php require_once 'lib/workshop_datas.php'; ?>
+<?php // require_once 'lib/workshop_datas.php'; 
+?>
+<?php require_once 'data_base/data_base_connect.php'; ?>
+
 <!------------------------------------------------------------- FOOTER START -->
 </main>
 <footer>
@@ -10,27 +13,25 @@
         <h2>Horaires d'ouverture</h2>
 
         <?php
-        foreach ($hours as $key => $hour) {
-          if ($hour['am_opening'] === null && $hour['am_closure'] === null) {
-            $am = 'fermé';
+        $req = "SELECT * FROM openings ;";
+        foreach ($bdd->query($req) as $opening) {
+
+          $am_opening = date('H:i', strtotime($opening['am_opening']));
+          $am_closure = date('H:i', strtotime($opening['am_closure']));
+          $pm_opening = date('H:i', strtotime($opening['pm_opening']));
+          $pm_closure = date('H:i', strtotime($opening['pm_closure']));
+
+          if ($am_opening === $am_closure && $pm_opening === $pm_closure) {
+            echo $opening['day'] . ' : fermé <br>';
+          } elseif ($am_opening === $am_closure) {
+            echo $opening['day'] . ' : fermé // ' . $pm_opening . ' - ' .  $pm_closure . '<br>';
+          } elseif ($pm_opening === $pm_closure) {
+            echo $opening['day'] . ' : ' . $am_opening . ' - ' .  $am_closure . ' // fermé <br>';
           } else {
-            $am = $hour['am_opening'] . ' - ' . $hour['am_closure'];
-          };
-          if ($hour['pm_opening'] === null && $hour['pm_closure'] === null) {
-            $pm = 'fermé';
-          } else {
-            $pm = $hour['pm_opening'] . ' - ' . $hour['pm_closure'];
-          };
-          if ($am === 'fermé' && $pm === 'fermé') {
-            $day = $key . ' : fermé';
-          } else {
-            $day = $key . ' : ' . $am . ' // ' . $pm;
-          };
+            echo $opening['day'] . ' : ' . $am_opening . ' - ' .  $am_closure . ' // ' . $pm_opening . ' - ' .  $pm_closure . '<br>';
+          }
+        }
         ?>
-          <p>
-            <?php echo $day; ?>
-          </p>
-        <?php }; ?>
       </div>
 
       <div class="copyrights">
@@ -49,6 +50,10 @@
     </div>
   </div>
 </footer>
+
+<?php 
+if (isset($bdd)) {$bdd = null; }
+?>
 <!--------------------------------------------------------------- FOOTER END -->
 
 
@@ -62,7 +67,7 @@
 <!-- page scpecific JS -->
 <?php
 if (file_exists("assets/js/$current_page.js")) :
-  echo '<script src="assets/js/'.$current_page.'.js"></script>';
+  echo '<script src="assets/js/' . $current_page . '.js"></script>';
 endif;
 ?>
 

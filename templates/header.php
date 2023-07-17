@@ -1,21 +1,18 @@
 <?php
-// session opening on each page load and define auto-destroy session after 3600s
+// DB
 require_once 'data_base/data_base_connect.php';
 
+// SESSION
 ini_set('session.save_path', 'session_files/');
-
 session_start();
-$_SESSION['last_activity'] = time();
 $_SESSION['role'] = 'client';
-
-
 if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 60 * 15)) {
   session_unset();
   session_destroy();
 } else {
   $_SESSION['last_activity'] = time();
 }
-
+// MOVE NECESSARY CODE IN PARTIAL THEN DELETE
 require_once 'lib/workshop_datas.php';
 require_once 'lib/users.php';
 require_once 'lib/cars_list.php';
@@ -48,7 +45,7 @@ require_once 'lib/cars_list.php';
   endif ?>
 
 
-  <title>Garage Vincent Parrot</title>
+<title><?= ucfirst($current_pageFR); ?> - Garage Vincent Parrot</title>
 </head>
 
 

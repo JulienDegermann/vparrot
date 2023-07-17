@@ -1,3 +1,9 @@
+#section-1 .bloc-2:first-of-type {
+  text-align: center;
+}
+#section-1 .bloc-2:last-of-type {
+  align-self: center;
+}
 @media screen and (max-width: 1023px) {
   #section-1 .bloc-2:last-of-type {
     margin-top: 2em;
@@ -20,14 +26,7 @@
 #section-1 .phone {
   font-size: 2em;
   color: hsl(189.47, 61.29%, 18.24%);
-  margin-left: 50%;
-  transform: translateX(-50%);
-  display: inline-block;
-  width: -moz-max-content;
-  width: max-content;
   font-weight: bold;
-  transform: translateX(-50%);
-  display: inline-block;
 }
 #section-1 iframe {
   width: 100%;
@@ -37,9 +36,6 @@
   #section-1 iframe {
     max-height: 250px;
   }
-}
-#section-1 .bloc-2:last-of-type {
-  align-self: center;
 }
 #section-1 h3 {
   text-align: center;

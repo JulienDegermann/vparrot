@@ -16,6 +16,9 @@ require_once 'lib/users.php';
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- ------------------------------------------------------------- FAVICON -->
+  <link rel="icon" type="image/x-icon" href="assets/images/favicons/favicon.ico">
+
   <!-- ----------------------------------------------------------------- CEO -->
   <meta name="description" content="Le garage V.Parrot vous accueille à Toulouse 6 jours sur 7 15 annnées d'expertise dans la réparation et l'entretien de votre véhicule" />
 
@@ -26,11 +29,13 @@ require_once 'lib/users.php';
 
   <!-- CUSTOM CSS -->
   <!-- PAGE SPECEFIC CSS -->
-  <link rel="stylesheet" href="/assets/css/index.css">
-  <link rel="stylesheet" href="/assets/css/<?php echo $current_page ?>.css">
-  <title>Garage Vincent Parrot</title>
-</head>
+  <link rel="stylesheet" href="assets/css/index.css">
+  <link rel="stylesheet" href="assets/css/<?= $current_page ?>.css">
+  <?php if ($current_page == 'used_car') : echo ('<link rel="stylesheet" href="/assets/css/contact_form.css">');
+  endif ?>
 
+  <title><?= ucfirst($current_page); ?> - Garage Vincent Parrot</title>
+</head>
 <body>
   <!------------------------------------------------------------ HEADER START-->
   <header>
