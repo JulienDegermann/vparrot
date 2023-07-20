@@ -17,11 +17,22 @@
   font-family: 'Ubuntu', sans-serif;
 }
 
+// force full screen view 
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+main {
+flex: 1;
+}
+
 // fonts import
 @font-face {
   font-family: 'Tektur';
   src: url('../fonts/Tektur/Tektur-Regular.ttf');
 }
+
 @font-face {
   font-family: 'Ubuntu';
   src: url('../fonts/Ubuntu/Ubuntu-Regular.ttf');

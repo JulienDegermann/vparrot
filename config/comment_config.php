@@ -1,45 +1,47 @@
 <?php
-
-require_once '../lib/users.php';
-
-
-$clients_comment = [];
-foreach ($users['client'] as $client) {
-  $note = $client['note']['note'];
-  $comment = $client['note']['comment'];
-  $name = $client['first_name'];
-  $client_comment = [
-    'name' => $name,
-    'note' => $note,
-    'comment'=> $comment
-  ];
-  $clients_comment[] = $client_comment;
-}
+session_start();
+require_once '../data_base/data_base_connect.php';
+$error = '';
 
 
-
-
-if (isset($_POST['name']) && isset($_POST['note'])) {
+if (!isset($_POST['first_name']) || !isset($_POST['last_name']) || !isset($_POST['note']) || !isset($_POST['comment'])) {
+  $error = 'un champ est manquant';
+  $_SESSION['error'] = $error;
+  header('Location: ../index.php');
+  exit();
+} else {
   $note = $_POST['note'];
-  $name = $_POST['name'];
-
-  if (isset($_POST['comment'])) {
-    $comment = $_POST['comment'];
-  }
-
-  $current_client = [
-    'name' => $name,
-    'note' => $note,
-    'comment' => $comment
-  ];
+  $first_name = ucfirst(strtolower($_POST['first_name']));
+  $last_name = ucfirst(strtolower($_POST['last_name']));
+  $comment = $_POST['comment'];
 }
 
-$clients_comment[] = $current_client;
-var_dump($clients_comment);
+echo $first_name . ' ' . $last_name;
+
+$id = null;
+$req = "SELECT id FROM users WHERE first_name = '$first_name' AND last_name = '$last_name';";
+
+foreach ($bdd->query($req) as $user) {
+  $id = $user['id'];
+};
 
 
-foreach ($clients_comment as $client) {
-  echo 'nom : ' .  $client['name'] . ', note : ' . $client['note'] . ', commentaire :' .$client['comment']  . '<br>';
+if ($id === null) {
+  $req = "INSERT INTO users (first_name, last_name, role)
+  VALUES ('$first_name', '$last_name', 'client');";
+  $bdd->query($req);
+  $id = $bdd->lastInsertId();
+  var_dump('last id : ' . $id);
+  $req = "INSERT INTO comments (note, comment, user_id)
+  VALUES ('$note', '$comment', '$id');";
+  $bdd->query($req);
+  $bdd = null;
+} else {
+  $req = "INSERT INTO comments (note, comment, user_id)
+VALUES ('$note', '$comment', '$id');";
+  $bdd->query($req);
+  $bdd = null;
 }
+
 header('Location: ../index.php');
 exit();

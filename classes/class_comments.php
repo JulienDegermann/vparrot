@@ -5,16 +5,17 @@ class Comments
 {
 
   public $id;
-  public $author;
+  public $first_name;
+  public $last_name;
   public $note;
   public $comment;
 
 
-  public function __construct($id, $author, $note, $comment)
+  public function __construct($first_name, $last_name, $note, $comment)
   {
     // Assigner les valeurs des paramètres aux propriétés correspondantes
-    $this->id = $id;
-    $this->author = $author;
+    $this->first_name = $first_name;
+    $this->last_name = $last_name;
     $this->note = $note;
     $this->comment = $comment;
   }

@@ -37,3 +37,13 @@ CREATE TABLE company (
 
 INSERT INTO company (phone, email, address_id)
 VALUES ('0581234567', 'parrot@example.com', 1);
+
+
+CREATE TABLE comments (
+  id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  user_id INT NOT NULL,
+  note INT(1) NOT NULL,
+  comment VARCHAR(255) NOT NULL,
+  is_checked BOOLEAN,
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);

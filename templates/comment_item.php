@@ -3,7 +3,7 @@
 ?>
 <div class="comment">
   <h3 class="comment-title">
-    <?= $this->author; ?>
+    <?= $this->first_name . ' ' . $this->last_name; ?>
   </h3>
   <div class="comment-note">
     <?php

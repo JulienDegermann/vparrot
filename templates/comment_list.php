@@ -2,7 +2,7 @@
 ?>
 
 <tr>
-  <td><?= $this->author; ?></td>
+  <td><?= $this->first_name . ' ' . $this->last_name; ?></td>
   <!-- add filled icon on :hover : JS mouseenter -->
   <td class="center"><?= $this->note ?></td>
   <td><?= $this->comment; ?></td>

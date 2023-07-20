@@ -54,7 +54,8 @@ require_once 'lib/users.php';
         <?php }
         ?>
       </div>
-      <?php //$bdd = null; ?>
+      <?php //$bdd = null; 
+      ?>
     </div>
   </div>
 </section>
@@ -69,42 +70,22 @@ require_once 'lib/users.php';
 
       <div class=" comments-slider">
         <?php
-        foreach ($users['client'] as $user) {
-
-
-          $current_comment = new Comments($user['id'], $user['first_name'], $user['note']['note'], $user['note']['comment']);
+        $req = "SELECT * FROM comments JOIN users ON comments.user_id = users.id;";
+        foreach ($bdd->query($req) as $user) {
+          $current_comment = new Comments($user['first_name'], $user['last_name'], $user['note'], $user['comment']);
           $current_comment->display_item();
-        ?>
-          <div class="comment">
-            <h3 class="comment-title">
-              <?php echo $user['first_name'] . ' ' .  $user['last_name'] ?>
-            </h3>
-            <div class="comment-note">
-
-              <?php
-              for ($i = 1; $i <= $user['note']['note']; $i++) {
-                require 'assets/images/icons/star-filled.svg';
-              };
-              for ($i = 0; $i < (5 - $user['note']['note']); $i++) {
-                require 'assets/images/icons/star.svg';
-              }; ?>
-            </div>
-            <p class="comment-text">
-              <?= $user['note']['comment']; ?>
-            </p>
-          </div>
-
-        <?php
         };
         ?>
       </div>
     </div>
     <div id="new-comment" class="row hidden">
       <h2>Ajouter un commentaire</h2>
-
       <form action="config/comment_config.php" method="post">
-        <label for="name">Votre nom :
-          <input type="text" id="name" name="name">
+        <label for="first_name">Prénom :
+          <input type="text" id="first_name" name="first_name">
+        </label>
+        <label for="last_name">Nom :
+          <input type="text" id="last_name" name="last_name">
         </label>
         <fieldset>
           <legend>Note :</legend>
@@ -123,10 +104,7 @@ require_once 'lib/users.php';
           <label for="5">5
             <input type="radio" id="5" name="note" value="5">
           </label>
-
-          </label>
         </fieldset>
-
         <label for="comment">Commentaire :
           <textarea name="comment" id="comment" placeholder="Votre commentaire…"></textarea>
         </label>

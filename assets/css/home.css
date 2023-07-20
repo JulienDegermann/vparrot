@@ -123,6 +123,9 @@ header .row li * {
   width: 40px;
   margin: 0 -5px;
 }
+#section-2 .comment-title {
+  margin-bottom: 0;
+}
 #section-2 .comment-text {
   font-weight: normal;
   padding: 0 5px;
