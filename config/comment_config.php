@@ -11,8 +11,8 @@ if (!isset($_POST['first_name']) || !isset($_POST['last_name']) || !isset($_POST
   exit();
 } else {
   $note = $_POST['note'];
-  $first_name = ucfirst(strtolower($_POST['first_name']));
-  $last_name = ucfirst(strtolower($_POST['last_name']));
+  $first_name = ucwords(strtolower($_POST['first_name']));
+  $last_name = ucwords(strtolower($_POST['last_name']));
   $comment = $_POST['comment'];
 }
 

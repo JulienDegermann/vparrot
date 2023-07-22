@@ -28,6 +28,7 @@ function logout() {
     .then(response => {
       // La session est détruite, vous pouvez rediriger l'utilisateur vers la page de connexion ou effectuer d'autres actions appropriées
       window.location.href = 'login.php';
+      alert('Vous êtes déconnecté');
     })
     .catch(error => {
       console.log('Une erreur s\'est produite lors de la déconnexion :', error);
@@ -49,7 +50,7 @@ $('aside li').click(() => {
 
 $('input[type="time"]').each(() => {
   min = '06:00';
-  max = '21:00' 
+  max = '21:00'
   $(this).on('input', function () {
     const selectedTime = this.value;
     const isValidTime = selectedTime >= min && selectedTime <= max;
@@ -57,5 +58,41 @@ $('input[type="time"]').each(() => {
     if (!isValidTime) {
       this.value = '';
     }
+  })
+})
+
+
+
+$('.edit').each(function () {
+  $(this).click(function () {
+    // open modal with a form inside; when submit : update values then call admin.php
+    urlEdit='config/employee_delete.php?id=' + $(this).attr('id')
+    console.log(urlEdit);
+
+    fetch(urlEdit, {
+      method: 'POST'
+    })
+      .then(response => {
+
+      })
+      .catch(error => {
+        console.log('il y a une erreur : ' + error)
+      })
+  })
+})
+$('.delete').each(function () {
+  $(this).click(function () {
+    urlDelete='config/employee_delete.php?id=' + $(this).attr('id')
+    console.log($(this).attr('id'));
+    fetch(urlDelete, {
+      method: 'POST'
+    })
+      .then(response => {
+        window.location.href = 'admin.php';
+        alert('compte supprimé');
+      })
+      .catch(error => {
+        console.log('il y a une erreur : ' + error)
+      })
   })
 })

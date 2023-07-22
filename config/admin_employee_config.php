@@ -12,7 +12,7 @@ if(isset($_POST['employee_password'])){
   $employee_password = $_POST['employee_password'];
 }
 if(isset($_POST['employee_first_name']) && isset($_POST['employee_last_name'])){
-  $employee_email = strtolower($_POST['employee_first_name'] .  '.' . $_POST['employee_last_name'] . '@example.com');
+  $employee_email = strtolower($_POST['employee_first_name'] .  '.' . str_replace(' ', '-', $_POST['employee_last_name'] . '@example.com'));
 }
 if(isset($_POST['client_first_name'])){
   $client_first_name = $_POST['client_first_name'];
@@ -36,8 +36,5 @@ if ($error != '') {
   $bdd->query($save);
   $bdd = null;
 }
-
-
-
 
 header('Location: ../admin.php');

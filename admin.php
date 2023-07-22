@@ -175,7 +175,7 @@ require 'classes/class_comments.php';
               <h1>Comptes employés</h1>
               <div>
                 <h2>Créer un compte employé</h2>
-                <form action="config/admin_config.php" method="post">
+                <form action="config/admin_employee_config.php" method="post">
                   <fieldset>
                     <label for="employee_first_name">Prénom :
                       <input type="text" name="employee_first_name" id="employee_first_name">
