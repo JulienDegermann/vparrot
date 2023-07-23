@@ -96,13 +96,14 @@ require 'classes/class_comments.php';
               <?php
               } ?>
               <ul>
-                <li id="messages">Messages clients</li>
+                <li id="messages" <?= $_SESSION['role'] === 'admin' ? '' : 'class="active"'; ?>>Messages clients</li>
                 <li id="comments">Commentaires clients</li>
                 <li id="cars">Véhicules d'occasion</li>
               </ul>
             </nav>
           </aside>
-          <article class="bloc-3-4 garage" id="display">
+          <!-- garage -->
+          <article class="bloc-3-4 <?= $_SESSION['role'] === 'admin' ? 'garage' : 'messages'; ?>" id="display">
             <!-- ------------------------------------------- GARAGE INFORMATIONS -->
             <div class="garage">
               <h1>Informations générales</h1>
@@ -110,60 +111,61 @@ require 'classes/class_comments.php';
                 <?php
                 $req = " SELECT * FROM company JOIN address ON company.address_id = address.id;";
                 foreach ($bdd->query($req) as $company) { ?>
-                
-                <fieldset>
-                  <legend>Entreprise : </legend>
-                  <label for="company_name">Nom :
-                    <input type="text" name="company_name" id="company_name" value="<?= $company['name']; ?>">
-                  </label>
-                  <label for="company_tel">Téléphone :
-                    <input type="tel" name="company_tel" maxlength="10" minlength="10" id="company_tel" value="<?= $company['phone']; ?>">
-                  </label>
-                  <label for="company_email">E-mail :
-                    <input type="email" name="company_email" id="company_email" value="<?= $company['email']; ?>">
-                  </label>
-                </fieldset>
-                <fieldset>
-                  <legend>Adresse</legend>
-                  <label for="street_number">N° de rue :
-                    <input type="number" name="street_number" id="street_number" value="<?= $company['street_number']; ?>">
-                  </label>
-                  <label for="street_name">Rue :
-                    <input type="text" name="street_name" id="street_name" value="<?= $company['street_name']; ?>">
-                  </label>
 
-                  <label for="city">Ville :
-                    <input type="text" name="city" id="city" value="<?= $company['city']; ?>">
-                  </label>
-                  <label for="zip_code">Code postal :
-                    <input type="number" name="zip_code" id="zip_code" value="<?= $company['zip_code']; ?>">
-                  </label>
-                </fieldset>
-                <fieldset id="opening_setting" >
-                  <legend>
-                    Horaires d'ouverture :
-                  </legend>
-                  <?php 
-                  $req = " SELECT * FROM openings;";
-                  foreach ($bdd->query($req) as $key => $opening) { ?>
-                  <p>
-                    <span><?= $opening['day']; ?> :</span>
-                    <label for="am_opening_<?= $key + 1; ?>">Ouverture matin : <br>
-                      <input type="time" min="06:00" max="21:00" id="am_opening_<?= $key + 1; ?>" name="am_opening_<?= $key + 1; ?>" value="<?= $opening['am_opening']; ?>">
+                  <fieldset>
+                    <legend>Entreprise : </legend>
+                    <label for="company_name">Nom :
+                      <input type="text" name="company_name" id="company_name" value="<?= $company['name']; ?>">
                     </label>
-                    <label for="am_closure_<?= $key + 1; ?>">Fermeture matin : <br>
-                      <input type="time" min="06:00" max="21:00" id="am_closure_<?= $key + 1; ?>" name="am_closure_<?= $key + 1; ?>" value="<?= $opening['am_closure']; ?>">
+                    <label for="company_tel">Téléphone :
+                      <input type="tel" name="company_tel" maxlength="10" minlength="10" id="company_tel" value="<?= $company['phone']; ?>">
                     </label>
-                    <label for="pm_opening_<?= $key + 1; ?>">Ouverture après-midi : <br>
-                      <input type="time" min="06:00" max="21:00" id="pm_opening_<?= $key + 1; ?>" name="pm_opening_<?= $key + 1; ?>" value="<?= $opening['pm_opening']; ?>">
+                    <label for="company_email">E-mail :
+                      <input type="email" name="company_email" id="company_email" value="<?= $company['email']; ?>">
                     </label>
-                    <label for="pm_closure_<?= $key + 1; ?>">Fermeture après-midi : <br>
-                      <input type="time" min="06:00" max="21:00" id="pm_closure_<?= $key + 1; ?>" name="pm_closure_<?= $key + 1; ?>" value="<?= $opening['pm_closure']; ?>">
+                  </fieldset>
+                  <fieldset>
+                    <legend>Adresse</legend>
+                    <label for="street_number">N° de rue :
+                      <input type="number" name="street_number" id="street_number" value="<?= $company['street_number']; ?>">
                     </label>
-                  </p>
-                  <?php } ?>
-                </fieldset>
-                <input class="button" type="submit" value="Enregistrer">
+                    <label for="street_name">Rue :
+                      <input type="text" name="street_name" id="street_name" value="<?= $company['street_name']; ?>">
+                    </label>
+
+                    <label for="city">Ville :
+                      <input type="text" name="city" id="city" value="<?= $company['city']; ?>">
+                    </label>
+                    <label for="zip_code">Code postal :
+                      <input type="number" name="zip_code" id="zip_code" value="<?= $company['zip_code']; ?>">
+                    </label>
+                  </fieldset>
+                  <fieldset id="opening_setting">
+                    <legend>
+                      Horaires d'ouverture :
+                    </legend>
+                    <p class="info">* pour l'heure de fermeture est égale à l'heure d'ouverture, cela indique que le garage est "fermé"</p>
+                    <?php
+                    $req = " SELECT * FROM openings;";
+                    foreach ($bdd->query($req) as $key => $opening) { ?>
+                      <p>
+                        <span><?= $opening['day']; ?> :</span>
+                        <label for="am_opening_<?= $key + 1; ?>">Ouverture matin : <br>
+                          <input type="time" min="06:00" max="21:00" id="am_opening_<?= $key + 1; ?>" name="am_opening_<?= $key + 1; ?>" value="<?= $opening['am_opening']; ?>">
+                        </label>
+                        <label for="am_closure_<?= $key + 1; ?>">Fermeture matin : <br>
+                          <input type="time" min="06:00" max="21:00" id="am_closure_<?= $key + 1; ?>" name="am_closure_<?= $key + 1; ?>" value="<?= $opening['am_closure']; ?>">
+                        </label>
+                        <label for="pm_opening_<?= $key + 1; ?>">Ouverture après-midi : <br>
+                          <input type="time" min="06:00" max="21:00" id="pm_opening_<?= $key + 1; ?>" name="pm_opening_<?= $key + 1; ?>" value="<?= $opening['pm_opening']; ?>">
+                        </label>
+                        <label for="pm_closure_<?= $key + 1; ?>">Fermeture après-midi : <br>
+                          <input type="time" min="06:00" max="21:00" id="pm_closure_<?= $key + 1; ?>" name="pm_closure_<?= $key + 1; ?>" value="<?= $opening['pm_closure']; ?>">
+                        </label>
+                      </p>
+                    <?php } ?>
+                  </fieldset>
+                  <input class="button" type="submit" value="Enregistrer">
                 <?php } ?>
               </form>
 
@@ -226,7 +228,6 @@ require 'classes/class_comments.php';
                     foreach ($bdd->query($employee_bdd) as $employee) {
                       $userObject = new Users($employee['id'], $employee['first_name'], $employee['last_name'], $employee['email'], $employee['key'] = 0);
                       $userObject->display_list();
-                      $bdd = null;
                     }
 
                     ?>
@@ -270,28 +271,48 @@ require 'classes/class_comments.php';
             </div>
             <!-- --------------------------------------------------------------- -->
 
-            <!-- ----------------------------------------------- CLIENT COMMENTS READY DB -->
+            <!-- ----------------------------------------------- CLIENT COMMENTS -->
             <div class="comments">
               <h1>Avis clients</h1>
+              <h2>Nouveaux avis</h2>
               <table>
                 <thead>
                   <tr>
                     <th>Prénom</th>
-
                     <th>Note</th>
                     <th>Commentaire</th>
+                    <th>Valider</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
-                  foreach ($users['client'] as $user) {
-                    $current_comment = new Comments($user['id'], $user['first_name'], $user['note']['note'], $user['note']['comment']);
+                  $comments = Comments::get_all_new_comments($bdd);
+                  foreach ($comments as $comment) {
+                    $current_comment = new Comments($comment['id'], $comment['first_name'], $comment['last_name'], $comment['note'], $comment['comment']);
                     $current_comment->display_list();
                   }
                   ?>
-
                 </tbody>
-
+              </table>
+              <h2>Avis vérifiés</h2>
+              <table class="checked">
+                <thead>
+                  <tr>
+                    <th>Prénom</th>
+                    <th>Note</th>
+                    <th>Commentaire</th>
+                    <th>Supprimer</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  $comments = Comments::get_all_valid_comments($bdd);
+                  foreach ($comments as $comment) {
+                    $current_comment = new Comments($comment['id'], $comment['first_name'], $comment['last_name'], $comment['note'], $comment['comment']);
+                    $current_comment->display_list();
+                  }
+                  ?>
+                </tbody>
               </table>
             </div>
             <!-- --------------------------------------------------------------- -->

@@ -18,7 +18,7 @@ header {
 
 .logout {
   position: absolute;
-  bottom: 0;
+  top: calc(100% - 27px);
   right: 0;
 
   p {
@@ -135,14 +135,42 @@ h2 {
       text-align: center;
     }
 
-    svg {
-      max-width: 50%;
-      cursor: pointer;
+    span {
+      max-width: 45%;
+      display: inline-block;
+
+      svg {
+        cursor: pointer;
+        width: 100%;
+      }
+
     }
+
+  }
+}
+
+.comments {
+  .save {
+    fill: green;
+  }
+
+  .cancel {
+    fill: $red;
+  }
+  .checked .save {
+    display: none;
   }
 }
 
 #opening_setting {
+  .info {
+    color: $grey-70;
+    margin-top: -1em;
+    font-size: 0.7em;
+    margin-bottom: 1em;
+    text-align: left;
+  }
+
   p {
     width: 100%;
     text-align: center;

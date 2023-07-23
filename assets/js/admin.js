@@ -26,7 +26,6 @@ function logout() {
     method: 'POST'
   })
     .then(response => {
-      // La session est détruite, vous pouvez rediriger l'utilisateur vers la page de connexion ou effectuer d'autres actions appropriées
       window.location.href = 'login.php';
       alert('Vous êtes déconnecté');
     })
@@ -90,6 +89,45 @@ $('.delete').each(function () {
       .then(response => {
         window.location.href = 'admin.php';
         alert('compte supprimé');
+      })
+      .catch(error => {
+        console.log('il y a une erreur : ' + error)
+      })
+  })
+})
+
+
+
+$('.cancel').each(function () {
+  $(this).click(function () {
+    // open modal with a form inside; when submit : update values then call admin.php
+    urlEdit='config/comment_delete.php?id=' + $(this).attr('id')
+    console.log(urlEdit);
+
+    fetch(urlEdit, {
+      method: 'POST'
+    })
+      .then(response => {
+        window.location.href = 'admin.php';
+        alert('le commentaire a été supprimé de la base de données');
+      })
+      .catch(error => {
+        console.log('il y a une erreur : ' + error)
+      })
+  })
+})
+$('.save').each(function () {
+  $(this).click(function () {
+    // open modal with a form inside; when submit : update values then call admin.php
+    urlEdit='config/comment_save.php?id=' + $(this).attr('id')
+    console.log(urlEdit);
+
+    fetch(urlEdit, {
+      method: 'POST'
+    })
+      .then(response => {
+        window.location.href = 'admin.php';
+        alert('le commentaire a été validé avec succès');
       })
       .catch(error => {
         console.log('il y a une erreur : ' + error)

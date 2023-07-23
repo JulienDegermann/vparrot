@@ -14,7 +14,7 @@ header {
 
 .logout {
   position: absolute;
-  bottom: 0;
+  top: calc(100% - 27px);
   right: 0;
 }
 .logout p {
@@ -106,11 +106,32 @@ h2 {
 .bloc-3-4 table .center {
   text-align: center;
 }
-.bloc-3-4 table svg {
-  max-width: 50%;
+.bloc-3-4 table span {
+  max-width: 45%;
+  display: inline-block;
+}
+.bloc-3-4 table span svg {
   cursor: pointer;
+  width: 100%;
 }
 
+.comments .save {
+  fill: green;
+}
+.comments .cancel {
+  fill: hsl(0, 100%, 49.8%);
+}
+.comments .checked .save {
+  display: none;
+}
+
+#opening_setting .info {
+  color: hsla(189.47, 61.29%, 18.24%, 0.7);
+  margin-top: -1em;
+  font-size: 0.7em;
+  margin-bottom: 1em;
+  text-align: left;
+}
 #opening_setting p {
   width: 100%;
   text-align: center;

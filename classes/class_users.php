@@ -35,6 +35,47 @@ class Users
     require 'templates/user_item.php';
   }
 
+
+  static function get_user_by_id($bdd, $id) {
+    $sql = "SELECT * FROM users WHERE id = :id ;";
+    // get PDOStatement object ($stmt)
+    $stmt = $bdd->prepare($sql);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt = null;
+    return $result;
+  }
+
+  static function get_user_by_full_name($bdd, $first_name, $last_name) {
+    $sql = "SELECT * FROM users WHERE first_name = :first_name AND last_name = :last_name ;";
+    // get PDOStatement object ($stmt)
+    $stmt = $bdd->prepare($sql);
+    $stmt->bindParam(':first_name', $first_name, PDO::PARAM_STR);
+    $stmt->bindParam(':last_name', $last_name, PDO::PARAM_STR);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt = null;
+    return $result;
+  }
+
+  // -------------------------------------------------------------------------------------- ADD HASH FOR PASSWORD !!!!!!
+  static function insert_new_user($bdd, $first_name, $last_name, $role, $email, $password) {
+    $sql = "INSERT INTO users (first_name, last_name, role, email, password)
+    VALUES (:first_name, :last_name, :role, :email, :password);";
+    // get PDOStatement object ($stmt)
+    $stmt = $bdd->prepare($sql);
+    $stmt->bindParam(':first_name', $first_name, PDO::PARAM_STR);
+    $stmt->bindParam(':last_name', $last_name, PDO::PARAM_STR);
+    $stmt->bindParam(':role', $role, PDO::PARAM_STR);
+    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+    $stmt->bindParam(':password', $password, PDO::PARAM_STR);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt = null;
+    return $result;
+  }
+
   // function login()
   // (
   // add function to check is Employee / Admin is logged in

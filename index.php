@@ -70,11 +70,11 @@ require_once 'lib/users.php';
 
       <div class=" comments-slider">
         <?php
-        $req = "SELECT * FROM comments JOIN users ON comments.user_id = users.id;";
-        foreach ($bdd->query($req) as $user) {
-          $current_comment = new Comments($user['first_name'], $user['last_name'], $user['note'], $user['comment']);
+        $comments = Comments::get_all_valid_comments($bdd);
+        foreach ($comments as $comment) {
+          $current_comment = new Comments($comment['id'], $comment['first_name'], $comment['last_name'], $comment['note'], $comment['comment']);
           $current_comment->display_item();
-        };
+        }
         ?>
       </div>
     </div>

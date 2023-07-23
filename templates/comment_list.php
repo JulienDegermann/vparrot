@@ -6,4 +6,8 @@
   <!-- add filled icon on :hover : JS mouseenter -->
   <td class="center"><?= $this->note ?></td>
   <td><?= $this->comment; ?></td>
+  <td class="center">
+    <span class="save"id="save-<?= $this->id; ?>"><?php require 'assets/images/icons/checked.svg'; ?></span>
+    <span class="cancel"id="cancel-<?= $this->id; ?>"><?php require 'assets/images/icons/cancel.svg'; ?></span>
+  </td>
 </tr>
