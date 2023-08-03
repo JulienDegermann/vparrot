@@ -44,6 +44,13 @@ h2 {
 .bloc-4 {
   height: 100%;
   margin-top: 1em;
+  position: static;
+  
+  @media screen and (min-width: 1024px) {
+    transform: translateY(-50%);
+      position: sticky;
+      top: 50%;
+    }
 
   ul {
     margin-top: 1em;
@@ -157,6 +164,7 @@ h2 {
   .cancel {
     fill: $red;
   }
+
   .checked .save {
     display: none;
   }

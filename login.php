@@ -41,8 +41,8 @@ require_once 'lib/users.php';
   <header>
     <div class="container">
       <div class="row">
-        <a href="http://localhost:8888/index.php" class="logo-parrot">
-          <img src="http://localhost:8888/assets/images/pictures/v_parrot_logo.png" alt="logo Vincent Parrot garage">
+        <a href="index.php" class="logo-parrot">
+          <img src="assets/images/pictures/v_parrot_logo.png" alt="logo Vincent Parrot garage">
           <p>V.PARROT <br> automobile</p>
           <!-- <p>Mécanique</p> -->
         </a>

@@ -2,24 +2,24 @@
 require_once '../data_base/data_base_connect.php';
 
 if(isset($_POST['employee_first_name'])){
-  $employee_first_name = $_POST['employee_first_name'];
+  $employee_first_name = trim($_POST['employee_first_name']);
 }
 if(isset($_POST['employee_last_name'])){
-  $employee_last_name = $_POST['employee_last_name'];
+  $employee_last_name = trim($_POST['employee_last_name']);
 }
 
 if(isset($_POST['employee_password'])){
-  $employee_password = $_POST['employee_password'];
+  $employee_password = trim($_POST['employee_password']);
 }
 if(isset($_POST['employee_first_name']) && isset($_POST['employee_last_name'])){
-  $employee_email = strtolower($_POST['employee_first_name'] .  '.' . str_replace(' ', '-', $_POST['employee_last_name'] . '@example.com'));
+  $employee_email = strtolower($employee_first_name .  '.' . str_replace(' ', '-', $employee_last_name) . '@example.com');
 }
-if(isset($_POST['client_first_name'])){
-  $client_first_name = $_POST['client_first_name'];
-}
-if(isset($_POST['client_last_name'])){
-  $client_last_name = $_POST['client_last_name'];
-}
+// if(isset($_POST['client_first_name'])){
+//   $client_first_name = $_POST['client_first_name'];
+// }
+// if(isset($_POST['client_last_name'])){
+//   $client_last_name = $_POST['client_last_name'];
+// }
 
 
 $req = "SELECT * FROM users;";

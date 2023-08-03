@@ -36,6 +36,14 @@ h2 {
 .bloc-4 {
   height: 100%;
   margin-top: 1em;
+  position: static;
+}
+@media screen and (min-width: 1024px) {
+  .bloc-4 {
+    transform: translateY(-50%);
+    position: sticky;
+    top: 50%;
+  }
 }
 .bloc-4 ul {
   margin-top: 1em;

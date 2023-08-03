@@ -4,25 +4,25 @@ session_start();
 
 
 if (isset($_POST['company_name'])) {
-  $company_name = $_POST['company_name'];
+  $company_name = trim($_POST['company_name']);
 }
 if (isset($_POST['company_tel'])) {
-  $company_tel = $_POST['company_tel'];
+  $company_tel = trim($_POST['company_tel']);
 }
 if (isset($_POST['company_email'])) {
-  $company_email = $_POST['company_email'];
+  $company_email = trim($_POST['company_email']);
 }
 if (isset($_POST['street_number'])) {
-  $street_number = $_POST['street_number'];
+  $street_number = trim($_POST['street_number']);
 }
 if (isset($_POST['street_name'])) {
-  $street_name = $_POST['street_name'];
+  $street_name = trim($_POST['street_name']);
 }
 if (isset($_POST['city'])) {
-  $city = $_POST['city'];
+  $city = trim($_POST['city']);
 }
 if (isset($_POST['zip_code'])) {
-  $zip_code = $_POST['zip_code'];
+  $zip_code = trim($_POST['zip_code']);
 }
 
 // openings

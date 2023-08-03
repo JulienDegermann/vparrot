@@ -13,9 +13,9 @@ if (!isset($_POST['first_name']) || !isset($_POST['last_name']) || !isset($_POST
   exit();
 } else {
   $note = $_POST['note'];
-  $first_name = ucwords(strtolower($_POST['first_name']));
-  $last_name = ucwords(strtolower($_POST['last_name']));
-  $comment = $_POST['comment'];
+  $first_name = trim(ucwords(strtolower($_POST['first_name'])));
+  $last_name = trim(ucwords(strtolower($_POST['last_name'])));
+  $comment = trim($_POST['comment']);
 }
 
 
@@ -27,8 +27,10 @@ $user ? $id = $user['id'] : $id = null;
 if ($id === null) {
   $user = Users::insert_new_user($bdd, $first_name, $last_name, 'client', null, null);
   $id = $bdd->lastInsertId();
-  $new_comment = Comments::insert_comment($bdd, $id, $note, $comment);
+  // $new_comment = Comments::insert_comment($bdd, $id, $note, $comment);
 }
+$new_comment = Comments::insert_comment($bdd, $id, $note, $comment);
+
 
 header('Location: ../index.php');
 exit();
