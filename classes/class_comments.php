@@ -1,15 +1,11 @@
 <?php
-
-
 class Comments
 {
-
   public $id;
   public $first_name;
   public $last_name;
   public $note;
   public $comment;
-
 
   public function __construct($id, $first_name, $last_name, $note, $comment)
   {
@@ -76,7 +72,6 @@ class Comments
     $stmt = null;
     return $result;
   }
- 
 
   static function get_all_valid_comments($bdd)
   {

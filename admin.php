@@ -21,6 +21,7 @@ require_once 'lib/workshop_datas.php';
 require_once 'lib/users.php';
 require 'classes/class_users.php';
 require 'classes/class_comments.php';
+require 'classes/class_messages.php';
 ?>
 
 <!DOCTYPE html>
@@ -73,6 +74,7 @@ require 'classes/class_comments.php';
       <button id="logout" type="button" class="button">Se déconnecter</button>
     </div>
   </header>
+
   <!------------------------------------------------------------- HEADER END -->
 
   <!------------------------------------------------------------- MAIN START -->
@@ -248,22 +250,16 @@ require 'classes/class_comments.php';
                     <th>E-mail</th>
                     <th>Ojbet</th>
                     <th>Message</th>
+                    <th>Supprimer</th>
+                    
                   </tr>
                 </thead>
                 <tbody>
                   <?php
-                  foreach ($users['client'] as $user) {
-
-                  ?>
-                    <tr>
-                      <td><?= $user['last_name']; ?></td>
-                      <td><?= $user['first_name']; ?></td>
-                      <td><?= $user['email']; ?></td>
-                      <!-- add filled icon on :hover : JS mouseenter -->
-                      <td><?= $user['messages']['title']; ?></td>
-                      <td><?= $user['messages']['content']; ?></td>
-                    </tr>
-                  <?php
+                  $messages = get_all_new_messages($bdd);
+                  foreach ($messages as $message) {
+                    $current = new Messages($message['id'],$message['first_name'], $message['last_name'], $message['email'], $message['content'], $message['title'] = null);
+                    $current->display_list();
                   }
                   ?>
                 </tbody>

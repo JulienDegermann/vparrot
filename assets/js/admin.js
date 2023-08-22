@@ -65,7 +65,7 @@ $('input[type="time"]').each(() => {
 $('.edit').each(function () {
   $(this).click(function () {
     // open modal with a form inside; when submit : update values then call admin.php
-    urlEdit='config/employee_delete.php?id=' + $(this).attr('id')
+    urlEdit = 'config/employee_delete.php?id=' + $(this).attr('id')
     console.log(urlEdit);
 
     fetch(urlEdit, {
@@ -81,7 +81,7 @@ $('.edit').each(function () {
 })
 $('.delete').each(function () {
   $(this).click(function () {
-    urlDelete='config/employee_delete.php?id=' + $(this).attr('id')
+    urlDelete = 'config/employee_delete.php?id=' + $(this).attr('id')
     console.log($(this).attr('id'));
     fetch(urlDelete, {
       method: 'POST'
@@ -101,7 +101,7 @@ $('.delete').each(function () {
 $('.cancel').each(function () {
   $(this).click(function () {
     // open modal with a form inside; when submit : update values then call admin.php
-    urlEdit='config/comment_delete.php?id=' + $(this).attr('id')
+    urlEdit = 'config/comment_delete.php?id=' + $(this).attr('id')
     console.log(urlEdit);
 
     fetch(urlEdit, {
@@ -119,9 +119,28 @@ $('.cancel').each(function () {
 $('.save').each(function () {
   $(this).click(function () {
     // open modal with a form inside; when submit : update values then call admin.php
-    urlEdit='config/comment_save.php?id=' + $(this).attr('id')
+    urlEdit = 'config/comment_save.php?id=' + $(this).attr('id')
     console.log(urlEdit);
 
+    fetch(urlEdit, {
+      method: 'POST'
+    })
+      .then(response => {
+        window.location.href = 'admin.php';
+        alert('le commentaire a été validé avec succès');
+      })
+      .catch(error => {
+        console.log('il y a une erreur : ' + error)
+      })
+  })
+})
+
+$('.message-delete').each(function () {
+  $(this).click(function () {
+    // open modal with a form inside; when submit : update values then call admin.php
+    urlEdit = 'config/message_delete.php?id=' + $(this).attr('id')
+    console.log(urlEdit);
+    // edit : create file and explode (do also for comments)
     fetch(urlEdit, {
       method: 'POST'
     })

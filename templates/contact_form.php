@@ -1,10 +1,10 @@
 <h3>Formulaire de contact</h3>
-<form action="" method="post">
-  <label for="first-name">
-    <input type="text" name="first-name" id="first-name" placeholder="Votre prénom">
+<form action="config/contact_form_config.php" method="post">
+  <label for="first_name">
+    <input type="text" name="first_name" id="first_name" placeholder="Votre prénom">
   </label>
-  <label for="last-name">
-    <input type="text" name="last-name" id="last-name" placeholder="Votre nom">
+  <label for="last_name">
+    <input type="text" name="last_name" id="last_name" placeholder="Votre nom">
   </label>
   <label for="email">
     <input type="email" name="email" id="email" placeholder="Votre email">
@@ -19,5 +19,5 @@
     <input type="checkbox" id="TOS" name="TOS">
     J'accepte les <a href="#">conditions générales d'utilisation</a>
   </label>
-  <input class="button" type="submit" value="Enoyer">
+  <input class="button" type="submit" value="Enoyer" name="send_message">
 </form
