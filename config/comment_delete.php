@@ -4,9 +4,7 @@ require_once '../classes/class_comments.php';
 //get the user id, then SQL to delete DB
 $id = $_GET['id'];
 var_dump($id);
-$id = substr($id, strlen('cancel-'));
+$id = explode('-', $id)[1];
 var_dump($id);
-Comments::delete_comment_by_id($bdd, $id);
-var_dump(Comments::get_comment_by_id($bdd, $id));
-
-
+delete_comment_by_id($bdd, $id);
+// header('location: ../admin.php');

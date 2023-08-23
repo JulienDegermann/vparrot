@@ -4,33 +4,39 @@ require_once '../data_base/data_base_connect.php';
 require_once '../classes/class_comments.php';
 require_once '../classes/class_users.php';
 
-$error = '';
+$errors = [];
+$messages = [];
 
-if (!isset($_POST['first_name']) || !isset($_POST['last_name']) || !isset($_POST['note']) || !isset($_POST['comment'])) {
-  $error = 'un champ est manquant';
-  $_SESSION['error'] = $error;
-  header('Location: ../index.php');
-  exit();
-} else {
-  $note = $_POST['note'];
+if (isset($_POST['new_comment'])) {
+  $note = intval($_POST['note']);
   $first_name = trim(ucwords(strtolower($_POST['first_name'])));
   $last_name = trim(ucwords(strtolower($_POST['last_name'])));
   $comment = trim($_POST['comment']);
+
+  if (!$note || !$first_name || !$last_name || !$comment) {
+    $errors[] = 'Un champ est manquant';
+  } else {
+    $user = get_user_by_full_name($bdd, $first_name, $last_name);
+    if (!$user) {
+      $errors[] = 'il faut créer le user';
+      $user = add_user($bdd, $first_name, $last_name, 'client', null, null, null);
+      $messages[] = 'nouvel user créé';
+      $id = $bdd->lastInsertId();
+    } else {
+      $id = $user['id'];
+    }
+  }
+  $messages[] = 'id récupéré' . $id;
+  var_dump($id);
+  $new_comment = new_comment($bdd, $id, $note, $comment);
+  $messages[] = 'Le commentaire a bien été envoyé';
 }
 
-
-$id = null;
-
-$user = Users::get_user_by_full_name($bdd, $first_name, $last_name);
-$user ? $id = $user['id'] : $id = null;
-
-if ($id === null) {
-  $user = Users::insert_new_user($bdd, $first_name, $last_name, 'client', null, null);
-  $id = $bdd->lastInsertId();
-  // $new_comment = Comments::insert_comment($bdd, $id, $note, $comment);
+foreach($errors as $error) {
+  echo $error . '<br>';
 }
-$new_comment = Comments::insert_comment($bdd, $id, $note, $comment);
-
-
-header('Location: ../index.php');
-exit();
+foreach($messages as $message) {
+  echo $message . '<br>';
+}
+// header('Location: ../index.php');
+// exit();
