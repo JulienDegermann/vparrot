@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'employee') {
+if ($_SESSION['user']['role'] === 'admin' || $_SESSION['user']['role'] === 'employee') {
 } else {
   header('Location: login.php');
   exit();
@@ -90,7 +90,7 @@ require 'classes/class_messages.php';
           <aside class="bloc-4">
             <nav class="admin-nav">
               <!-- if is admin -> display admin functions -->
-              <?php if ($_SESSION['role'] === 'admin') { ?>
+              <?php if ($_SESSION['user']['role'] === 'admin') { ?>
                 <ul class="admin">
                   <li id="garage" class="active">Informations sur le garage</li>
                   <li id="employee">Comptes employé</li>
@@ -98,14 +98,14 @@ require 'classes/class_messages.php';
               <?php
               } ?>
               <ul>
-                <li id="messages" <?= $_SESSION['role'] === 'admin' ? '' : 'class="active"'; ?>>Messages clients</li>
+                <li id="messages" <?= $_SESSION['user']['role'] === 'admin' ? '' : 'class="active"'; ?>>Messages clients</li>
                 <li id="comments">Commentaires clients</li>
                 <li id="cars">Véhicules d'occasion</li>
               </ul>
             </nav>
           </aside>
           <!-- garage -->
-          <article class="bloc-3-4 <?= $_SESSION['role'] === 'admin' ? 'garage' : 'messages'; ?>" id="display">
+          <article class="bloc-3-4 <?= $_SESSION['user']['role'] === 'admin' ? 'garage' : 'messages'; ?>" id="display">
             <!-- ------------------------------------------- GARAGE INFORMATIONS -->
             <div class="garage">
               <h1>Informations générales</h1>
@@ -113,7 +113,6 @@ require 'classes/class_messages.php';
                 <?php
                 $req = " SELECT * FROM company JOIN address ON company.address_id = address.id;";
                 foreach ($bdd->query($req) as $company) { ?>
-
                   <fieldset>
                     <legend>Entreprise : </legend>
                     <label for="company_name">Nom :
@@ -191,26 +190,7 @@ require 'classes/class_messages.php';
                       <input type="password" name="employee_password" id="employee_password">
                     </label>
                   </fieldset>
-                  <input class="button" type="submit" value="Enregistrer">
-                  <?php
-                  if (
-                    isset($_POST['first_name']) &&
-                    isset($_POST['last_name']) &&
-                    isset($_POST['password']) &&
-                    $_POST['first_name'] != '' &&
-                    $_POST['last_name'] != '' &&
-                    $_POST['password'] != ''
-                  ) {
-                    $users['employee'][] = [
-                      'id' => uniqid(),
-                      'last_name' => $_POST['last_name'],
-                      'first_name' => $_POST['first_name'],
-                      'password' => $_POST['password'],
-                      'function' => 'employee',
-                      'email' => strtolower($_POST['first_name'] . '.' . $_POST['last_name'] . '@example.com')
-                    ];
-                  }
-                  ?>
+                  <input class="button" type="submit" value="Enregistrer" name="submit">
                 </form>
               </div>
               <div>
@@ -226,16 +206,40 @@ require 'classes/class_messages.php';
                   </thead>
                   <tbody>
                     <?php
-                    $employee_bdd = "SELECT * FROM users WHERE role='employee'";
-                    foreach ($bdd->query($employee_bdd) as $employee) {
-                      $userObject = new Users($employee['id'], $employee['first_name'], $employee['last_name'], $employee['email'], $employee['key'] = 0);
+                    $employees = get_employees($bdd);
+                    foreach ($employees as $employee) {
+                      $userObject = new Users($employee['id'], $employee['first_name'], $employee['last_name'], $employee['email'], $employee['role'], $employee['password']);
                       $userObject->display_list();
                     }
-
                     ?>
                   </tbody>
                 </table>
               </div>
+
+              <!-- 
+                edit employee account
+                <div class="modal_employee hidden">
+                <input type="hidden" name="hidden_id" id="hidden_id">
+                <?php
+                // foreach($employees as $employee) {
+                //   if($employee['id'] == )
+                //   $employee_first_name =;
+                //   $employee_last_name =;
+                //   $employee_password =;
+                // }
+                ?>
+                <label for="employee_first_name_modal">Prénom :
+                  <input type="text" name="employee_first_name" id="employee_first_name_modal" value="bonjour">
+                </label>
+                <label for="employee_last_name_modal">Nom :
+                  <input type="text" name="employee_last_name" id="employee_last_name_modal" value="bonjour">
+                </label>
+                <label for="employee_password_modal">Mot de passe :
+                  <input type="password" name="employee_password" id="employee_password_modal" value="bonjour">
+                </label>
+                </fieldset>
+                <input class="button" type="submit" value="Mettre à jour" name="updateemployee">
+              </div> -->
             </div>
             <!-- --------------------------------------------------------------- -->
 
@@ -245,20 +249,17 @@ require 'classes/class_messages.php';
               <table>
                 <thead>
                   <tr>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>E-mail</th>
-                    <th>Ojbet</th>
+                    <th>Auteur</th>
+                    <th>Réf. Véhicule</th>
                     <th>Message</th>
                     <th>Supprimer</th>
-                    
                   </tr>
                 </thead>
                 <tbody>
                   <?php
                   $messages = get_all_new_messages($bdd);
                   foreach ($messages as $message) {
-                    $current = new Messages($message['id'],$message['first_name'], $message['last_name'], $message['email'], $message['content'], $message['title'] = null);
+                    $current = new Messages($message['id'], $message['first_name'], $message['last_name'], $message['email'], $message['content'], $message['tel'], $message['title']);
                     $current->display_list();
                   }
                   ?>
@@ -282,7 +283,7 @@ require 'classes/class_messages.php';
                 </thead>
                 <tbody>
                   <?php
-                  $comments = Comments::get_all_new_comments($bdd);
+                  $comments = get_all_new_comments($bdd);
                   foreach ($comments as $comment) {
                     $current_comment = new Comments($comment['id'], $comment['first_name'], $comment['last_name'], $comment['note'], $comment['comment']);
                     $current_comment->display_list();
@@ -302,7 +303,7 @@ require 'classes/class_messages.php';
                 </thead>
                 <tbody>
                   <?php
-                  $comments = Comments::get_all_valid_comments($bdd);
+                  $comments = get_all_valid_comments($bdd);
                   foreach ($comments as $comment) {
                     $current_comment = new Comments($comment['id'], $comment['first_name'], $comment['last_name'], $comment['note'], $comment['comment']);
                     $current_comment->display_list();

@@ -60,17 +60,17 @@ require_once 'lib/users.php';
       <div class="container">
         <div class="row">
           <h1>Connexion</h1>
-          <form action="config/login_config.php" method="post">
+          <form action="config/admin_employee_config.php" method="post">
             <label for="email">
               <input type="email" name="email" id="email" placeholder="Votre email" required>
             </label>
             <label for="password">
-              <input type="password" name="password" id="password" required>
+              <input type="password" name="password" id="password" placeholder="Votre mot de passe" required>
             </label>
-            <label for="passord_memory" class="tos">
-              <input type="checkbox" id="TOpassord_memoryS" name="passord_memory">
+            <!-- <label for="passord_memory" class="tos">
+              <input type="checkbox" id="passord_memory" name="passord_memory">
               Mémorier la connexion
-            </label>
+            </label> -->
             <?php
             if (isset($_SESSION['error']) && $_SESSION['error'] != '') {
 
@@ -81,7 +81,7 @@ require_once 'lib/users.php';
             <?php
             }
             ?>
-            <input class="button" type="submit" value="Se connecter">
+            <input class="button" type="submit" value="Se connecter" name="connect">
           </form>
         </div>
       </div>

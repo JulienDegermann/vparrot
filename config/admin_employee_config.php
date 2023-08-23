@@ -1,40 +1,64 @@
 <?php
 require_once '../data_base/data_base_connect.php';
+require_once '../classes/class_users.php';
+session_start();
 
-if(isset($_POST['employee_first_name'])){
-  $employee_first_name = trim($_POST['employee_first_name']);
-}
-if(isset($_POST['employee_last_name'])){
-  $employee_last_name = trim($_POST['employee_last_name']);
-}
-
-if(isset($_POST['employee_password'])){
-  $employee_password = trim($_POST['employee_password']);
-}
-if(isset($_POST['employee_first_name']) && isset($_POST['employee_last_name'])){
+$errors = [];
+$messages = [];
+// account create
+if (isset($_POST['submit'])) {
+  $employee_first_name = ucfirst(trim($_POST['employee_first_name']));
+  $employee_last_name = ucfirst(trim($_POST['employee_last_name']));
+  $employee_password = password_hash($_POST['employee_password'], PASSWORD_DEFAULT);
   $employee_email = strtolower($employee_first_name .  '.' . str_replace(' ', '-', $employee_last_name) . '@example.com');
-}
-// if(isset($_POST['client_first_name'])){
-//   $client_first_name = $_POST['client_first_name'];
-// }
-// if(isset($_POST['client_last_name'])){
-//   $client_last_name = $_POST['client_last_name'];
-// }
 
-
-$req = "SELECT * FROM users;";
-$_SESSION['error'] = '';
-foreach ($bdd->query($req) as $user) {
-  strtolower($employee_first_name) === strtolower($user['first_name']) && strtolower($employee_last_name) === strtolower($user['last_name']) ? $_SESSION['error'] = 'Erreur : l\'employé existe déjà' : $_SESSION['error'] = '';
+  if (!$employee_first_name || !$employee_last_name || !$employee_password || !$employee_email) {
+    $errors[] = 'Un champ requis est manquant';
+  } else {
+    $user = get_user_by_full_name($bdd, $employee_first_name, $employee_last_name);
+    if ($user) {
+      $errors[] = 'Le compte existe déjà';
+    } else {
+      $messages[] = 'création d\'un nouvel espace employé';
+      add_user($bdd, $employee_first_name, $employee_last_name, 'employee', $employee_email, null, $employee_password);
+    }
+  }
+  foreach ($errors as $error) {
+    echo $error . '<br>';
+  }
+  foreach ($messages as $message) {
+    echo $message . '<br>';
+  }
+  header('Location: ../admin.php');
 }
-if ($error != '') {
-  var_dump($error);
-  $bdd = null;
-} else {
-  var_dump('créer le compte');
-  $save = "INSERT INTO users (first_name, last_name, email, password, role) VALUES ('$employee_first_name', '$employee_last_name', '$employee_email', '$employee_password', 'employee');";
-  $bdd->query($save);
-  $bdd = null;
+// account connect
+elseif (isset($_POST['connect'])) {
+  var_dump('connexion en cours');
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+  if (!$email || !$password) {
+    $errors[] = "Identifiant ou mot de passe incorrect";
+  } else {
+    $user = get_user_by_email($bdd, $email);
+    if(!$user || (!password_verify($password, $user['password']) && $user['password'] !== $password)) {
+      $errors[] = "Identifiant ou mot de passe incorrect";
+    } else {
+      $_SESSION['user'] = [
+        'first_name' => $user['first_name'],
+        'last_name' => $user['last_name'],
+        'role' => $user['role']
+      ];
+      header('Location: ../admin.php');
+    }
+  }
+  foreach ($errors as $error) {
+    echo $error . '<br>';
+  }
+  foreach ($messages as $message) {
+    echo $message . '<br>';
+  }}
+// nothing 
+else {
+  var_dump('coucou');
+  // header('Location: ../admin.php');
 }
-
-header('Location: ../admin.php');
