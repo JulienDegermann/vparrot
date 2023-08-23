@@ -35,16 +35,15 @@ class Cars
   {
     require 'templates/car_ad.php';
   }
+}
 
-
-  function get_car_by_id($bdd, $id) {
-    $sql = "SELECT * FROM cars WHERE id = :id;";
-    // get PDOStatement object ($stmt)
-    $stmt = $bdd->prepare($sql);
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    $stmt = null;
-    return $result;
-  }
+function get_car_by_id(PDO $bdd, int $id)
+{
+  $sql = "SELECT * FROM cars WHERE id = :id;";
+  $stmt = $bdd->prepare($sql);
+  $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+  $stmt->execute();
+  $result = $stmt->fetch(PDO::FETCH_ASSOC);
+  $stmt = null;
+  return $result;
 }

@@ -70,7 +70,7 @@ require_once 'lib/users.php';
 
       <div class=" comments-slider">
         <?php
-        $comments = Comments::get_all_valid_comments($bdd);
+        $comments = get_all_valid_comments($bdd);
         foreach ($comments as $comment) {
           $current_comment = new Comments($comment['id'], $comment['first_name'], $comment['last_name'], $comment['note'], $comment['comment']);
           $current_comment->display_item();
@@ -108,7 +108,7 @@ require_once 'lib/users.php';
         <label for="comment">Commentaire :
           <textarea name="comment" id="comment" placeholder="Votre commentaire…"></textarea>
         </label>
-        <input type="submit" class="button" value="Envoyer">
+        <input type="submit" class="button" value="Envoyer" name="new_comment">
       </form>
     </div>
 

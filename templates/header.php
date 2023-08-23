@@ -39,16 +39,13 @@ require_once 'lib/cars_list.php';
 
   <!-- CUSTOM CSS -->
   <!-- PAGE SPECEFIC CSS -->
-  <link rel="stylesheet" href="/assets/css/index.css">
-  <link rel="stylesheet" href="/assets/css/<?php echo $current_page ?>.css">
-  <?php if ($current_page == 'used_car') : echo ('<link rel="stylesheet" href="/assets/css/contact_form.css">');
+  <link rel="stylesheet" href="assets/css/index.css">
+  <link rel="stylesheet" href="assets/css/<?php echo $current_page ?>.css">
+  <?php if ($current_page == 'used_car') : echo ('<link rel="stylesheet" href="assets/css/contact_form.css">');
   endif ?>
-
-
-<title><?= ucfirst($current_pageFR); ?> - Garage Vincent Parrot</title>
+  
+<title><?= ucfirst($current_page); ?> - Garage Vincent Parrot</title>
 </head>
-
-
 
 <body> <!------------------------------------------------------------ HEADER START-->
   <header>

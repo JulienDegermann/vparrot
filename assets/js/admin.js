@@ -36,7 +36,6 @@ function logout() {
 // !!! call fonction without () : direct call instead
 $('#logout').click(logout);
 
-
 // setTimeout(logout, 60 * 1000);
 function update() {
   lastActivity = new Date().getTime();
@@ -45,7 +44,6 @@ function update() {
 $('aside li').click(() => {
   update();
 })
-
 
 $('input[type="time"]').each(() => {
   min = '06:00';
@@ -59,30 +57,35 @@ $('input[type="time"]').each(() => {
     }
   })
 })
+// --------------------------------------------------------------------------------------------------------------- FOCUS
+// $('.editemployee').each(function () {
+//   $(this).click(function () {
+//     let id = $(this).attr('id')
+//     urlEdit = 'config/update_employee.php?id=' + id;
+//     fetch(urlEdit, { method: 'POST' })
+//       .then(response => {
+//         console.log(response); // Vérifiez si response contient les données
+//         let data = response.json();
+//         console.log(data);
+//       })
+//       .then(data => {
+//         console.log("data", data);
+//       })
+//       .catch(error => {
+//         console.log('il y a une erreur : ' + error)
+//       })
+//   $('.modal_employee.hidden').removeClass('hidden');
+//     $('.modal_employee input').each(function () {
+//       $(this).val(id);
+//     });
+//   })
+// })
+// --------------------------------------------------------------------------------------------------------------- FOCUS
 
 
-
-$('.edit').each(function () {
-  $(this).click(function () {
-    // open modal with a form inside; when submit : update values then call admin.php
-    urlEdit = 'config/employee_delete.php?id=' + $(this).attr('id')
-    console.log(urlEdit);
-
-    fetch(urlEdit, {
-      method: 'POST'
-    })
-      .then(response => {
-
-      })
-      .catch(error => {
-        console.log('il y a une erreur : ' + error)
-      })
-  })
-})
-$('.delete').each(function () {
+$('.deleteemployee').each(function () {
   $(this).click(function () {
     urlDelete = 'config/employee_delete.php?id=' + $(this).attr('id')
-    console.log($(this).attr('id'));
     fetch(urlDelete, {
       method: 'POST'
     })
@@ -95,12 +98,9 @@ $('.delete').each(function () {
       })
   })
 })
-
-
-
+// -------------------------------------------------------------- COMMENTS FETCH
 $('.cancel').each(function () {
   $(this).click(function () {
-    // open modal with a form inside; when submit : update values then call admin.php
     urlEdit = 'config/comment_delete.php?id=' + $(this).attr('id')
     console.log(urlEdit);
 
@@ -118,7 +118,6 @@ $('.cancel').each(function () {
 })
 $('.save').each(function () {
   $(this).click(function () {
-    // open modal with a form inside; when submit : update values then call admin.php
     urlEdit = 'config/comment_save.php?id=' + $(this).attr('id')
     console.log(urlEdit);
 
@@ -134,19 +133,17 @@ $('.save').each(function () {
       })
   })
 })
-
+// ------------------------------------------------------------- MESSGAGES FETCH
 $('.message-delete').each(function () {
   $(this).click(function () {
-    // open modal with a form inside; when submit : update values then call admin.php
     urlEdit = 'config/message_delete.php?id=' + $(this).attr('id')
     console.log(urlEdit);
-    // edit : create file and explode (do also for comments)
     fetch(urlEdit, {
       method: 'POST'
     })
       .then(response => {
         window.location.href = 'admin.php';
-        alert('le commentaire a été validé avec succès');
+        alert('le message a été supprimé avec succès');
       })
       .catch(error => {
         console.log('il y a une erreur : ' + error)
