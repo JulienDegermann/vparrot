@@ -1,5 +1,13 @@
 <h3>Formulaire de contact</h3>
 <form action="config/contact_form_config.php" method="post">
+  <?php
+  // récupère l'id si form vient de la page used_car
+  if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $title =  $cars[$id]['brand'] . ' ' . $cars[$id]['model'] . ' ' . $cars[$id]['price'].'€';
+  }
+  ?>
+  <input type="hidden" name="title" id="title" value="<?= isset($title) ? $title : null; ?>">
   <label for="first_name">
     <input type="text" name="first_name" id="first_name" placeholder="Votre prénom">
   </label>
@@ -19,5 +27,5 @@
     <input type="checkbox" id="TOS" name="TOS">
     J'accepte les <a href="#">conditions générales d'utilisation</a>
   </label>
-  <input class="button" type="submit" value="Enoyer" name="send_message">
-</form
+  <input class="button" type="submit" value="Envoyer" name="send_message">
+</form>
