@@ -8,5 +8,4 @@ require_once '../data_base/data_base_connect.php';
 
 
 
-
-header('Location: ../admin.php');
+// header('Location: ../admin.php');
