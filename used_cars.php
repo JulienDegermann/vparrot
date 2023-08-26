@@ -1,7 +1,8 @@
 <!-- --------------------------------------------------------- PHP FUNCTIONS -->
 <!-- PAGE NAME -->
-<?php $current_page = 'used_cars'; 
-$current_pageFR='Véhicules d\'occasion';
+<?php
+$current_page = 'used_cars';
+$current_pageFR = 'Véhicules d\'occasion';
 ?>
 
 <!-- ----------------------------------------------------------- HEADER CALL -->
@@ -34,12 +35,13 @@ $current_pageFR='Véhicules d\'occasion';
 
           <?php
           // cars BDD
-          require_once 'lib/cars_list.php';
-
-          foreach ($cars as $key => $car) {
-            $carObject = new Cars($car['id'], $car['brand'], $car['model'], $car['mileage'], $car['year'], $car['energy'], $car['price'], $key);
+          // require_once 'lib/cars_list.php';
+          $cars = get_all_cars($bdd);
+          foreach ($cars as $car) {
+            $pictures = get_main_picture($bdd, $car['id']);
+            $carObject = new Cars($car['id'], $car['brand'], $car['model'], $car['mileage'], $car['year'], $car['energy'], $car['price'], $pictures);
             $carObject->display_list();
-            ?>
+          ?>
           <?php
           }; ?>
         </div>

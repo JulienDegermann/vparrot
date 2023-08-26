@@ -47,3 +47,31 @@ CREATE TABLE comments (
   is_checked BOOLEAN,
   FOREIGN KEY (user_id) REFERENCES users(id)
 );
+
+DROP TABLE messages;
+CREATE TABLE messages (
+  id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  title VARCHAR(50) NULL, 
+  content TEXT NOT NULL,
+  user_id INT NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+
+CREATE TABLE cars (
+  id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  brand VARCHAR(50) NOT NULL,
+  model VARCHAR(100) NOT NULL,
+  year DATE NOT NULL,
+  price INT(7) NOT NULL,
+  mileage INT(6) NOT NULL
+);
+
+
+CREATE TABLE images (
+  id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  filename VARCHAR(159) NOT NULL,
+  is_main BOOLEAN NOT NULL, 
+  car_id INT NOT NULL,
+  FOREIGN KEY (car_id) REFERENCES cars(id)
+);

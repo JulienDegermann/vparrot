@@ -16,12 +16,21 @@ if (isset($_SESSION['last_activity']) && ((time() - $_SESSION['last_activity']) 
 $current_page = 'admin';
 
 require_once 'data_base/data_base_connect.php';
-require_once 'lib/cars_list.php';
-require_once 'lib/workshop_datas.php';
-require_once 'lib/users.php';
+require_once 'lib/functions.php';
+
+
+// to delete
+// require_once 'lib/workshop_datas.php';
+// require_once 'lib/users.php';
+
+// templates
+// require_once 'lib/cars_list.php';
+
+// class files
 require 'classes/class_users.php';
 require 'classes/class_comments.php';
 require 'classes/class_messages.php';
+require 'classes/class_cars.php';
 ?>
 
 <!DOCTYPE html>
@@ -320,7 +329,7 @@ require 'classes/class_messages.php';
 
               <div>
                 <h2>Ajouter un véhicule</h2>
-                <form action="admin_config" method="post" enctype="multipart/form-data">
+                <form action="config/car_config.php" method="post" enctype="multipart/form-data">
                   <fieldset>
                     <label for="brand">Marque :
                       <input type="text" name="brand" id="brand">
@@ -334,6 +343,9 @@ require 'classes/class_messages.php';
                     <label for="mileage">Kimométrage :
                       <input type="number" name="mileage" id="mileage">
                     </label>
+                    <label for="energy">Carburant :
+                      <input type="text" name="energy" id="energy">
+                    </label>
                     <label for="price">Prix :
                       <input type="number" name="price" id="price">
                     </label>
@@ -341,7 +353,7 @@ require 'classes/class_messages.php';
                       <input type="file" name="main_picture" id="main_picture" accept="image/jpeg, image/jpg, image/png">
                     </label>
                   </fieldset>
-                  <input class="button" type="submit" value="Enregistrer">
+                  <input class="button" type="submit" value="Enregistrer" name="new_car">
                 </form>
               </div>
               <div>
@@ -355,29 +367,22 @@ require 'classes/class_messages.php';
                       <th>Kilométrage</th>
                       <th>Prix</th>
                       <th>Photo principale</th>
-                      <th>Autres photos</th>
+                      <!-- <th>Autres photos</th> -->
                       <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php
-                    foreach ($cars as $key => $car) {
-                    ?>
-                      <tr>
-                        <td><?= $car['brand']; ?></td>
-                        <td><?= $car['model']; ?></td>
-                        <td><?= $car['year']; ?></td>
-                        <td><?= $car['mileage']; ?> kms</td>
-                        <td><?= $car['price']; ?> €</td>
-                        <td>Photo 1</td>
-                        <td>Photos</td>
-                        <!-- add filled icon on :hover : JS mouseenter -->
-                        <td class="center"><?php require 'assets/images/icons/edit.svg' ?>
-                          <?php require 'assets/images/icons/delete.svg' ?></td>
-                      </tr>
-                    <?php
-                    }
-                    ?>
+                    $cars = get_all_cars($bdd);
+                    if ($cars) {
+                      foreach ($cars as $car) {
+                        $pictures = get_main_picture($bdd, $car['id']);
+                        $current = new Cars($car['id'], $car['brand'], $car['model'], $car['mileage'], $car['year'], $car['energy'], $car['price'], $pictures);
+                        $current->display_list_admin();
+                      }
+                    } else { ?>
+                      <p>Aucun véhicule n'est enregistré</p>
+                    <?php } ?>
 
                   </tbody>
 

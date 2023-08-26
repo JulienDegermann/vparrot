@@ -12,7 +12,6 @@ $('.picture-min').slick({
 
 $('.picture-min img').each(function () {
   $(this).click(function () {
-    console.log($(this).attr('src'))
     $('.main-picture').attr('src', ($(this).attr('src')))
   });
 });
