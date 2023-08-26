@@ -2,6 +2,9 @@
 // DB
 require_once 'data_base/data_base_connect.php';
 
+require_once 'classes/class_company.php';
+$company = get_all_informations($bdd);
+
 // SESSION
 ini_set('session.save_path', 'session_files/');
 session_start();
@@ -12,10 +15,6 @@ if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 
 } else {
   $_SESSION['last_activity'] = time();
 }
-// MOVE NECESSARY CODE IN PARTIAL THEN DELETE
-require_once 'lib/workshop_datas.php';
-require_once 'lib/users.php';
-require_once 'lib/cars_list.php';
 ?>
 
 <!DOCTYPE html>

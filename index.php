@@ -10,8 +10,9 @@ require_once 'lib/workshop_datas.php';
 <!-- ----------------------------------------------------------------------- -->
 
 <!-- ----------------------------------------------------------- HEADER CALL -->
-<?php require_once 'templates/header.php';
-require_once 'lib/users.php';
+<?php
+ require_once 'templates/header.php';
+// require_once 'lib/users.php';
 ?>
 
 <!-- -------------------------------------------------------------- HOME.PHP -->

@@ -2,9 +2,11 @@
 <form action="config/contact_form_config.php" method="post">
   <?php
   // récupère l'id si form vient de la page used_car
+  
   if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $title =  $cars[$id]['brand'] . ' ' . $cars[$id]['model'] . ' ' . $cars[$id]['price'].'€';
+    $car = get_car_by_id($bdd, $id);
+    $title =  $car['brand'] . ' ' . $car['model'] . ' ' . $car['price'].'€';
   }
   ?>
   <input type="hidden" name="title" id="title" value="<?= isset($title) ? $title : null; ?>">

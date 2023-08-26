@@ -38,5 +38,5 @@ foreach($errors as $error) {
 foreach($messages as $message) {
   echo $message . '<br>';
 }
-// header('Location: ../index.php');
-// exit();
+header('Location: ../index.php');
+exit();

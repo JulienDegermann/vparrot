@@ -1,7 +1,4 @@
 <!----------------------------------------------------------------- MAIN END -->
-<?php // require_once 'lib/workshop_datas.php'; 
-?>
-<?php require_once 'data_base/data_base_connect.php'; ?>
 
 <!------------------------------------------------------------- FOOTER START -->
 </main>
@@ -45,15 +42,11 @@
       <div class="contact">
         <a href="contact.php" class="button contact-button">
           Contactez-nous
-          <a href="tel:<?php echo $phone; ?>" class="phone"><?php echo $phone; ?></a>
+          <a href="tel:<?= $company['phone']; ?>" class="phone"><?= $company['phone']; ?></a>
       </div>
     </div>
   </div>
 </footer>
-
-<?php 
-if (isset($bdd)) {$bdd = null; }
-?>
 <!--------------------------------------------------------------- FOOTER END -->
 
 
