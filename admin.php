@@ -18,19 +18,15 @@ $current_page = 'admin';
 require_once 'data_base/data_base_connect.php';
 require_once 'lib/functions.php';
 
+$errors = [];
+$infos = [];
 
-// to delete
-// require_once 'lib/workshop_datas.php';
-// require_once 'lib/users.php';
-
-// templates
-// require_once 'lib/cars_list.php';
-
-// class files
+$active = $_SESSION['user']['role'] === 'admin' ? 'garage' : 'messages';
 require 'classes/class_users.php';
 require 'classes/class_comments.php';
 require 'classes/class_messages.php';
 require 'classes/class_cars.php';
+require 'config/config.php';
 ?>
 
 <!DOCTYPE html>
@@ -73,21 +69,24 @@ require 'classes/class_cars.php';
           <p>V.PARROT <br> automobile</p>
           <!-- <p>Mécanique</p> -->
         </a>
-        <button type="button" class="menu">
-          <?php include 'assets/images/icons/menu.svg'; ?>
-        </button>
+        <!-- <button type="button" class="menu">
+          <? //php include 'assets/images/icons/menu.svg'; 
+          ?>
+        </button> -->
+        <div class="logout">
+          <p>Bonjour <?= $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name']; ?></p>
+          <button id="logout" type="button" class="button">Se déconnecter</button>
+        </div>
       </div>
     </div>
-    <div class="logout">
-      <p>Bonjour <?= $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name']; ?></p>
-      <button id="logout" type="button" class="button">Se déconnecter</button>
-    </div>
   </header>
+
 
   <!------------------------------------------------------------- HEADER END -->
 
   <!------------------------------------------------------------- MAIN START -->
   <main>
+    <?php include 'templates/infos_errors.php'; ?>
     <!-- ----------------------------------------------------------- HEADER CALL -->
     <section class="mobile_only">
       <h1>ERREUR</h1>
@@ -101,20 +100,21 @@ require 'classes/class_cars.php';
               <!-- if is admin -> display admin functions -->
               <?php if ($_SESSION['user']['role'] === 'admin') { ?>
                 <ul class="admin">
-                  <li id="garage" class="active">Informations sur le garage</li>
-                  <li id="employee">Comptes employé</li>
+                  <li id="garage" class="<?= $active === 'garage' ? 'active' : ''; ?>">Informations sur le garage</li>
+                  <li id="employees" class="<?= $active === 'employees' ? 'active' : ''; ?>">Comptes employé</li>
                 </ul>
-              <?php
-              } ?>
+              <?php } ?>
               <ul>
-                <li id="messages" <?= $_SESSION['user']['role'] === 'admin' ? '' : 'class="active"'; ?>>Messages clients</li>
-                <li id="comments">Commentaires clients</li>
-                <li id="cars">Véhicules d'occasion</li>
+                <?php if (isset($active)) {
+                } ?>
+                <li id="messages" class="<?= $active === 'messages' ? 'active' : ''; ?>">Messages clients</li>
+                <li id="comments" class="<?= $active === 'comments' ? 'active' : ''; ?>">Commentaires clients</li>
+                <li id="cars" class="<?= $active === 'cars' ? 'active' : ''; ?>">Véhicules d'occasion</li>
               </ul>
             </nav>
           </aside>
           <!-- garage -->
-          <article class="bloc-3-4 <?= $_SESSION['user']['role'] === 'admin' ? 'garage' : 'messages'; ?>" id="display">
+          <article class="bloc-3-4 <?= $active; ?>" id="display">
             <!-- ------------------------------------------- GARAGE INFORMATIONS -->
             <div class="garage">
               <h1>Informations générales</h1>
@@ -154,7 +154,7 @@ require 'classes/class_cars.php';
                     <legend>
                       Horaires d'ouverture :
                     </legend>
-                    <p class="info">* pour l'heure de fermeture est égale à l'heure d'ouverture, cela indique que le garage est "fermé"</p>
+                    <p class="warning">⚠️ pour l'heure de fermeture est égale à l'heure d'ouverture, cela indique que le garage est "fermé"</p>
                     <?php
                     $req = " SELECT * FROM openings;";
                     foreach ($bdd->query($req) as $key => $opening) { ?>
@@ -183,11 +183,12 @@ require 'classes/class_cars.php';
             <!-- --------------------------------------------------------------- -->
 
             <!-- --------------------------------------------- EMPLOYEES ACCOUNT -->
-            <div class="employee">
+            <div class="employees">
               <h1>Comptes employés</h1>
               <div>
                 <h2>Créer un compte employé</h2>
-                <form action="config/admin_employee_config.php" method="post">
+                <!-- <form action="config/admin_employee_config.php" method="post"> -->
+                <form method="post">
                   <fieldset>
                     <label for="employee_first_name">Prénom :
                       <input type="text" name="employee_first_name" id="employee_first_name">
@@ -199,7 +200,7 @@ require 'classes/class_cars.php';
                       <input type="password" name="employee_password" id="employee_password">
                     </label>
                   </fieldset>
-                  <input class="button" type="submit" value="Enregistrer" name="submit">
+                  <input class="button" type="submit" value="Enregistrer" name="new_employee">
                 </form>
               </div>
               <div>
@@ -329,7 +330,7 @@ require 'classes/class_cars.php';
 
               <div>
                 <h2>Ajouter un véhicule</h2>
-                <form action="config/car_config.php" method="post" enctype="multipart/form-data">
+                <form method="post" enctype="multipart/form-data">
                   <fieldset>
                     <label for="brand">Marque :
                       <input type="text" name="brand" id="brand">

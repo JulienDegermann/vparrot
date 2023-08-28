@@ -8,6 +8,8 @@
   <td><?= $this->title; ?></td>
   <td><?= $this->message; ?></td>
   <td class="center">
-    <span class="message-delete" id="message-<?= $this->id; ?>"><?php require 'assets/images/icons/cancel.svg'; ?></span>
+    <a href="admin.php?admin=messages-delete-<?= $this->id; ?>">
+      <?php require 'assets/images/icons/cancel.svg'; ?>
+    </a>
   </td>
 </tr>

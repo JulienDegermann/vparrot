@@ -121,6 +121,11 @@ header {
     text-align: center;
   }
 
+  .error,
+  .info {
+    text-align: left;
+  }
+
   &>.container .row>h2 {
     text-align: center;
     width: 100%;

@@ -10,7 +10,22 @@ $current_pageFR = 'Véhicules d\'occasion';
 <?php require_once 'classes/class_cars.php'; ?>
 
 <!-- ----------------------------------------------------------- CONTACT.PHP -->
+<?php
+    foreach ($errors as $error) { ?>
+      <div class="container">
+        <div class="error">
+          <?= $error; ?>
+        </div>
+      </div>
+    <?php }
+    foreach ($infos as $info) { ?>
+      <div class="container">
 
+        <div class="info">
+          <?= $info; ?>
+        </div>
+      </div>
+    <?php }?>
 <section id="section-1">
 
   <div class="container">

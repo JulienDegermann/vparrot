@@ -1,8 +1,8 @@
 <h3>Formulaire de contact</h3>
-<form action="config/contact_form_config.php" method="post">
+<!-- <form action="config/contact_form_config.php" method="post"> -->
+<form method="post">
   <?php
-  // récupère l'id si form vient de la page used_car
-  
+  // get id from URL if form from car page
   if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $car = get_car_by_id($bdd, $id);

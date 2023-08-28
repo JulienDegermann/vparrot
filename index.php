@@ -11,7 +11,9 @@ require_once 'lib/workshop_datas.php';
 
 <!-- ----------------------------------------------------------- HEADER CALL -->
 <?php
- require_once 'templates/header.php';
+require_once 'templates/header.php';
+require_once 'classes/class_users.php';
+require_once 'config/config.php';
 // require_once 'lib/users.php';
 ?>
 
@@ -67,6 +69,7 @@ require_once 'lib/workshop_datas.php';
   <div class="container">
     <div class="row">
       <h2>Votre avis compte</h2> <br>
+      <?php include 'templates/infos_errors.php'; ?>
       <button type="button" id="add-comment">ajoutez-le</button>
 
       <div class=" comments-slider">
@@ -81,7 +84,8 @@ require_once 'lib/workshop_datas.php';
     </div>
     <div id="new-comment" class="row hidden">
       <h2>Ajouter un commentaire</h2>
-      <form action="config/comment_config.php" method="post">
+      <!-- <form action="config/comment_config.php" method="post"> -->
+      <form method="post">
         <label for="first_name">Prénom :
           <input type="text" id="first_name" name="first_name">
         </label>
@@ -112,7 +116,7 @@ require_once 'lib/workshop_datas.php';
         <input type="submit" class="button" value="Envoyer" name="new_comment">
       </form>
     </div>
-
+    
   </div>
 </section>
 <!-- ----------------------------------------------------------------------- -->

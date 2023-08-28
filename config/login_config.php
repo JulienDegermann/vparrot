@@ -25,11 +25,9 @@ foreach ($bdd->query($req) as $user) {
     $first_name_connected = $user['first_name'];
     $last_name_connected = $user['last_name'];
     $role = $user['role'];
-    var_dump('mdp + email OK : ' . $user['email'] . $user['role'] . $role );
   }
 }
 if ($role == '') {
-  var_dump('je ne dois pas voir ca');
   $_SESSION['error'] = 'l\'identifiant ou le mot de passe est incorrect.';
   $error = 'l identifiant ou le mot de passe est incorrect.';
   $bdd = null;

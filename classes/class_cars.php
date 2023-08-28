@@ -127,6 +127,22 @@ function add_car(
 }
 
 
+function delete_car_by_id(PDO $bdd, int $id)
+{
+  $sql = "DELETE FROM images WHERE car_id = :id;";
+  $stmt = $bdd->prepare($sql);
+  $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+  $stmt->execute();
+  $stmt = null;
+  $sql = "DELETE FROM cars WHERE id = :id;";
+  $stmt = $bdd->prepare($sql);
+  $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+  $result = $stmt->execute();
+  $stmt = null;
+  return $result;
+}
+
+
 // make class ? 
 function add_image(
   PDO $bdd,

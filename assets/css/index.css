@@ -22,6 +22,27 @@ body {
 
 main {
   flex: 1;
+  position: relative;
+}
+main .container .error,
+main .container .info {
+  padding: 1em 2em;
+  margin: 0.5em;
+  border-radius: 5px;
+  border: 1px solid;
+  text-align: left;
+}
+
+main .error {
+  background-color: lightcoral;
+  border-color: darkred;
+  color: darkred;
+}
+
+main .info {
+  background-color: lightgreen;
+  border-color: darkgreen;
+  color: darkgreen;
 }
 
 @font-face {

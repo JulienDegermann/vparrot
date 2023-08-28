@@ -4,6 +4,10 @@
   <td class="desktop_only"><?= $this->email; ?></td>
   <!-- add filled icon on :hover : JS mouseenter -->
   <td class="center">
-    <span id="editemployee-<?= $this->id ;?>" class="editemployee"><?php require 'assets/images/icons/edit.svg' ?></span>
-    <span id="deleteemployee-<?= $this->id ;?>" class="deleteemployee"><?php require 'assets/images/icons/cancel.svg' ?></span> </td>
+    <!-- <span id="editemployee-<?//= $this->id ;?>" class="editemployee"><?//php require 'assets/images/icons/edit.svg' ?></span> -->
+    <a href="admin.php?admin=employees-delete-<?= $this->id; ?>">
+      <?php require 'assets/images/icons/cancel.svg'; ?>
+    </a>
+  
+  </td>
 </tr>
