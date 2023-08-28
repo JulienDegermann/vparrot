@@ -3,7 +3,13 @@
 session_start();
 require_once 'lib/workshop_datas.php';
 require_once 'lib/users.php';
-// require_once 'config/login_config.php';
+$errors = [];
+$infos = [];
+
+require_once 'data_base/data_base_connect.php';
+require_once 'classes/class_users.php';
+require_once 'config/config.php';
+
 ?>
 
 <!-- PAGE NAME -->
@@ -46,9 +52,9 @@ require_once 'lib/users.php';
           <p>V.PARROT <br> automobile</p>
           <!-- <p>Mécanique</p> -->
         </a>
-        <button type="button" class="menu">
+        <!-- <button type="button" class="menu">
           <img src="assets/images/icons/menu.svg" alt="burger menu icon">
-        </button>
+        </button> -->
       </div>
     </div>
   </header>
@@ -56,11 +62,15 @@ require_once 'lib/users.php';
 
   <!------------------------------------------------------------- MAIN START -->
   <main>
+  <?php include 'templates/infos_errors.php'; ?>
+
+  </div>
     <section id="section-1">
       <div class="container">
         <div class="row">
           <h1>Connexion</h1>
-          <form action="config/admin_employee_config.php" method="post">
+          <!-- <form action="config/admin_employee_config.php" method="post"> -->
+          <form method="post">
             <label for="email">
               <input type="email" name="email" id="email" placeholder="Votre email" required>
             </label>
@@ -73,11 +83,8 @@ require_once 'lib/users.php';
             </label> -->
             <?php
             if (isset($_SESSION['error']) && $_SESSION['error'] != '') {
-
             ?>
-
               <p class="error"><?= $_SESSION['error']; ?></p>
-
             <?php
             }
             ?>
@@ -92,9 +99,6 @@ require_once 'lib/users.php';
   <footer>
     <div class="container">
       <div class="row">
-
-
-
         <div class="copyrights">
           <p>
             <a href="legal_notice.php">mentions légales</a> -

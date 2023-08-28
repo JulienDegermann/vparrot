@@ -36,7 +36,6 @@ for ($i = 1; $i < 8; $i++) {
   global $$name2;
   global $$name3;
   global $$name4;
-  var_dump($_POST['am_opening_1']);
 
   if (isset($_POST['am_opening_'.$i])) {
     $$name1 = $_POST['am_opening_'.$i];

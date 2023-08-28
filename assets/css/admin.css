@@ -10,11 +10,11 @@
 }
 header {
   position: relative;
+  z-index: 1;
 }
 
 .logout {
-  position: absolute;
-  top: calc(100% - 27px);
+  top: 50%;
   right: 0;
 }
 .logout p {
@@ -40,9 +40,8 @@ h2 {
 }
 @media screen and (min-width: 1024px) {
   .bloc-4 {
-    transform: translateY(-50%);
     position: sticky;
-    top: 50%;
+    top: 0;
   }
 }
 .bloc-4 ul {
@@ -60,7 +59,7 @@ h2 {
 .bloc-3-4 > * {
   display: none;
 }
-.bloc-3-4.garage > .garage, .bloc-3-4.employee > .employee, .bloc-3-4.messages > .messages, .bloc-3-4.comments > .comments, .bloc-3-4.cars > .cars {
+.bloc-3-4.garage > .garage, .bloc-3-4.employees > .employees, .bloc-3-4.messages > .messages, .bloc-3-4.comments > .comments, .bloc-3-4.cars > .cars {
   display: block;
 }
 .bloc-3-4 form {
@@ -139,10 +138,14 @@ h2 {
   display: none;
 }
 
-#opening_setting .info {
+#opening_setting .warning {
   color: hsla(189.47, 61.29%, 18.24%, 0.7);
+  background: hsla(48.76, 100%, 49.22%, 0.1);
+  padding: 1em;
+  border: 1px solid hsl(48.76, 100%, 49.22%);
+  border-radius: 5px;
   margin-top: -1em;
-  font-size: 0.7em;
+  font-size: 0.8em;
   margin-bottom: 1em;
   text-align: left;
 }

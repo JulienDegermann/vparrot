@@ -100,6 +100,10 @@ header .row li * {
 #section-2 * {
   text-align: center;
 }
+#section-2 .error,
+#section-2 .info {
+  text-align: left;
+}
 #section-2 > .container .row > h2 {
   text-align: center;
   width: 100%;

@@ -36,8 +36,9 @@ function new_comment(PDO $bdd, int $user_id, int $note, string $comment)
   $stmt->bindParam(':note', $note, PDO::PARAM_INT);
   $stmt->bindParam(':comment', $comment, PDO::PARAM_STR);
   $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-  $stmt->execute();
+  $result = $stmt->execute();
   $stmt = null;
+  return $result;
 }
 
 function get_comment_by_id(PDO $bdd, int $id)
@@ -56,10 +57,9 @@ function delete_comment_by_id(PDO $bdd, int $id)
   $sql = "DELETE FROM comments WHERE id = :id;";
   $stmt = $bdd->prepare($sql);
   $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-  $stmt->execute();
-  // $result = $stmt->fetch(PDO::FETCH_ASSOC);
+  $result = $stmt->execute();
   $stmt = null;
-  // return $result;
+  return $result;
 }
 
 function get_all_new_comments(PDO $bdd)
@@ -90,8 +90,7 @@ function validate_comment_by_id(PDO $bdd, int $id)
   $sql = "UPDATE comments SET is_checked = 1 WHERE id = :id;";
   $stmt = $bdd->prepare($sql);
   $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-  $stmt->execute();
-  $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  $result = $stmt->execute();
   $stmt = null;
   return $result;
 }

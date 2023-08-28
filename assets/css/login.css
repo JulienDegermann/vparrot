@@ -13,8 +13,24 @@
   margin: auto;
   height: -moz-max-content;
   height: max-content;
-  width: -moz-max-content;
-  width: max-content;
+}
+@media screen and (min-width: 1024px) {
+  #section-1 form {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 1023px) {
+  #section-1 form {
+    width: 80%;
+  }
+}
+#section-1 form label,
+#section-1 form input {
+  width: 100%;
+  margin: 10px auto;
+}
+#section-1 form input[type=submit] {
+  text-align: center;
 }
 #section-1 input {
   padding: 10px;

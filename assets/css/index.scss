@@ -23,8 +23,30 @@ body {
   display: flex;
   flex-direction: column;
 }
+
 main {
-flex: 1;
+  flex: 1;
+  position: relative;
+
+  .container .error,
+  .container .info {
+    padding: 1em 2em;
+    margin: .5em;
+    border-radius: 5px;
+    border: 1px solid;
+    text-align: left;
+  }
+}
+
+main .error {
+  background-color: lightcoral;
+  border-color: darkred;
+  color: darkred;
+}
+main .info {
+  background-color: lightgreen;
+  border-color: darkgreen;
+  color: darkgreen;
 }
 
 // fonts import

@@ -88,8 +88,7 @@ function delete_user_by_id(PDO $bdd, int $id) {
   $sql = "DELETE FROM users WHERE id = :id;";
   $stmt = $bdd->prepare($sql);
   $stmt->bindParam(':id', $id, PDO::PARAM_STR);
-  $stmt->execute();
-  $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  $result = $stmt->execute();
   $stmt = null;
   return $result;
 }

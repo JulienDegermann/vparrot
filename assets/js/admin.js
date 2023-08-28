@@ -5,7 +5,7 @@ $('.admin-nav li').each(function () {
     $('.admin-nav li').removeClass('active');
     $(this).addClass('active');
 
-    $('#display').removeClass('garage employee comments messages cars');
+    $('#display').removeClass('garage employees comments messages cars');
     $('#display').addClass(($(this).attr('id')));
   });
 });
@@ -22,7 +22,7 @@ setInterval(() => {
 
 
 function logout() {
-  fetch('../logout.php', {
+  fetch('config/logout.php', {
     method: 'POST'
   })
     .then(response => {

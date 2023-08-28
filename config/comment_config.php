@@ -27,7 +27,6 @@ if (isset($_POST['new_comment'])) {
     }
   }
   $messages[] = 'id récupéré' . $id;
-  var_dump($id);
   $new_comment = new_comment($bdd, $id, $note, $comment);
   $messages[] = 'Le commentaire a bien été envoyé';
 }

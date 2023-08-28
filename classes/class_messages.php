@@ -47,8 +47,9 @@ function delete_message_by_id($bdd, $id)
   $sql = "DELETE FROM messages WHERE id = :id;";
   $stmt = $bdd->prepare($sql);
   $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-  $stmt->execute();
+  $result = $stmt->execute();
   $stmt = null;
+  return $result;
 }
 
 function get_all_new_messages(PDO $bdd)

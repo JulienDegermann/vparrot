@@ -18,7 +18,24 @@
     padding: 20px;
     margin: auto;
     height: max-content;
-    width: max-content;
+
+    @media screen and (min-width: 1024px) {
+      width: 50%;
+    }
+
+    @media screen and (max-width: 1023px) {
+      width: 80%;
+    }
+
+    label,
+    input {
+      width: 100%;
+      margin: 10px auto;
+    }
+
+    input[type="submit"] {
+      text-align: center;
+    }
   }
 
   input {
@@ -28,6 +45,6 @@
 
   .error {
     color: red;
-    
+
   }
 }

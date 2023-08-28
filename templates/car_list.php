@@ -18,6 +18,9 @@
     <!-- add filled icon on :hover : JS mouseenter -->
     <td class="center">
       <span class="update-car" id="updatecar-<?= $this->id; ?>"><?php require 'assets/images/icons/edit.svg' ?></span>
-      <span class="delete-car" id="deletecar-<?= $this->id; ?>"><?php require 'assets/images/icons/delete.svg' ?></span>
+      <a href="admin.php?admin=cars-delete-<?= $this->id; ?>">
+      <?php require 'assets/images/icons/cancel.svg'; ?>
+    </a>
+      <!-- <span class="delete-car" id="deletecar-<?//= $this->id; ?>"><?//php require 'assets/images/icons/delete.svg' ?></span> -->
     </td>
   </tr>

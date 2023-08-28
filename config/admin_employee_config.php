@@ -6,7 +6,7 @@ session_start();
 $errors = [];
 $messages = [];
 // account create
-if (isset($_POST['submit'])) {
+if (isset($_POST['new_employee'])) {
   $employee_first_name = ucfirst(trim($_POST['employee_first_name']));
   $employee_last_name = ucfirst(trim($_POST['employee_last_name']));
   $employee_password = password_hash($_POST['employee_password'], PASSWORD_DEFAULT);
@@ -33,7 +33,6 @@ if (isset($_POST['submit'])) {
 }
 // account connect
 elseif (isset($_POST['connect'])) {
-  var_dump('connexion en cours');
   $email = $_POST['email'];
   $password = $_POST['password'];
   if (!$email || !$password) {
@@ -59,6 +58,5 @@ elseif (isset($_POST['connect'])) {
   }}
 // nothing 
 else {
-  var_dump('coucou');
   // header('Location: ../admin.php');
 }

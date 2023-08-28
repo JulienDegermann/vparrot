@@ -1,19 +1,26 @@
 <!-- --------------------------------------------------------- PHP FUNCTIONS -->
 <!-- PAGE NAME -->
-<?php $current_page = 'contact';
+<?php
+$current_page = 'contact';
 $current_pageFR = 'contact';
 
-require_once 'lib/workshop_datas.php';
-require_once 'data_base/data_base_connect.php'; ?>
+
+?>
 
 
 <!-- ----------------------------------------------------------- HEADER CALL -->
-<?php require_once 'templates/header.php'; ?>
+<?php require_once 'templates/header.php';
+require_once 'lib/workshop_datas.php';
+require_once 'data_base/data_base_connect.php';
+require_once 'classes/class_users.php';
+require_once 'classes/class_messages.php';
+require_once 'config/config.php';
+?>
 
 <!-- ----------------------------------------------------------- CONTACT.PHP -->
+<?php include 'templates/infos_errors.php'; ?>
 
 <section id="section-1">
-
   <div class="container">
     <div class="row">
       <h1>nous contacter</h1>

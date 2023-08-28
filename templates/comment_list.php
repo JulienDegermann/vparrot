@@ -7,7 +7,12 @@
   <td class="center"><?= $this->note ?></td>
   <td><?= $this->comment; ?></td>
   <td class="center">
-    <span class="save"id="save-<?= $this->id; ?>"><?php require 'assets/images/icons/checked.svg'; ?></span>
-    <span class="cancel"id="cancel-<?= $this->id; ?>"><?php require 'assets/images/icons/cancel.svg'; ?></span>
+
+    <a href="admin.php?admin=comments-validate-<?= $this->id; ?>">
+      <?php require 'assets/images/icons/checked.svg'; ?></span>
+    </a>
+    <a href="admin.php?admin=comments-delete-<?= $this->id; ?>">
+      <?php require 'assets/images/icons/cancel.svg'; ?>
+    </a>
   </td>
 </tr>

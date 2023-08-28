@@ -15,6 +15,9 @@ if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 
 } else {
   $_SESSION['last_activity'] = time();
 }
+
+$errors = [];
+$infos = [];
 ?>
 
 <!DOCTYPE html>
@@ -42,8 +45,8 @@ if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 
   <link rel="stylesheet" href="assets/css/<?php echo $current_page ?>.css">
   <?php if ($current_page == 'used_car') : echo ('<link rel="stylesheet" href="assets/css/contact_form.css">');
   endif ?>
-  
-<title><?= ucfirst($current_page); ?> - Garage Vincent Parrot</title>
+
+  <title><?= ucfirst($current_page); ?> - Garage Vincent Parrot</title>
 </head>
 
 <body> <!------------------------------------------------------------ HEADER START-->
