@@ -1,8 +1,7 @@
 <!-- --------------------------------------------------------- PHP FUNCTIONS -->
 <?php
+ini_set('session.save_path', 'session_files/');
 session_start();
-require_once 'lib/workshop_datas.php';
-require_once 'lib/users.php';
 $errors = [];
 $infos = [];
 
