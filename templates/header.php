@@ -30,7 +30,7 @@ require_once 'lib/cars_list.php';
   <link rel="icon" type="image/x-icon" href="assets/images/favicons/favicon.ico">
 
   <!-- ----------------------------------------------------------------- CEO -->
-  <meta name="description" content="Le garage V.Parrot vous accueille à Toulouse 6 jours sur 7 15 annnées d'expertise dans la réparation et l'entretien de votre véhicule" />
+  <meta name="description" content="Le garage V.Parrot vous accueille à Toulouse 6 jours sur 7 15 années d'expertise dans la réparation et l'entretien de votre véhicule" />
 
   <!-- -------------------------------------------------------------- STYLES -->
   <!-- SLICK CSS -->
