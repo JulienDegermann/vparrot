@@ -3,6 +3,35 @@
 <?php
 $current_page = 'used_cars';
 $current_pageFR = 'Véhicules d\'occasion';
+
+
+if (isset($_GET['price_min'])) {
+  $price_min = $_GET['price_min'];
+}
+if (isset($_GET['price_max'])) {
+  $price_max = $_GET['price_max'];
+}
+if (isset($_GET['mileage_min'])) {
+  $mileage_min = $_GET['mileage_min'];
+}
+if (isset($_GET['mileage_max'])) {
+  $mileage_max = $_GET['mileage_min'];
+}
+if (isset($_GET['year_min'])) {
+  $year_min = $_GET['year_min'];
+}
+if (isset($_GET['year_max'])) {
+  $year_max = $_GET['year_max'];
+}
+
+echo isset($price_min) ? $price_min: '';
+echo isset($price_max) ? $price_max: '';
+echo isset($mileage_min) ? $mileage_min: '';
+echo isset($mileage_max) ? $mileage_max: '';
+echo isset($year_min) ? $year_min: '';
+echo isset($year_max) ? $year_max: '';
+
+
 ?>
 
 <!-- ----------------------------------------------------------- HEADER CALL -->
@@ -11,21 +40,21 @@ $current_pageFR = 'Véhicules d\'occasion';
 
 <!-- ----------------------------------------------------------- CONTACT.PHP -->
 <?php
-    foreach ($errors as $error) { ?>
-      <div class="container">
-        <div class="error">
-          <?= $error; ?>
-        </div>
-      </div>
-    <?php }
-    foreach ($infos as $info) { ?>
-      <div class="container">
+foreach ($errors as $error) { ?>
+  <div class="container">
+    <div class="error">
+      <?= $error; ?>
+    </div>
+  </div>
+<?php }
+foreach ($infos as $info) { ?>
+  <div class="container">
 
-        <div class="info">
-          <?= $info; ?>
-        </div>
-      </div>
-    <?php }?>
+    <div class="info">
+      <?= $info; ?>
+    </div>
+  </div>
+<?php } ?>
 <section id="section-1">
 
   <div class="container">
@@ -63,7 +92,6 @@ $current_pageFR = 'Véhicules d\'occasion';
       </div>
     </div>
   </div>
-
 </section>
 <!-- ----------------------------------------------------------- FOOTER CALL -->
 <?php require_once 'templates/footer.php'; ?>

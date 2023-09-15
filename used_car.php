@@ -5,18 +5,19 @@ $current_pageFR = 'Véhicules d\'occasion';
 
 // cars BDD
 // require_once 'lib/cars_list.php';
-require_once 'classes/class_cars.php';
+
 require_once 'classes/class_users.php';
 require_once 'classes/class_messages.php';
-require_once 'data_base/data_base_connect.php';
+require_once 'classes/class_cars.php';
 
+
+// ----------------------------------------------------------------- HEADER CALL
+require_once 'templates/header.php'; 
 if (isset($_GET['id'])) {
   $id = $_GET['id'];
   $car = get_car_by_id($bdd, $id);
 }
-// ----------------------------------------------------------------- HEADER CALL
-require_once 'templates/header.php'; 
-require_once 'config/config.php';
+
 ?>
 
 <?php

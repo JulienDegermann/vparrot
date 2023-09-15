@@ -3,8 +3,10 @@
 <?php
 $current_page = 'home';
 $current_pageFR = 'Accueil';
+
+// require_once 'config/config.php';
 require_once 'classes/class_comments.php';
-require_once 'lib/workshop_datas.php';
+require_once 'classes/class_users.php';
 ?>
 
 <!-- ----------------------------------------------------------------------- -->
@@ -12,9 +14,6 @@ require_once 'lib/workshop_datas.php';
 <!-- ----------------------------------------------------------- HEADER CALL -->
 <?php
 require_once 'templates/header.php';
-require_once 'classes/class_users.php';
-require_once 'config/config.php';
-// require_once 'lib/users.php';
 ?>
 
 <!-- -------------------------------------------------------------- HOME.PHP -->
@@ -57,8 +56,6 @@ require_once 'config/config.php';
         <?php }
         ?>
       </div>
-      <?php //$bdd = null; 
-      ?>
     </div>
   </div>
 </section>

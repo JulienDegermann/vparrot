@@ -1,9 +1,11 @@
 <?php
 $current_page = 'legal_notice';
 $current_pageFR = 'Politique de confidentialité';
-require_once 'templates/header.php';
-require_once 'lib/workshop_datas.php';
+
 require_once 'lib/users.php';
+require_once 'templates/header.php';
+
+require_once 'lib/workshop_datas.php';
 ?>
 <section>
   <div class="container">

@@ -14,7 +14,8 @@ if (isset($_POST['new_comment'])) {
     if (!$user) {
       $user = add_user($bdd, $first_name, $last_name, 'client', null, null, null);
       $id = $bdd->lastInsertId();
-    } else {
+    }
+    else {
       $id = $user['id'];
     }
     $new_comment = new_comment($bdd, $id, $note, $comment);
@@ -26,9 +27,6 @@ if (isset($_POST['new_comment'])) {
   }
   $active = 'comments';
 }
-
-
-
 
 // Messages from contact form
 if (isset($_POST['send_message'])) {
@@ -60,34 +58,37 @@ if (isset($_POST['send_message'])) {
   }
 }
 
-
 // Admin panel connexion
 if (isset($_POST['connect'])) {
   $current_email = $_POST['email'];
   $current_password = $_POST['password'];
-  $employee = get_user_by_email($bdd, $current_email);
-  if (!$employee || (!password_verify($current_password, $employee['password']) && !$employee['password'] === $current_password)) {
-    $errors[] = 'Identifiant ou mot de passe incorrect';
+  if(!$current_email || !$current_password) {
+    $errors[] = 'Identifiant ou mot de passe manquant';
   } else {
-    if (!$employee['role'] === 'employee' && !$employee['role'] === 'admin') {
-      $errors[] = 'Un problème est survenu, veuillez contacter le gérant';
+    $employee = get_user_by_email($bdd, $current_email);
+    if (!$employee || (!password_verify($current_password, $employee['password']))) {
+      $errors[] = 'Identifiant ou mot de passe incorrect';
     } else {
-      session_destroy();
-      session_start();
-      $role = $employee['role'];
-      $first_name = $employee['first_name'];
-      $last_name = $employee['last_name'];
-      $_SESSION['user'] = [
-        'first_name' => $first_name,
-        'last_name' => $last_name,
-        'role' => $role
-      ];
-      header('location: admin.php');
-      exit();
+      if (!$employee['role'] === 'employee' && !$employee['role'] === 'admin') {
+        $errors[] = 'Un problème est survenu, veuillez contacter le gérant';
+      } else {
+        session_unset();
+        session_destroy();
+        session_start();
+        $role = $employee['role'];
+        $first_name = $employee['first_name'];
+        $last_name = $employee['last_name'];
+        $_SESSION['user'] = [
+          'first_name' => $first_name,
+          'last_name' => $last_name,
+          'role' => $role
+        ];
+        header('location: admin.php');
+        exit();
+      }
     }
   }
 }
-
 
 // Create employee account
 if (isset($_POST['new_employee'])) {
