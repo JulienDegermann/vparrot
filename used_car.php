@@ -5,37 +5,36 @@ $current_pageFR = 'Véhicules d\'occasion';
 
 // cars BDD
 // require_once 'lib/cars_list.php';
-
-require_once 'classes/class_users.php';
 require_once 'classes/class_messages.php';
 require_once 'classes/class_cars.php';
+require_once 'classes/class_users.php';
 
 
 // ----------------------------------------------------------------- HEADER CALL
-require_once 'templates/header.php'; 
+require_once 'templates/header.php';
+require_once 'config/config.php';
+var_dump($errors);
 if (isset($_GET['id'])) {
   $id = $_GET['id'];
   $car = get_car_by_id($bdd, $id);
 }
-
 ?>
 
 <?php
-    foreach ($errors as $error) { ?>
-      <div class="container">
-        <div class="error">
-          <?= $error; ?>
-        </div>
-      </div>
-    <?php }
-    foreach ($infos as $info) { ?>
-      <div class="container">
-
-        <div class="info">
-          <?= $info; ?>
-        </div>
-      </div>
-    <?php }?>
+foreach ($errors as $error) { ?>
+  <div class="container">
+    <div class="error">
+      <?= $error; ?>
+    </div>
+  </div>
+<?php }
+foreach ($infos as $info) { ?>
+  <div class="container">
+    <div class="info">
+      <?= $info; ?>
+    </div>
+  </div>
+<?php } ?>
 
 <section id="section-1">
   <div class="container">

@@ -37,12 +37,12 @@ if (isset($_POST['send_message'])) {
     $tel = $_POST['tel'];
     $content = trim($_POST['message']);
     $title = $_POST['title'] != '' ? $_POST['title'] : null;
-
+    
     if (!$first_name || !$last_name || !$email || !$tel || !$content) {
       $errors[] = 'Un champ est manquant';
     } elseif (!intval($tel)){
       $errors[] = 'Le numéro de téléphone n\'est pas valide';
-
+      
     } else {
       $user = get_user_by_full_name($bdd, $first_name, $last_name);
       if (!$user) {
@@ -55,6 +55,7 @@ if (isset($_POST['send_message'])) {
     }
   } else {
     $errors[] = 'Vous n\'avez pas accepté les conditions générales d\'utilisation';
+    var_dump($errors);
   }
 }
 
@@ -124,18 +125,20 @@ if (isset($_POST['new_car'])) {
     if (getimagesize($main_picture)) {
       $file_name = slugify((uniqid() . '-' . $_FILES['main_picture']['name']));
       move_uploaded_file($main_picture, 'uploads/images/' . $file_name);
-    }
-  }
-  if (!$brand || !$model || !$year || !$mileage || !$price || !$energy || !$main_picture) {
-    $errors[] = 'Un champ est manquant';
-  } else {
-    $new_car = add_car($bdd, $brand, $model, $year, $mileage, $price, $energy);
-    $car_id = $bdd->lastInsertId();
-    $new_image = add_image($bdd, $file_name, $car_id);
-    if ($new_car) {
-      $infos[] = 'La voiture a été ajoutée avec succès';
+      if (!$brand || !$model || !$year || !$mileage || !$price || !$energy || !$main_picture) {
+        $errors[] = 'Un champ est manquant';
+      } else {
+        $new_car = add_car($bdd, $brand, $model, $year, $mileage, $price, $energy);
+        $car_id = $bdd->lastInsertId();
+        $new_image = add_image($bdd, $file_name, $car_id);
+        if ($new_car) {
+          $infos[] = 'La voiture a été ajoutée avec succès';
+        } else {
+          $errors[] = 'Une erreur s\'est produite';
+        }
+      }
     } else {
-      $errors[] = 'Une erreur s\'est produite';
+      $errors[] = 'Le fichier envoyé n\'est pas une image';
     }
   }
   $active = 'cars';
