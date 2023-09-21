@@ -2,10 +2,10 @@
 
 // Comments on index.php
 if (isset($_POST['new_comment'])) {
-  $note = isset($_POST['note']) ? intval($_POST['note']) : null;
-  $first_name = trim(ucwords(strtolower($_POST['first_name'])));
-  $last_name = trim(ucwords(strtolower($_POST['last_name'])));
-  $comment = trim($_POST['comment']);
+  $note = isset($_POST['note']) ? htmlentities(intval($_POST['note'])) : null;
+  $first_name = htmlentities(trim(ucwords(strtolower($_POST['first_name']))));
+  $last_name = htmlentities(trim(ucwords(strtolower($_POST['last_name']))));
+  $comment = htmlentities(trim($_POST['comment']));
 
   if (!$note || !$first_name || !$last_name || !$comment) {
     $errors[] = 'Un champ est manquant';
@@ -31,12 +31,12 @@ if (isset($_POST['new_comment'])) {
 // Messages from contact form
 if (isset($_POST['send_message'])) {
   if (isset($_POST['TOS'])) {
-    $first_name = ucfirst(strtolower(trim($_POST['first_name'])));
-    $last_name = ucwords(strtolower(trim($_POST['last_name'])));
-    $email = strtolower(trim($_POST['email']));
-    $tel = $_POST['tel'];
-    $content = trim($_POST['message']);
-    $title = $_POST['title'] != '' ? $_POST['title'] : null;
+    $first_name = htmlentities(ucfirst(strtolower(trim($_POST['first_name']))));
+    $last_name = htmlentities(ucwords(strtolower(trim($_POST['last_name']))));
+    $email = htmlentities(strtolower(trim($_POST['email'])));
+    $tel = htmlentities($_POST['tel']);
+    $content = htmlentities(trim($_POST['message']));
+    $title = $_POST['title'] != '' ? htmlentities($_POST['title']) : null;
     
     if (!$first_name || !$last_name || !$email || !$tel || !$content) {
       $errors[] = 'Un champ est manquant';
@@ -55,14 +55,13 @@ if (isset($_POST['send_message'])) {
     }
   } else {
     $errors[] = 'Vous n\'avez pas accepté les conditions générales d\'utilisation';
-    var_dump($errors);
   }
 }
 
 // Admin panel connexion
 if (isset($_POST['connect'])) {
-  $current_email = $_POST['email'];
-  $current_password = $_POST['password'];
+  $current_email = htmlentities($_POST['email']);
+  $current_password = htmlentities($_POST['password']);
   if(!$current_email || !$current_password) {
     $errors[] = 'Identifiant ou mot de passe manquant';
   } else {
@@ -93,10 +92,10 @@ if (isset($_POST['connect'])) {
 
 // Create employee account
 if (isset($_POST['new_employee'])) {
-  $employee_first_name = ucfirst(trim($_POST['employee_first_name']));
-  $employee_last_name = ucfirst(trim($_POST['employee_last_name']));
-  $employee_password = password_hash($_POST['employee_password'], PASSWORD_DEFAULT);
-  $employee_email = strtolower($employee_first_name .  '.' . str_replace(' ', '-', $employee_last_name) . '@example.com');
+  $employee_first_name = htmlentities(ucfirst(trim($_POST['employee_first_name'])));
+  $employee_last_name = htmlentities(ucfirst(trim($_POST['employee_last_name'])));
+  $employee_password = htmlentities(password_hash($_POST['employee_password'], PASSWORD_DEFAULT));
+  $employee_email = htmlentities(strtolower($employee_first_name .  '.' . str_replace(' ', '-', $employee_last_name) . '@example.com'));
 
   if (!$employee_first_name || !$employee_last_name || !$employee_password || !$employee_email) {
     $errors[] = 'Un champ requis est manquant';
@@ -114,13 +113,13 @@ if (isset($_POST['new_employee'])) {
 
 // add car
 if (isset($_POST['new_car'])) {
-  $brand = $_POST['brand'];
-  $model = strval($_POST['model']);
-  $year = $_POST['year'];
-  $mileage = $_POST['mileage'];
-  $price = $_POST['price'];
-  $energy = $_POST['energy'];
-  $main_picture = $_FILES['main_picture']['tmp_name'];
+  $brand = htmlentities($_POST['brand']);
+  $model = htmlentities(strval($_POST['model']));
+  $year = htmlentities($_POST['year']);
+  $mileage = htmlentities($_POST['mileage']);
+  $price = htmlentities($_POST['price']);
+  $energy = htmlentities($_POST['energy']);
+  $main_picture = htmlentities($_FILES['main_picture']['tmp_name']);
   if ($main_picture) {
     if (getimagesize($main_picture)) {
       $file_name = slugify((uniqid() . '-' . $_FILES['main_picture']['name']));
@@ -146,8 +145,9 @@ if (isset($_POST['new_car'])) {
 
 // get delete or modify for messages, comments, employees
 if (isset($_GET['admin'])) {
-  $get = $_GET['admin'];
-  $id = explode('-', $get)[2];
+  $get = htmlentities($_GET['admin']);
+  $get2 = explode('-', $get)[2];
+  $id = intval(explode('-', $get)[2]);
   $table = explode('-', $get)[0]; // messages, comments, employees
   $function = explode('-', $get)[1]; // delete, validate
   $active = $table;
