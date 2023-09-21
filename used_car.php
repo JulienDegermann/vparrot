@@ -12,11 +12,11 @@ require_once 'classes/class_users.php';
 
 // ----------------------------------------------------------------- HEADER CALL
 require_once 'templates/header.php';
-require_once 'config/config.php';
-var_dump($errors);
 if (isset($_GET['id'])) {
-  $id = $_GET['id'];
-  $car = get_car_by_id($bdd, $id);
+  $id = intval($_GET['id']);
+  if($id) {
+    $car = get_car_by_id($bdd, $id);
+  }
 }
 ?>
 

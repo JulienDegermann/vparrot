@@ -1,7 +1,7 @@
 <?php
 // DB
 require_once 'data_base/data_base_connect.php';
-require_once 'config/config.php';
+
 require_once 'classes/class_company.php';
 $company = get_all_informations($bdd);
 
@@ -20,6 +20,7 @@ if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 
 
 $errors = [];
 $infos = [];
+require_once 'config/config.php';
 ?>
 
 <!DOCTYPE html>
