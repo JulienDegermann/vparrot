@@ -1,6 +1,5 @@
 <!-- --------------------------------------------------------- PHP FUNCTIONS -->
 <?php
-ini_set('session.save_path', 'session_files/');
 session_start();
 $errors = [];
 $infos = [];

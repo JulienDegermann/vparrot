@@ -11,6 +11,7 @@
 }
 #section-1 .bloc-2 {
   height: 300px;
+  overflow: hidden;
 }
 @media screen and (max-width: 1023px) {
   #section-1 .bloc-2:last-child {

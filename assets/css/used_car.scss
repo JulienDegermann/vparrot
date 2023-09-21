@@ -16,6 +16,7 @@
 
   .bloc-2 {
     height: 300px;
+    overflow: hidden;
 
     &:last-child {
       @media screen and (max-width:1023px) {

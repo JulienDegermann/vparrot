@@ -1,5 +1,4 @@
 <?php
-ini_set('session.save_path', 'session_files/');
 session_start();
 if (!isset($_SESSION['user']) || (!$_SESSION['user']['role'] === 'admin' && !$_SESSION['user']['role'] === 'employee')) {
   header('Location: login.php');
