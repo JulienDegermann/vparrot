@@ -4,30 +4,75 @@
 #section-1 {
 
   .container.row {
-    @media screen and (max-width: 1023px){
+    @media screen and (max-width: 1023px) {
       display: block;
     }
 
   }
+
   .filter {
     border: 1px solid $grey-100;
     padding: 5px;
     border-radius: 5px;
+
+
     @media screen and (max-width: 1023px) {
-      margin-bottom: 2em;      
+      margin-bottom: 2em;
     }
 
     h2 {
       text-align: center;
-      @media screen and (max-width: 519px){
+
+      @media screen and (max-width: 519px) {
         font-size: 1.2em;
-      }      
+      }
 
     }
 
-    input[type="range"] {
-      background-color: red;
+    form {
+      text-align: center;
+
+      @media screen and (max-width: 519px) {
+        display: flex;
+      }
+    }
+
+    fieldset {
       width: 100%;
+      border: none;
+      padding: .5em;
+      text-align: center;
+
+      @media screen and (max-width: 519px) {
+        width: 33%;
+      }
+
+      legend {
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    label {
+      width: 45%;
+      display: inline-block;
+      margin-bottom: .25em;
+
+      @media screen and (max-width: 519px) {
+        display: inline-block;
+        width: 100%;
+      }
+
+      input {
+        padding: .25em .5em;
+        width: 100%;
+        margin: auto;
+
+        @media screen and (max-width: 519px) {
+          padding: .5px;
+          font-size: 12px;
+        }
+      }
     }
   }
 
@@ -87,7 +132,7 @@
       }
 
       li {
-        color: $grey-70;  
+        color: $grey-70;
       }
 
       .price {
@@ -100,7 +145,7 @@
 
       .button {
         margin-left: 50%;
-        word-wrap:initial;
+        word-wrap: initial;
         padding: 1em;
       }
     }

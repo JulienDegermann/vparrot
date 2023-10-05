@@ -21,9 +21,50 @@
     font-size: 1.2em;
   }
 }
-#section-1 .filter input[type=range] {
-  background-color: red;
+#section-1 .filter form {
+  text-align: center;
+}
+@media screen and (max-width: 519px) {
+  #section-1 .filter form {
+    display: flex;
+  }
+}
+#section-1 .filter fieldset {
   width: 100%;
+  border: none;
+  padding: 0.5em;
+  text-align: center;
+}
+@media screen and (max-width: 519px) {
+  #section-1 .filter fieldset {
+    width: 33%;
+  }
+}
+#section-1 .filter fieldset legend {
+  width: 100%;
+  text-align: center;
+}
+#section-1 .filter label {
+  width: 45%;
+  display: inline-block;
+  margin-bottom: 0.25em;
+}
+@media screen and (max-width: 519px) {
+  #section-1 .filter label {
+    display: inline-block;
+    width: 100%;
+  }
+}
+#section-1 .filter label input {
+  padding: 0.25em 0.5em;
+  width: 100%;
+  margin: auto;
+}
+@media screen and (max-width: 519px) {
+  #section-1 .filter label input {
+    padding: 0.5px;
+    font-size: 12px;
+  }
 }
 #section-1 .grid {
   display: grid;
