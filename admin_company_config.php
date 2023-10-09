@@ -2,6 +2,7 @@
 require_once '../data_base/data_base_connect.php';
 session_start();
 var_dump('coucou');
+var_dump('coucou');
 
 if (isset($_POST['company_name'])) {
   $company_name = trim($_POST['company_name']);
