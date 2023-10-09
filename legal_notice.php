@@ -2,8 +2,6 @@
 $current_page = 'legal_notice';
 $current_pageFR = 'mentions légales';
 require_once 'templates/header.php';
-require_once 'lib/workshop_datas.php';
-require_once 'lib/users.php';
 ?>
 <section>
     <div class="container">
@@ -17,14 +15,14 @@ require_once 'lib/users.php';
     <div class="container">
         <div class="row">
             <h2>Informations générales</h2>
-            <p>Nom de l'entreprise : <?= $address_input['name']; ?></p>
+            <p>Nom de l'entreprise : <?= $company['name']; ?></p>
             <p>Adresse : <br>
-                <?= address($address_input); ?>
+                <?= address($company); ?>
             </p>
-            <p>Téléphone : <?= $phone; ?></p>
-            <p>Email : <?= $email; ?></p>
-            <p>Responsable de la publication : <?= $users['admin']['first_name'] . ' ' . $users['admin']['last_name']; ?></p>
-            <p>Nom de l'hébergeur : MAMP</p>
+            <p>Téléphone : <?= $company['phone']; ?></p>
+            <p>Email : <?= $company['email']; ?></p>
+            <p>Responsable de la publication : Vincent Parrot</p>
+            <p>Nom de l'hébergeur : Planet Hoster</p>
         </div>
     </div>
 </section>

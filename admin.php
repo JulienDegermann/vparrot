@@ -15,7 +15,7 @@ if (isset($_SESSION['last_activity']) && ((time() - $_SESSION['last_activity']) 
 $current_page = 'admin';
 
 require_once 'data_base/data_base_connect.php';
-require_once 'lib/functions.php';
+require_once 'config/functions.php';
 
 $errors = [];
 $infos = [];

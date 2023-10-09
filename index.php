@@ -7,19 +7,12 @@ $current_pageFR = 'Accueil';
 // require_once 'config/config.php';
 require_once 'classes/class_comments.php';
 require_once 'classes/class_users.php';
-require_once 'classes/class_company.php';
+// -----------------------------------------------------------------------------
 
-
-?>
-
-<!-- ----------------------------------------------------------------------- -->
-
-<!-- ----------------------------------------------------------- HEADER CALL -->
-<?php
+// ----------------------------------------------------------------- HEADER CALL 
 require_once 'templates/header.php';
 $services = get_services($bdd);
 ?>
-
 <!-- -------------------------------------------------------------- HOME.PHP -->
 <!-- ------------------------------------------------------ SERVICES SECTION -->
 <section id="section-1">
@@ -34,9 +27,7 @@ $services = get_services($bdd);
       </h1>
       <div class="show-services">
         <?php
-        foreach ($services as $service) {
-        ?>
-
+        foreach ($services as $service) { ?>
           <div class="services">
             <h2><?= $service['title']; ?></h2>
             <ul>
@@ -44,11 +35,8 @@ $services = get_services($bdd);
               $contents = stringToArray($service['content']);
               foreach ($contents as $content) { ?>
                 <li><?= $content; ?> </li>
-              <?php
-              }
-              ?>
+              <?php } ?>
             </ul>
-
             <?php if ($service['title'] == 'Véhicules d\'occasion') { ?>
               <a class="button" href="used_cars.php">Nos occasions</a>
 
