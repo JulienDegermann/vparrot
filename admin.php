@@ -31,7 +31,7 @@ require 'config/config.php';
 
 $company = get_all_informations($bdd);
 $openings = get_openings($bdd);
-$services = get_services($bdd);
+$services = (get_services($bdd));
 
 
 ?>

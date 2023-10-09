@@ -294,7 +294,7 @@ if (isset($_POST['update_info'])) {
       'content' => $_POST['service_content_3']
     ]
   ];
-  var_dump($services2);
+
   foreach ($services2 as $key => $service2) {
     update_services($bdd, $key + 1, $service2['title'], $service2['content']);
   }
