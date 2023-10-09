@@ -10,7 +10,7 @@
 
 # DB informations
 data_base_connect.php
-session_files/
+session_files/*
 
 # uploaded files
 upload/images/*
