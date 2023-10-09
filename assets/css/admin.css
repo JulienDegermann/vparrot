@@ -92,6 +92,7 @@ h2 {
 .bloc-3-4 .service_style textarea {
   width: 100%;
   max-width: 100%;
+  padding: 10px;
 }
 .bloc-3-4 .service_style textarea {
   height: 200px;

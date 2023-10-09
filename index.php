@@ -7,6 +7,9 @@ $current_pageFR = 'Accueil';
 // require_once 'config/config.php';
 require_once 'classes/class_comments.php';
 require_once 'classes/class_users.php';
+require_once 'classes/class_company.php';
+
+
 ?>
 
 <!-- ----------------------------------------------------------------------- -->
@@ -14,6 +17,7 @@ require_once 'classes/class_users.php';
 <!-- ----------------------------------------------------------- HEADER CALL -->
 <?php
 require_once 'templates/header.php';
+$services = get_services($bdd);
 ?>
 
 <!-- -------------------------------------------------------------- HOME.PHP -->
@@ -30,15 +34,14 @@ require_once 'templates/header.php';
       </h1>
       <div class="show-services">
         <?php
-        $req = "SELECT * FROM services;";
-        foreach ($bdd->query($req) as $service) {
+        foreach ($services as $service) {
         ?>
 
           <div class="services">
             <h2><?= $service['title']; ?></h2>
             <ul>
               <?php
-              $contents = json_decode($service['content']);
+              $contents = stringToArray($service['content']);
               foreach ($contents as $content) { ?>
                 <li><?= $content; ?> </li>
               <?php
@@ -113,7 +116,7 @@ require_once 'templates/header.php';
         <input type="submit" class="button" value="Envoyer" name="new_comment">
       </form>
     </div>
-    
+
   </div>
 </section>
 <!-- ----------------------------------------------------------------------- -->
