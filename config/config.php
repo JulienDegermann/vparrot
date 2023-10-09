@@ -1,5 +1,9 @@
 <?php
 
+function stringToArray (string $string) {
+  return explode(PHP_EOL, $string);
+}
+
 // Comments on index.php
 if (isset($_POST['new_comment'])) {
   $note = isset($_POST['note']) ? htmlentities(intval($_POST['note'])) : null;
@@ -14,12 +18,11 @@ if (isset($_POST['new_comment'])) {
     if (!$user) {
       $user = add_user($bdd, $first_name, $last_name, 'client', null, null, null);
       $id = $bdd->lastInsertId();
-    }
-    else {
+    } else {
       $id = $user['id'];
     }
     $new_comment = new_comment($bdd, $id, $note, $comment);
-    if($new_comment) {
+    if ($new_comment) {
       $infos[] = 'Le commentaire a bien été envoyé';
     } else {
       $errors[] = 'Une erreur s\'est produite';
@@ -37,12 +40,11 @@ if (isset($_POST['send_message'])) {
     $tel = htmlentities($_POST['tel']);
     $content = htmlentities(trim($_POST['message']));
     $title = $_POST['title'] != '' ? htmlentities($_POST['title']) : null;
-    
+
     if (!$first_name || !$last_name || !$email || !$tel || !$content) {
       $errors[] = 'Un champ est manquant';
-    } elseif (!intval($tel)){
+    } elseif (!intval($tel)) {
       $errors[] = 'Le numéro de téléphone n\'est pas valide';
-      
     } else {
       $user = get_user_by_full_name($bdd, $first_name, $last_name);
       if (!$user) {
@@ -62,7 +64,7 @@ if (isset($_POST['send_message'])) {
 if (isset($_POST['connect'])) {
   $current_email = htmlentities($_POST['email']);
   $current_password = htmlentities($_POST['password']);
-  if(!$current_email || !$current_password) {
+  if (!$current_email || !$current_password) {
     $errors[] = 'Identifiant ou mot de passe manquant';
   } else {
     $employee = get_user_by_email($bdd, $current_email);
@@ -232,5 +234,68 @@ if (isset($_GET['admin'])) {
         }
         break;
     }
+  }
+}
+
+// update garage informations
+if (isset($_POST['update_info'])) {
+  // garage infos
+  $company_name = htmlentities(trim($_POST['company_name']));
+  $company_tel = htmlentities(trim($_POST['company_tel']));
+  $company_email = htmlentities(trim($_POST['company_email']));
+  $street_number = htmlentities(trim($_POST['street_number']));
+  $street_name = htmlentities(trim($_POST['street_name']));
+  $city = htmlentities(trim($_POST['city']));
+  $zip_code = intval(htmlentities(trim($_POST['zip_code'])));
+
+  $update_company = update_company_informations(
+    $bdd,
+    $company_email,
+    $company_name,
+    $company_tel,
+    $city,
+    $street_number,
+    $street_name,
+    $zip_code
+  );
+  if ($update_company) {
+    $infos[] = 'Les informations ont été mises à jour.';
+  } else {
+    $errors[] = 'Une erreur est survenue, veuillez réessayer.';
+  }
+
+
+  // openings
+  for ($i = 1; $i < 8; $i++) {
+    $name1 = 'am_opening_' . $i;
+    $name2 = 'am_closure_' . $i;
+    $name3 = 'pm_opening_' . $i;
+    $name4 = 'pm_closure_' . $i;
+
+    $$name1 = $_POST['am_opening_' . $i];
+    $$name2 = $_POST['am_closure_' . $i];
+    $$name3 = $_POST['pm_opening_' . $i];
+    $$name4 = $_POST['pm_closure_' . $i];
+
+    update_openings($bdd, $i, $$name1, $$name2, $$name3, $$name4);
+  }
+
+  $services2 = [
+    [
+      'title' => $_POST['service_title_1'],
+      'content' => $_POST['service_content_1']
+    ],
+    [
+      'title' => $_POST['service_title_2'],
+      'content' => $_POST['service_content_2']
+    ],
+    [
+      'title' => $_POST['service_title_3'],
+      'content' => $_POST['service_content_3']
+    ]
+  ];
+  var_dump($services2);
+  foreach ($services2 as $key => $service2) {
+    update_services($bdd, $key + 1, $service2['title'], $service2['content']);
   }
 }
