@@ -14,6 +14,24 @@ function slugify($text, string $divider = '-')
     if (empty($text)) {
         $text = 'n-a';
     }
-    
+
     return $text;
 }
+
+// convert textarea to array
+function stringToArray(string $string)
+{
+    return explode(PHP_EOL, $string);
+}
+
+// display address
+function address($address_input)
+{ ?>
+    <address>
+        <strong>
+            <?= $address_input['name']; ?>
+        </strong> <br>
+        <?= $address_input['street_number'] . ' ' . $address_input['street_name']; ?><br>
+        <?= $address_input['zip_code'] . ' ' . $address_input['city']; ?>
+    </address>
+<?php };

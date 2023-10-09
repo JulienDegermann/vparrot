@@ -10,8 +10,9 @@
         <h2>Horaires d'ouverture</h2>
 
         <?php
-        $req = "SELECT * FROM openings ;";
-        foreach ($bdd->query($req) as $opening) {
+        // $req = "SELECT * FROM openings ;";
+        $openings = get_openings($bdd);
+        foreach ($openings as $opening) {
 
           $am_opening = date('H:i', strtotime($opening['am_opening']));
           $am_closure = date('H:i', strtotime($opening['am_closure']));

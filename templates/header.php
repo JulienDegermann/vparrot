@@ -1,14 +1,15 @@
 <?php
 // DB
 require_once 'data_base/data_base_connect.php';
-
 require_once 'classes/class_company.php';
+require_once 'config/functions.php';
+
 $company = get_all_informations($bdd);
 
 // SESSION
 ini_set('session.save_path', 'session_files/');
 session_start();
-if(!isset($_SESSION['user']['role'])) {
+if (!isset($_SESSION['user']['role'])) {
   $_SESSION['user']['role'] = 'client';
 }
 if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 60 * 15)) {
@@ -37,7 +38,7 @@ require_once 'config/config.php';
 
   <!-- ----------------------------------------------------------------- CEO -->
   <meta name="description" content="Le garage V.Parrot vous accueille à Toulouse 6 jours sur 7 et propose ses 15 années
-   d'expertise dans la réparation et l'entretien de votre véhicule" />
+  d'expertise dans la réparation et l'entretien de votre véhicule." />
 
   <!-- -------------------------------------------------------------- STYLES -->
   <!-- SLICK CSS -->

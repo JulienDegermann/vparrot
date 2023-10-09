@@ -1,9 +1,5 @@
 <?php
 
-function stringToArray (string $string) {
-  return explode(PHP_EOL, $string);
-}
-
 // Comments on index.php
 if (isset($_POST['new_comment'])) {
   $note = isset($_POST['note']) ? htmlentities(intval($_POST['note'])) : null;
@@ -97,7 +93,7 @@ if (isset($_POST['new_employee'])) {
   $employee_first_name = htmlentities(ucfirst(trim($_POST['employee_first_name'])));
   $employee_last_name = htmlentities(ucfirst(trim($_POST['employee_last_name'])));
   $employee_password = htmlentities(password_hash($_POST['employee_password'], PASSWORD_DEFAULT));
-  $employee_email = htmlentities(strtolower($employee_first_name .  '.' . str_replace(' ', '-', $employee_last_name) . '@example.com'));
+  $employee_email = htmlentities(strtolower(slugify($_POST['employee_first_name']) .  '.' . slugify($_POST['employee_last_name']) . '@example.com'));
 
   if (!$employee_first_name || !$employee_last_name || !$employee_password || !$employee_email) {
     $errors[] = 'Un champ requis est manquant';
@@ -126,20 +122,20 @@ if (isset($_POST['new_car'])) {
     if (getimagesize($main_picture)) {
       $file_name = slugify((uniqid() . '-' . $_FILES['main_picture']['name']));
       move_uploaded_file($main_picture, 'uploads/images/' . $file_name);
-      if (!$brand || !$model || !$year || !$mileage || !$price || !$energy || !$main_picture) {
-        $errors[] = 'Un champ est manquant';
-      } else {
-        $new_car = add_car($bdd, $brand, $model, $year, $mileage, $price, $energy);
-        $car_id = $bdd->lastInsertId();
-        $new_image = add_image($bdd, $file_name, $car_id);
-        if ($new_car) {
-          $infos[] = 'La voiture a été ajoutée avec succès';
-        } else {
-          $errors[] = 'Une erreur s\'est produite';
-        }
-      }
     } else {
       $errors[] = 'Le fichier envoyé n\'est pas une image';
+    }
+  }
+  if (!$brand || !$model || !$year || !$mileage || !$price || !$energy || !$main_picture) {
+    $errors[] = 'Un champ est manquant';
+  } else {
+    $new_car = add_car($bdd, $brand, $model, $year, $mileage, $price, $energy);
+    $car_id = $bdd->lastInsertId();
+    $new_image = add_image($bdd, $file_name, $car_id);
+    if ($new_car) {
+      $infos[] = 'La voiture a été ajoutée avec succès';
+    } else {
+      $errors[] = 'Une erreur s\'est produite';
     }
   }
   $active = 'cars';
@@ -282,16 +278,16 @@ if (isset($_POST['update_info'])) {
 
   $services2 = [
     [
-      'title' => $_POST['service_title_1'],
-      'content' => $_POST['service_content_1']
+      'title' => htmlentities($_POST['service_title_1']),
+      'content' => htmlentities($_POST['service_content_1'])
     ],
     [
-      'title' => $_POST['service_title_2'],
-      'content' => $_POST['service_content_2']
+      'title' => htmlentities($_POST['service_title_2']),
+      'content' => htmlentities($_POST['service_content_2'])
     ],
     [
-      'title' => $_POST['service_title_3'],
-      'content' => $_POST['service_content_3']
+      'title' => htmlentities($_POST['service_title_3']),
+      'content' => htmlentities($_POST['service_content_3'])
     ]
   ];
 
