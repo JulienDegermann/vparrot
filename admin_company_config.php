@@ -48,7 +48,6 @@ for ($i = 1; $i < 8; $i++) {
   }
   if (isset($_POST['pm_closure_'.$i])) {
     $$name4 = $_POST['pm_closure_'.$i];
-
   }
 }
 
@@ -76,9 +75,6 @@ foreach ($bdd->query($req) as $company) {
     $bdd->query($save);
   }
 }
-
-
-
 
 $req = "SELECT * FROM openings";
 foreach ($bdd->query($req) as $opening) {

@@ -24,7 +24,6 @@ function get_all_pictures(PDO $bdd, int $car_id)
 
 class Cars
 {
-
   public $id;
   public $brand;
   public $model;

@@ -3,7 +3,7 @@ session_start();
 if (!isset($_SESSION['user']) || (!$_SESSION['user']['role'] === 'admin' && !$_SESSION['user']['role'] === 'employee')) {
   header('Location: login.php');
   exit();
-} 
+}
 if (isset($_SESSION['last_activity']) && ((time() - $_SESSION['last_activity']) > 15 * 60)) {
   session_unset();
   session_destroy();
@@ -21,11 +21,19 @@ $errors = [];
 $infos = [];
 
 $active = $_SESSION['user']['role'] === 'admin' ? 'garage' : 'messages';
+require 'classes/class_company.php';
 require 'classes/class_users.php';
 require 'classes/class_comments.php';
 require 'classes/class_messages.php';
 require 'classes/class_cars.php';
 require 'config/config.php';
+
+
+$company = get_all_informations($bdd);
+$openings = get_openings($bdd);
+$services = get_services($bdd);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -117,65 +125,78 @@ require 'config/config.php';
             <!-- ------------------------------------------- GARAGE INFORMATIONS -->
             <div class="garage">
               <h1>Informations générales</h1>
-              <form action="config/admin_company_config.php" method="post">
-                <?php
-                $req = " SELECT * FROM company JOIN address ON company.address_id = address.id;";
-                foreach ($bdd->query($req) as $company) { ?>
-                  <fieldset>
-                    <legend>Entreprise : </legend>
-                    <label for="company_name">Nom :
-                      <input type="text" name="company_name" id="company_name" value="<?= $company['name']; ?>">
-                    </label>
-                    <label for="company_tel">Téléphone :
-                      <input type="tel" name="company_tel" maxlength="10" minlength="10" id="company_tel" value="<?= $company['phone']; ?>">
-                    </label>
-                    <label for="company_email">E-mail :
-                      <input type="email" name="company_email" id="company_email" value="<?= $company['email']; ?>">
-                    </label>
-                  </fieldset>
-                  <fieldset>
-                    <legend>Adresse</legend>
-                    <label for="street_number">N° de rue :
-                      <input type="number" name="street_number" id="street_number" value="<?= $company['street_number']; ?>">
-                    </label>
-                    <label for="street_name">Rue :
-                      <input type="text" name="street_name" id="street_name" value="<?= $company['street_name']; ?>">
-                    </label>
+              <form action="" method="post">
+                <fieldset>
+                  <legend>Entreprise : </legend>
+                  <label for="company_name">Nom :
+                    <input type="text" name="company_name" id="company_name" value="<?= $company['name']; ?>">
+                  </label>
+                  <label for="company_tel">Téléphone :
+                    <input type="tel" name="company_tel" maxlength="10" minlength="10" id="company_tel" value="<?= $company['phone']; ?>">
+                  </label>
+                  <label for="company_email">E-mail :
+                    <input type="email" name="company_email" id="company_email" value="<?= $company['email']; ?>">
+                  </label>
+                </fieldset>
+                <fieldset>
+                  <legend>Adresse</legend>
+                  <label for="street_number">N° de rue :
+                    <input type="number" name="street_number" id="street_number" value="<?= $company['street_number']; ?>">
+                  </label>
+                  <label for="street_name">Rue :
+                    <input type="text" name="street_name" id="street_name" value="<?= $company['street_name']; ?>">
+                  </label>
 
-                    <label for="city">Ville :
-                      <input type="text" name="city" id="city" value="<?= $company['city']; ?>">
+                  <label for="city">Ville :
+                    <input type="text" name="city" id="city" value="<?= $company['city']; ?>">
+                  </label>
+                  <label for="zip_code">Code postal :
+                    <input type="number" name="zip_code" id="zip_code" value="<?= $company['zip_code']; ?>">
+                  </label>
+                </fieldset>
+                <fieldset id="opening_setting">
+                  <legend>
+                    Horaires d'ouverture :
+                  </legend>
+                  <p class="warning">⚠️ pour l'heure de fermeture est égale à l'heure d'ouverture, cela indique que le garage est "fermé"</p>
+                  <?php
+                  foreach ($openings as $key => $opening) { ?>
+                    <p>
+                      <span><?= $opening['day']; ?> :</span>
+                      <label for="am_opening_<?= $key + 1; ?>">Ouverture matin : <br>
+                        <input type="time" min="06:00" max="21:00" id="am_opening_<?= $key + 1; ?>" name="am_opening_<?= $key + 1; ?>" value="<?= $opening['am_opening']; ?>">
+                      </label>
+                      <label for="am_closure_<?= $key + 1; ?>">Fermeture matin : <br>
+                        <input type="time" min="06:00" max="21:00" id="am_closure_<?= $key + 1; ?>" name="am_closure_<?= $key + 1; ?>" value="<?= $opening['am_closure']; ?>">
+                      </label>
+                      <label for="pm_opening_<?= $key + 1; ?>">Ouverture après-midi : <br>
+                        <input type="time" min="06:00" max="21:00" id="pm_opening_<?= $key + 1; ?>" name="pm_opening_<?= $key + 1; ?>" value="<?= $opening['pm_opening']; ?>">
+                      </label>
+                      <label for="pm_closure_<?= $key + 1; ?>">Fermeture après-midi : <br>
+                        <input type="time" min="06:00" max="21:00" id="pm_closure_<?= $key + 1; ?>" name="pm_closure_<?= $key + 1; ?>" value="<?= $opening['pm_closure']; ?>">
+                      </label>
+                    </p>
+                  <?php } ?>
+                </fieldset>
+
+                <fieldset class="service_style">
+                  <legend>Services :</legend>
+
+                  <?php
+                  foreach ($services as $service) { ?>
+                    <label for="service_title_<?= $service['id']; ?>">Nom du service :
+                      <input type="text" name="service_title_<?= $service['id']; ?>" id="service_title_<?= $service['id']; ?>" value="<?= $service['title']; ?>">
                     </label>
-                    <label for="zip_code">Code postal :
-                      <input type="number" name="zip_code" id="zip_code" value="<?= $company['zip_code']; ?>">
+                    <label for="service_content_<?= $service['id'] ;?>">Détails du service :
+                      <textarea 
+                      name="service_content_<?= $service['id'] ;?>" 
+                      id="service_content_<?= $service['id'] ;?>"><?= $service['content']; ?></textarea>
                     </label>
-                  </fieldset>
-                  <fieldset id="opening_setting">
-                    <legend>
-                      Horaires d'ouverture :
-                    </legend>
-                    <p class="warning">⚠️ pour l'heure de fermeture est égale à l'heure d'ouverture, cela indique que le garage est "fermé"</p>
-                    <?php
-                    $req = " SELECT * FROM openings;";
-                    foreach ($bdd->query($req) as $key => $opening) { ?>
-                      <p>
-                        <span><?= $opening['day']; ?> :</span>
-                        <label for="am_opening_<?= $key + 1; ?>">Ouverture matin : <br>
-                          <input type="time" min="06:00" max="21:00" id="am_opening_<?= $key + 1; ?>" name="am_opening_<?= $key + 1; ?>" value="<?= $opening['am_opening']; ?>">
-                        </label>
-                        <label for="am_closure_<?= $key + 1; ?>">Fermeture matin : <br>
-                          <input type="time" min="06:00" max="21:00" id="am_closure_<?= $key + 1; ?>" name="am_closure_<?= $key + 1; ?>" value="<?= $opening['am_closure']; ?>">
-                        </label>
-                        <label for="pm_opening_<?= $key + 1; ?>">Ouverture après-midi : <br>
-                          <input type="time" min="06:00" max="21:00" id="pm_opening_<?= $key + 1; ?>" name="pm_opening_<?= $key + 1; ?>" value="<?= $opening['pm_opening']; ?>">
-                        </label>
-                        <label for="pm_closure_<?= $key + 1; ?>">Fermeture après-midi : <br>
-                          <input type="time" min="06:00" max="21:00" id="pm_closure_<?= $key + 1; ?>" name="pm_closure_<?= $key + 1; ?>" value="<?= $opening['pm_closure']; ?>">
-                        </label>
-                      </p>
-                    <?php } ?>
-                  </fieldset>
-                  <input class="button" type="submit" value="Enregistrer">
-                <?php } ?>
+                  <?php } ?>
+                </fieldset>
+
+                <input class="button" type="submit" value="Enregistrer" name="update_info">
+
               </form>
 
             </div>
