@@ -71,12 +71,7 @@ foreach ($infos as $info) { ?>
         <div class="grid">
 
           <?php
-          // cars BDD
-          // require_once 'lib/cars_list.php';
-
-
-          $cars = isset($filter) ? $filter : get_all_cars($bdd);
-
+          $cars = get_all_cars($bdd);
           foreach ($cars as $car) {
             $pictures = get_main_picture($bdd, $car['id']);
             $carObject = new Cars($car['id'], $car['brand'], $car['model'], $car['mileage'], $car['year'], $car['energy'], $car['price'], $pictures);

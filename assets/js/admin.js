@@ -83,21 +83,21 @@ $('input[type="time"]').each(() => {
 // --------------------------------------------------------------------------------------------------------------- FOCUS
 
 
-$('.deleteemployee').each(function () {
-  $(this).click(function () {
-    urlDelete = 'config/employee_delete.php?id=' + $(this).attr('id')
-    fetch(urlDelete, {
-      method: 'POST'
-    })
-      .then(response => {
-        window.location.href = 'admin.php';
-        alert('compte supprimé');
-      })
-      .catch(error => {
-        console.log('il y a une erreur : ' + error)
-      })
-  })
-})
+// $('.deleteemployee').each(function () {
+//   $(this).click(function () {
+//     urlDelete = 'config/employee_delete.php?id=' + $(this).attr('id')
+//     fetch(urlDelete, {
+//       method: 'POST'
+//     })
+//       .then(response => {
+//         window.location.href = 'admin.php';
+//         alert('compte supprimé');
+//       })
+//       .catch(error => {
+//         console.log('il y a une erreur : ' + error)
+//       })
+//   })
+// })
 // -------------------------------------------------------------- COMMENTS FETCH
 $('.cancel').each(function () {
   $(this).click(function () {

@@ -25,6 +25,6 @@ if (isset($_GET['filter'])) {
   
   $filter = get_filter($bdd, $year_min, $year_max, $price_min, $price_max, $mileage_min, $mileage_max);
 
-  header('Content-Type: appplication/json');
+  header('Content-Type: application/json');
   echo json_encode($filter);
 }

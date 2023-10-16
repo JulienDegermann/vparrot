@@ -1,7 +1,6 @@
 <!-- --------------------------------------------------------- PHP FUNCTIONS -->
 <!-- PAGE NAME -->
 <?php $current_page = 'contact'; ?>
-<?php require_once 'lib/workshop_datas.php'; ?>
 
 <!-- ----------------------------------------------------------- HEADER CALL -->
 <?php require_once 'templates/header.php'; ?>

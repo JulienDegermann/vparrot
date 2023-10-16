@@ -21,6 +21,5 @@
       <a href="admin.php?admin=cars-delete-<?= $this->id; ?>">
       <?php require 'assets/images/icons/cancel.svg'; ?>
     </a>
-      <!-- <span class="delete-car" id="deletecar-<?//= $this->id; ?>"><?//php require 'assets/images/icons/delete.svg' ?></span> -->
     </td>
   </tr>

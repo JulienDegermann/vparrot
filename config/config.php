@@ -39,7 +39,7 @@ if (isset($_POST['send_message'])) {
 
     if (!$first_name || !$last_name || !$email || !$tel || !$content) {
       $errors[] = 'Un champ est manquant';
-    } elseif (!intval($tel)) {
+    } elseif (!ctype_digit($tel) || strlen($tel) != 10) {
       $errors[] = 'Le numéro de téléphone n\'est pas valide';
     } else {
       $user = get_user_by_full_name($bdd, $first_name, $last_name);
@@ -126,13 +126,13 @@ if (isset($_POST['new_car'])) {
       $errors[] = 'Le fichier envoyé n\'est pas une image';
     }
   }
-  if (!$brand || !$model || !$year || !$mileage || !$price || !$energy || !$main_picture) {
+  if (!$brand || !$model || !$year || !$mileage || !$price || !$energy || !$file_name) {
     $errors[] = 'Un champ est manquant';
   } else {
     $new_car = add_car($bdd, $brand, $model, $year, $mileage, $price, $energy);
     $car_id = $bdd->lastInsertId();
     $new_image = add_image($bdd, $file_name, $car_id);
-    if ($new_car) {
+    if ($new_car && $new_image) {
       $infos[] = 'La voiture a été ajoutée avec succès';
     } else {
       $errors[] = 'Une erreur s\'est produite';
@@ -145,90 +145,87 @@ if (isset($_POST['new_car'])) {
 if (isset($_GET['admin'])) {
   $get = htmlentities($_GET['admin']);
   $get2 = explode('-', $get)[2];
-  $id = intval(explode('-', $get)[2]);
-  $table = explode('-', $get)[0]; // messages, comments, employees
-  $function = explode('-', $get)[1]; // delete, validate
-  $active = $table;
-  if ($table !== 'messages' && $table !== 'comments' && $table !== 'employees' && $table !== 'garage' && $table !== 'cars') {
-    $errors[] = 'Une erreur est suvenue, veuillez essayer de nouveau';
+  if (!$get2) {
+    header('Location: 404.php');
+    exit();
   } else {
-    switch ($table) {
-      case 'messages':
-        switch ($function) {
-          case 'delete':
-            $delete_message = delete_message_by_id($bdd, $id);
-            if ($delete_message) {
-              $infos[] = 'Message supprimé avec succès';
-            } else {
-              $errors[] = 'Une erreur s\'est produite';
-            }
-            break;
-          default:
-            return;
-            break;
-        }
-        break;
-      case 'employees':
-        switch ($function) {
-          case 'delete':
-            $delete_user = delete_user_by_id($bdd, $id);
-            if ($delete_user) {
-              $infos[] = 'Compte employé supprimé avec succès';
-            } else {
-              $errors[] = 'Une erreur s\'est produite';
-            }
-            break;
-          default:
-            return;
-            break;
-        }
-        break;
-      case 'comments':
-        switch ($function) {
-          case 'delete':
-            $delete_comment = delete_comment_by_id($bdd, $id);
-            if ($delete_comment) {
-              $infos[] = 'Commentaire supprimé avec succès';
-            } else {
-              $errors[] = 'Une erreur s\'est produite';
-            }
-            break;
-          case 'validate':
-            $validate_comment = validate_comment_by_id($bdd, $id);
-            if ($validate_comment) {
-              $infos[] = 'Commentaire validé avec succès';
-            } else {
-              $errors[] = 'Une erreur s\'est produite';
-            }
-            break;
-          default:
-            return;
-            break;
-        }
-        break;
-      case 'cars':
-        switch ($function) {
-          case 'delete':
-            $delete_car = delete_car_by_id($bdd, $id);
-            if ($delete_car) {
-              $infos[] = 'Véhicule supprimé avec succès';
-            } else {
-              $errors[] = 'Une erreur s\'est produite';
-            }
-            break;
-          case 'validate':
-            $validate_comment = validate_comment_by_id($bdd, $id);
-            if ($validate_comment) {
-              $infos[] = 'Commentaire validé avec succès';
-            } else {
-              $errors[] = 'Une erreur s\'est produite';
-            }
-            break;
-          default:
-            return;
-            break;
-        }
-        break;
+    $table = explode('-', $get)[0]; // messages, comments, employees
+    $action = explode('-', $get)[1]; // delete, validate
+    $id = intval(explode('-', $get)[2]);
+    $active = $table;
+    if ($table !== 'messages' && $table !== 'comments' && $table !== 'employees' && $table !== 'garage' && $table !== 'cars') {
+      $errors[] = 'Une erreur est suvenue, veuillez essayer de nouveau';
+    } else {
+      switch ($table) {
+        case 'messages':
+          switch ($action) {
+            case 'delete':
+              $delete_message = delete_message_by_id($bdd, $id);
+              if ($delete_message) {
+                $infos[] = 'Message supprimé avec succès';
+              } else {
+                $errors[] = 'Une erreur s\'est produite';
+              }
+              break;
+            default:
+              return;
+              break;
+          }
+          break;
+        case 'employees':
+          switch ($action) {
+            case 'delete':
+              $delete_user = delete_user_by_id($bdd, $id);
+              if ($delete_user) {
+                $infos[] = 'Compte employé supprimé avec succès';
+              } else {
+                $errors[] = 'Une erreur s\'est produite';
+              }
+              break;
+            default:
+              return;
+              break;
+          }
+          break;
+        case 'comments':
+          switch ($action) {
+            case 'delete':
+              $delete_comment = delete_comment_by_id($bdd, $id);
+              if ($delete_comment) {
+                $infos[] = 'Commentaire supprimé avec succès';
+              } else {
+                $errors[] = 'Une erreur s\'est produite';
+              }
+              break;
+            case 'validate':
+              $validate_comment = validate_comment_by_id($bdd, $id);
+              if ($validate_comment) {
+                $infos[] = 'Commentaire validé avec succès';
+              } else {
+                $errors[] = 'Une erreur s\'est produite';
+              }
+              break;
+            default:
+              return;
+              break;
+          }
+          break;
+        case 'cars':
+          switch ($action) {
+            case 'delete':
+              $delete_car = delete_car_by_id($bdd, $id);
+              if ($delete_car) {
+                $infos[] = 'Véhicule supprimé avec succès';
+              } else {
+                $errors[] = 'Une erreur s\'est produite';
+              }
+              break;
+            default:
+              return;
+              break;
+          }
+          break;
+      }
     }
   }
 }
