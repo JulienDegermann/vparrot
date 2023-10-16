@@ -3,9 +3,7 @@
     <?php 
     foreach ($this->pictures as $picture) {
       if ($picture['is_main']) { ?>
-      
         <img src="uploads/images/<?= $picture['file_name']; ?>" alt="photo <?= $this->brand. ' ' . $this->model ; ?>">
-        
     <?php }
     } ?>
   </div>

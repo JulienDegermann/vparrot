@@ -7,6 +7,9 @@
   .desktop_only {
     display: none;
   }
+  .mobile_only {
+    padding: 0 1em;
+  }
 }
 header {
   position: relative;
@@ -16,6 +19,11 @@ header {
 .logout {
   top: 50%;
   right: 0;
+}
+@media screen and (max-width: 519px) {
+  .logout {
+    max-width: 55%;
+  }
 }
 .logout p {
   text-transform: capitalize;

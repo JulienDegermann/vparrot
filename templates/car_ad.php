@@ -4,19 +4,14 @@
   foreach ($this->pictures as $picture) {
     if ($picture['is_main']) { ?>
       <img class="main-picture" src="<?= 'uploads/images/' . $picture['file_name'] ?>" alt="image principale de">
-
   <?php }
-  }
-
-
-  ?>
+  } ?>
   <div class="picture-min">
     <?php
     if (count($this->pictures) > 1) {
-    foreach ($this->pictures as $picture) { ?>
-      <img src="<?= 'uploads/images/' . $picture['file_name'] ?>" alt="image principale de">
+      foreach ($this->pictures as $picture) { ?>
+        <img src="<?= 'uploads/images/' . $picture['file_name'] ?>" alt="image principale de">
     <?php }
-
     }
     ?>
   </div>
@@ -29,10 +24,6 @@
   <p>Carburant: <?= $this->energy; ?></p>
   <p>Kilométrage: <?= $this->mileage; ?> kms</p>
   <p>Prix: <?= $this->price; ?> €</p>
-
-  <!-- <p>Informations complémentaires: <? //= $this->more;
-                                        ?></p> -->
-
-
+  
   <button id="form_call" type="button" class="button">Nous contacter</button>
 </div>

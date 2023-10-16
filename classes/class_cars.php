@@ -178,47 +178,22 @@ function get_filter(
   int $mileage_max,
 ) {
   $sql = "SELECT cars.*, images.file_name FROM cars JOIN images ON images.car_id = cars.id WHERE 1 = 1 ";
-  if ($year_min) {
-    $sql .= "AND year >= :year_min ";
-  }
-  if ($year_max) {
-    $sql .= "AND year <= :year_max ";
-  }
-  if ($price_min) {
-    $sql .= "AND price >= :price_min ";
-  }
-  if ($price_max) {
-    $sql .= "AND price <= :price_max ";
-  }
-  if ($mileage_min) {
-    $sql .= "AND mileage >= :mileage_min ";
-  }
-  if ($mileage_max) {
-    $sql .= "AND mileage <= :mileage_max ";
-  }
-
+  if ($year_min) { $sql .= "AND year >= :year_min "; }
+  if ($year_max) { $sql .= "AND year <= :year_max "; }
+  if ($price_min) { $sql .= "AND price >= :price_min "; }
+  if ($price_max) { $sql .= "AND price <= :price_max "; }
+  if ($mileage_min) { $sql .= "AND mileage >= :mileage_min "; }
+  if ($mileage_max) { $sql .= "AND mileage <= :mileage_max "; }
+  
   $sql .= ";";
-  // var_dump($sql);
-
   $stmt = $bdd->prepare($sql);
-  if ($year_min) {
-    $stmt->bindParam(':year_min', $year_min, PDO::PARAM_INT);
-  }
-  if ($year_max) {
-    $stmt->bindParam(':year_max', $year_max, PDO::PARAM_INT);
-  }
-  if ($price_min) {
-    $stmt->bindParam(':price_min', $price_min, PDO::PARAM_INT);
-  }
-  if ($price_max) {
-    $stmt->bindParam(':price_max', $price_max, PDO::PARAM_INT);
-  }
-  if ($mileage_min) {
-    $stmt->bindParam(':mileage_min', $mileage_min, PDO::PARAM_INT);
-  }
-  if ($mileage_max) {
-    $stmt->bindParam(':mileage_max', $mileage_max, PDO::PARAM_INT);
-  }
+
+  if ($year_min) { $stmt->bindParam(':year_min', $year_min, PDO::PARAM_INT); }
+  if ($year_max) { $stmt->bindParam(':year_max', $year_max, PDO::PARAM_INT); }
+  if ($price_min) { $stmt->bindParam(':price_min', $price_min, PDO::PARAM_INT); }
+  if ($price_max) { $stmt->bindParam(':price_max', $price_max, PDO::PARAM_INT); }
+  if ($mileage_min) { $stmt->bindParam(':mileage_min', $mileage_min, PDO::PARAM_INT); }
+  if ($mileage_max) { $stmt->bindParam(':mileage_max', $mileage_max, PDO::PARAM_INT); }
 
   $stmt->execute();
   $result = $stmt->fetchALL(PDO::FETCH_ASSOC);
