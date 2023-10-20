@@ -3,7 +3,7 @@
 require_once '../data_base/data_base_connect.php';
 require_once '../classes/class_cars.php';
 
-if (isset($_GET['filter'])) {
+if (isset($_GET['filter'])) {  
   if (isset($_GET['price_min'])) {
     $price_min = intval(htmlentities($_GET['price_min']));
   }

@@ -175,7 +175,7 @@ function get_filter(
   int $price_min,
   int $price_max,
   int $mileage_min,
-  int $mileage_max,
+  int $mileage_max
 ) {
   $sql = "SELECT cars.*, images.file_name FROM cars JOIN images ON images.car_id = cars.id WHERE 1 = 1 ";
   if ($year_min) { $sql .= "AND year >= :year_min "; }

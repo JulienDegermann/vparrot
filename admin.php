@@ -125,7 +125,7 @@ $services = (get_services($bdd));
             <!-- ------------------------------------------- GARAGE INFORMATIONS -->
             <div class="garage">
               <h1>Informations générales</h1>
-              <form action="" method="post">
+              <form action="admin.php" method="post">
                 <fieldset>
                   <legend>Entreprise : </legend>
                   <label for="company_name">Nom :
@@ -187,10 +187,8 @@ $services = (get_services($bdd));
                     <label for="service_title_<?= $service['id']; ?>">Nom du service :
                       <input type="text" name="service_title_<?= $service['id']; ?>" id="service_title_<?= $service['id']; ?>" value="<?= $service['title']; ?>">
                     </label>
-                    <label for="service_content_<?= $service['id'] ;?>">Détails du service :
-                      <textarea 
-                      name="service_content_<?= $service['id'] ;?>" 
-                      id="service_content_<?= $service['id'] ;?>"><?= $service['content']; ?></textarea>
+                    <label for="service_content_<?= $service['id']; ?>">Détails du service :
+                      <textarea name="service_content_<?= $service['id']; ?>" id="service_content_<?= $service['id']; ?>"><?= $service['content']; ?></textarea>
                     </label>
                   <?php } ?>
                 </fieldset>
@@ -207,8 +205,7 @@ $services = (get_services($bdd));
               <h1>Comptes employés</h1>
               <div>
                 <h2>Créer un compte employé</h2>
-                <!-- <form action="config/admin_employee_config.php" method="post"> -->
-                <form method="post">
+                <form action="admin.php" method="post">
                   <fieldset>
                     <label for="employee_first_name">Prénom :
                       <input type="text" name="employee_first_name" id="employee_first_name">
@@ -216,12 +213,16 @@ $services = (get_services($bdd));
                     <label for="employee_last_name">Nom :
                       <input type="text" name="employee_last_name" id="employee_last_name">
                     </label>
-                    <label for="employee_password">Mot de passe :
+                    <label for="employee_password">Mot de passe * :
                       <input type="password" name="employee_password" id="employee_password">
                     </label>
                   </fieldset>
+                  <p class="requirements">
+                    * Le mot de passe doit contenir au moins : 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial
+                    </p>
                   <input class="button" type="submit" value="Enregistrer" name="new_employee">
                 </form>
+
               </div>
               <div>
                 <h2>Liste des employés</h2>
@@ -350,7 +351,7 @@ $services = (get_services($bdd));
 
               <div>
                 <h2>Ajouter un véhicule</h2>
-                <form method="post" enctype="multipart/form-data">
+                <form method="post" action="admin.php" enctype="multipart/form-data">
                   <fieldset>
                     <label for="brand">Marque :
                       <input type="text" name="brand" id="brand">

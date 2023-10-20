@@ -75,6 +75,11 @@ h2 {
   flex-wrap: wrap;
   position: relative;
 }
+.bloc-3-4 form .requirements {
+  font-size: 14px;
+  color: hsla(189.47, 61.29%, 18.24%, 0.7);
+  font-style: italic;
+}
 .bloc-3-4 fieldset {
   width: 100%;
   max-width: 100%;
