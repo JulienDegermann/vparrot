@@ -94,6 +94,12 @@ h2 {
     width: 100%;
     flex-wrap: wrap;
     position: relative;
+
+    .requirements {
+      font-size: 14px;
+      color: $grey-70;
+      font-style: italic;
+    }
   }
 
   fieldset {

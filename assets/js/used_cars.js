@@ -8,7 +8,7 @@ $('form input').on('input propertychange', () => {
   let year_max = $('#year_max').val()
 
   const url = 'config/filter.php?filter=true&price_min=' + price_min + '&price_max=' + price_max + '&mileage_min=' + mileage_min + '&mileage_max=' + mileage_max + '&year_min=' + year_min + '&year_max=' + year_max
-
+  console.log(url)
   const fetchFilter = fetch(url, { method: 'POST', body: JSON.stringify() })
     .then((res) => {
       return res.json()
