@@ -98,9 +98,8 @@ if (isset($_POST['connect'])) {
 if (isset($_POST['new_employee'])) {
   $employee_first_name = htmlentities(ucfirst(trim($_POST['employee_first_name'])), ENT_QUOTES, 'UTF-8');
   $employee_last_name = htmlentities(ucfirst(trim($_POST['employee_last_name'])), ENT_QUOTES, 'UTF-8');
-  // $employee_password = htmlentities(password_hash($_POST['employee_password'], PASSWORD_DEFAULT));    ------------------------------------------------------------------------------------------------------------ before TEST
-  $employee_password = password_hash(htmlentities($_POST['employee_password'], ENT_QUOTES, 'UTF-8'), PASSWORD_DEFAULT); // ------------------------------------------------------------------------------------------------- TEST 
-  $employee_email = htmlentities(strtolower(slugify($_POST['employee_first_name']) .  '.' . slugify($_POST['employee_last_name']) . '@example.com'), ENT_QUOTES, 'UTF-8'); // --------------------------------- CHECK THEN UPDATE , ENT_QUOTES, 'UTF-8' 1st htmlentities then slugify then strtolower ?
+  $employee_password = password_hash(htmlentities($_POST['employee_password'], ENT_QUOTES, 'UTF-8'), PASSWORD_DEFAULT);
+  $employee_email = htmlentities(strtolower(slugify($_POST['employee_first_name']) .  '.' . slugify($_POST['employee_last_name']) . '@example.com'), ENT_QUOTES, 'UTF-8');
   $regex_password = "/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/";
   $password_not_hashed = $_POST['employee_password'];
   if (!$employee_first_name || !$employee_last_name || !$employee_password || !$employee_email) {

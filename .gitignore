@@ -11,6 +11,7 @@
 # DB informations
 data_base_connect.php
 session_files/*
+!session_files/gitkeep
 
 # uploaded files
 upload/images/*
