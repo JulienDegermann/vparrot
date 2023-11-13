@@ -6,6 +6,7 @@ $infos = [];
 
 require_once 'data_base/data_base_connect.php';
 require_once 'classes/class_users.php';
+require_once 'config/functions.php';
 require_once 'config/config.php';
 
 ?>
