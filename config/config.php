@@ -229,6 +229,81 @@ if (isset($_POST['new_car'])) {
 
 
 
+
+
+if (isset($_POST['update_car'])) {
+  $id = isset($_POST['id']) ? intval($_POST['id']) : null;
+  $brand = isset($_POST['brand']) ? $_POST['brand'] : null;
+  $model = isset($_POST['model']) ? strval($_POST['model']) : null;
+  $year = isset($_POST['year']) ? intval($_POST['year']) : null;
+  $mileage = isset($_POST['mileage']) ? intval($_POST['mileage']) : null;
+  $price = isset($_POST['price']) ? intval($_POST['price']) : null;
+  $energy = isset($_POST['energy']) ? $_POST['energy'] : null;
+  $main_picture = isset($_FILES['main_picture']) ? $_FILES['main_picture'] : null;
+
+  if (!$brand || !$model || !$year || !$mileage || !$price || !$energy) {
+    $errors[] = 'Un champ est manquant';
+  } elseif (
+    !preg_match(_BRAND_REGEX_, $brand) ||
+    !preg_match(_MODEL_REGEX_, $model) ||
+    !preg_match(_YEAR_REGEX_, $year) ||
+    !preg_match(_MILEAGE_REGEX_, $mileage) ||
+    !preg_match(_MILEAGE_REGEX_, $price) ||
+    !preg_match(_BRAND_REGEX_, $energy) ||
+    !preg_match(_ID_REGEX_, $id)
+  ) {
+    $errors[] = 'Un champ n\'est pas correctement complété';
+  } else {
+
+    // XSS prevent
+    $brand = htmlentities($brand, ENT_QUOTES, 'UTF-8');
+    $model = htmlentities($model, ENT_QUOTES, 'UTF-8');
+    $year = htmlentities($year, ENT_QUOTES, 'UTF-8');
+    $mileage = htmlentities($mileage, ENT_QUOTES, 'UTF-8');
+    $price = htmlentities($price, ENT_QUOTES, 'UTF-8');
+    $energy = htmlentities($energy, ENT_QUOTES, 'UTF-8');
+
+    // case image is changed -------------------------------------------------------------------------------------
+    if ($main_picture['tmp_name']) {
+      if (!preg_match(_COMMENT_REGEX_, $main_picture['name']) || !getimagesize($main_picture['tmp_name'])) {
+        $errors[] = 'Le fichier envoyé n\'est pas une image';
+      } else {
+        // file_name normalized
+        
+        $file_name = get_main_picture($bdd, $id);
+        $file_name = $file_name['0']['file_name'];
+        unlink(_UPLOAD_IMAGES_ . $file_name);
+        if(!file_exists(_UPLOAD_IMAGES_ . $file_name)) {
+          $file_name = slugify((uniqid() . '-' . $main_picture['name']));
+          $update_image = update_main_picture($bdd, $id, $file_name);
+          move_uploaded_file($main_picture['tmp_name'], _UPLOAD_IMAGES_ . $file_name);
+        }
+      }
+    } else {
+      $main_picture = null;
+    }
+    $update_success = update_car($bdd, $id, $brand, $model, $year, $mileage, $price, $energy);
+    if ($update_success) {
+      $infos[] = 'Les modifications ont été enregistrées';
+    } else {
+      $errors[] = 'Une erreur s\'est produite';
+    }
+  }
+  $active = 'cars';
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 // get delete or modify for messages, comments, employees
 if (isset($_GET['admin'])) {
   $get = htmlentities($_GET['admin'], ENT_QUOTES, 'UTF-8');
@@ -305,6 +380,12 @@ if (isset($_GET['admin'])) {
               if ($delete_car) {
                 $infos[] = 'Véhicule supprimé avec succès';
               } else {
+                $errors[] = 'Une erreur s\'est produite';
+              }
+              break;
+            case 'update':
+              $update_car = get_car_by_id($bdd, $id);
+              if (!$update_car) {
                 $errors[] = 'Une erreur s\'est produite';
               }
               break;

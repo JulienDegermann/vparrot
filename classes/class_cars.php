@@ -11,6 +11,20 @@ function get_main_picture(PDO $bdd, int $car_id, bool|int $is_main = true)
   return $result;
 }
 
+
+function update_main_picture(PDO $bdd, int $car_id, string $file_name,bool|int $is_main = true)
+{
+  $sql = "UPDATE images SET file_name = :file_name WHERE car_id = :car_id AND is_main = :is_main;";
+  $stmt = $bdd->prepare($sql);
+  $stmt->bindParam(':car_id', $car_id, PDO::PARAM_INT);
+  $stmt->bindParam(':is_main', $is_main, PDO::PARAM_INT);
+  $stmt->bindParam(':file_name', $file_name, PDO::PARAM_STR);
+  $result = $stmt->execute();
+  $stmt = null;
+  return $result;
+}
+
+
 function get_all_pictures(PDO $bdd, int $car_id)
 {
   $sql = "SELECT * FROM images WHERE car_id = :car_id;";
@@ -43,7 +57,7 @@ class Cars
     int $year,
     string $energy,
     int $price,
-    array $pictures
+    string|array $pictures
   ) {
     $this->id = $id;
     $this->brand = $brand;
@@ -72,7 +86,7 @@ class Cars
 
 function get_car_by_id(PDO $bdd, int $id)
 {
-  $sql = "SELECT * FROM cars WHERE id = :id;";
+  $sql = "SELECT cars.*, images.file_name FROM cars JOIN images ON cars.id = images.car_id WHERE cars.id = :id;";
   $stmt = $bdd->prepare($sql);
   $stmt->bindParam(':id', $id, PDO::PARAM_INT);
   $stmt->execute();
@@ -83,7 +97,7 @@ function get_car_by_id(PDO $bdd, int $id)
 
 function get_all_cars(PDO $bdd)
 {
-  $sql = "SELECT * FROM cars;";
+  $sql = "SELECT cars.*, images.file_name FROM cars JOIN images ON cars.id = images.car_id;";
   $stmt = $bdd->prepare($sql);
   $stmt->execute();
   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -178,25 +192,80 @@ function get_filter(
   int $mileage_max
 ) {
   $sql = "SELECT cars.*, images.file_name FROM cars JOIN images ON images.car_id = cars.id WHERE 1 = 1 ";
-  if ($year_min) { $sql .= "AND year >= :year_min "; }
-  if ($year_max) { $sql .= "AND year <= :year_max "; }
-  if ($price_min) { $sql .= "AND price >= :price_min "; }
-  if ($price_max) { $sql .= "AND price <= :price_max "; }
-  if ($mileage_min) { $sql .= "AND mileage >= :mileage_min "; }
-  if ($mileage_max) { $sql .= "AND mileage <= :mileage_max "; }
-  
+  if ($year_min) {
+    $sql .= "AND year >= :year_min ";
+  }
+  if ($year_max) {
+    $sql .= "AND year <= :year_max ";
+  }
+  if ($price_min) {
+    $sql .= "AND price >= :price_min ";
+  }
+  if ($price_max) {
+    $sql .= "AND price <= :price_max ";
+  }
+  if ($mileage_min) {
+    $sql .= "AND mileage >= :mileage_min ";
+  }
+  if ($mileage_max) {
+    $sql .= "AND mileage <= :mileage_max ";
+  }
+
   $sql .= ";";
   $stmt = $bdd->prepare($sql);
 
-  if ($year_min) { $stmt->bindParam(':year_min', $year_min, PDO::PARAM_INT); }
-  if ($year_max) { $stmt->bindParam(':year_max', $year_max, PDO::PARAM_INT); }
-  if ($price_min) { $stmt->bindParam(':price_min', $price_min, PDO::PARAM_INT); }
-  if ($price_max) { $stmt->bindParam(':price_max', $price_max, PDO::PARAM_INT); }
-  if ($mileage_min) { $stmt->bindParam(':mileage_min', $mileage_min, PDO::PARAM_INT); }
-  if ($mileage_max) { $stmt->bindParam(':mileage_max', $mileage_max, PDO::PARAM_INT); }
+  if ($year_min) {
+    $stmt->bindParam(':year_min', $year_min, PDO::PARAM_INT);
+  }
+  if ($year_max) {
+    $stmt->bindParam(':year_max', $year_max, PDO::PARAM_INT);
+  }
+  if ($price_min) {
+    $stmt->bindParam(':price_min', $price_min, PDO::PARAM_INT);
+  }
+  if ($price_max) {
+    $stmt->bindParam(':price_max', $price_max, PDO::PARAM_INT);
+  }
+  if ($mileage_min) {
+    $stmt->bindParam(':mileage_min', $mileage_min, PDO::PARAM_INT);
+  }
+  if ($mileage_max) {
+    $stmt->bindParam(':mileage_max', $mileage_max, PDO::PARAM_INT);
+  }
 
   $stmt->execute();
   $result = $stmt->fetchALL(PDO::FETCH_ASSOC);
+  $stmt = null;
+  return $result;
+}
+
+function update_car(
+  PDO $bdd,
+  int $id,
+  string $brand,
+  string $model,
+  int $year,
+  int $mileage,
+  int $price,
+  string $energy,
+) {
+  $sql = "UPDATE cars SET 
+    brand = :brand,
+    model = :model,
+    year = :year,
+    mileage = :mileage,
+    price = :price,
+    energy = :energy
+    WHERE id = :id;";
+  $stmt = $bdd->prepare($sql);
+  $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+  $stmt->bindParam(':brand', $brand, PDO::PARAM_STR);
+  $stmt->bindParam(':model', $model, PDO::PARAM_STR);
+  $stmt->bindParam(':year', $year, PDO::PARAM_INT);
+  $stmt->bindParam(':mileage', $mileage, PDO::PARAM_INT);
+  $stmt->bindParam(':price', $price, PDO::PARAM_INT);
+  $stmt->bindParam(':energy', $energy, PDO::PARAM_STR);
+  $result = $stmt->execute();
   $stmt = null;
   return $result;
 }

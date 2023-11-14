@@ -219,7 +219,7 @@ $services = get_services($bdd);
                   </fieldset>
                   <p class="requirements">
                     * Le mot de passe doit contenir au moins : 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial
-                    </p>
+                  </p>
                   <input class="button" type="submit" value="Enregistrer" name="new_employee">
                 </form>
 
@@ -348,34 +348,40 @@ $services = get_services($bdd);
             <!-- ------------------------------------------------------ CARS ADS -->
             <div class="cars">
               <h1>Véhicules d'occasion</h1>
-
               <div>
-                <h2>Ajouter un véhicule</h2>
+
+                <h2><?= isset($update_car) ? 'Modifier le véhicule' : 'Ajouter un véhicule'; ?></h2>
                 <form method="post" action="admin.php" enctype="multipart/form-data">
                   <fieldset>
+                    <input type="hidden" name="id" value="<?= isset($update_car) ? $update_car['id'] : ''; ?>">
                     <label for="brand">Marque :
-                      <input type="text" name="brand" id="brand">
+                      <input type="text" name="brand" id="brand" value="<?= isset($update_car) ? $update_car['brand'] : ''; ?>">
                     </label>
                     <label for="model">Modèle :
-                      <input type="text" name="model" id="model">
+                      <input type="text" name="model" id="model" value="<?= isset($update_car) ? $update_car['model'] : ''; ?>">
                     </label>
                     <label for="year">Année :
-                      <input type="number" name="year" id="year">
+                      <input type="number" name="year" id="year" value="<?= isset($update_car) ? $update_car['year'] : ''; ?>">
                     </label>
                     <label for="mileage">Kimométrage :
-                      <input type="number" name="mileage" id="mileage">
+                      <input type="number" name="mileage" id="mileage" value="<?= isset($update_car) ? $update_car['mileage'] : ''; ?>">
                     </label>
                     <label for="energy">Carburant :
-                      <input type="text" name="energy" id="energy">
+                      <input type="text" name="energy" id="energy" value="<?= isset($update_car) ? $update_car['energy'] : ''; ?>">
                     </label>
                     <label for="price">Prix :
-                      <input type="number" name="price" id="price">
+                      <input type="number" name="price" id="price" value="<?= isset($update_car) ? $update_car['price'] : ''; ?>">
                     </label>
                     <label for="main_picture">Photo principale :
                       <input type="file" name="main_picture" id="main_picture" accept="image/jpeg, image/jpg, image/png">
+                      <?php
+                      if (isset($update_car)) { ?>
+                          <img src="<?= _UPLOAD_IMAGES_ . $update_car['file_name'] ?>" alt="photo du véhicule">
+                      <?php } ?>
                     </label>
                   </fieldset>
-                  <input class="button" type="submit" value="Enregistrer" name="new_car">
+                  <input class="button" type="submit" value="<?= isset($update_car) ? 'Mettre à jour le véhicule' : 'Ajouter le véhicule'; ?>" name="<?= isset($update_car) ? 'update_car' : 'new_car'; ?>">
+
                 </form>
               </div>
               <div>
@@ -398,8 +404,8 @@ $services = get_services($bdd);
                     $cars = get_all_cars($bdd);
                     if ($cars) {
                       foreach ($cars as $car) {
-                        $pictures = get_main_picture($bdd, $car['id']);
-                        $current = new Cars($car['id'], $car['brand'], $car['model'], $car['mileage'], $car['year'], $car['energy'], $car['price'], $pictures);
+                        // $pictures = get_main_picture($bdd, $car['id']);
+                        $current = new Cars($car['id'], $car['brand'], $car['model'], $car['mileage'], $car['year'], $car['energy'], $car['price'], $car['file_name']);
                         $current->display_list_admin();
                       }
                     } else { ?>

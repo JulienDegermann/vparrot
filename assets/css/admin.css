@@ -80,6 +80,9 @@ h2 {
   color: hsla(189.47, 61.29%, 18.24%, 0.7);
   font-style: italic;
 }
+.bloc-3-4 form img {
+  max-width: 150px;
+}
 .bloc-3-4 fieldset {
   width: 100%;
   max-width: 100%;

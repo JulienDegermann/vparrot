@@ -50,7 +50,7 @@ foreach ($infos as $info) { ?>
         exit();
       } else {
         $pictures = get_all_pictures($bdd, $id);
-        $carObject = new Cars($car['id'], $car['brand'], $car['model'], $car['mileage'], $car['year'], $car['energy'], $car['price'], $pictures);
+        $carObject = new Cars($car['id'], $car['brand'], $car['model'], $car['mileage'], $car['year'], $car['energy'], $car['price'], $car['file_name']);
         $carObject->display_item();
       }
       ?>

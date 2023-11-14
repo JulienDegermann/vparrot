@@ -2,6 +2,7 @@
 
 define('_UPLOAD_IMAGES_', 'uploads/images/');
 
+// RegEx
 define('_FIRST_NAME_REGEX_', '/^[a-zA-Z\s\-\p{L}]{1,50}+$/u');
 define('_LAST_NAME_REGEX_', '/^[a-zA-Z\s\-\p{L}]{1,100}+$/u');
 define('_PWD_REGEX_', '/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{12,}$/');
@@ -18,6 +19,7 @@ define('_YEAR_REGEX_', '/^(19|20)\d{2}$/');
 define('_MILEAGE_REGEX_', '/^\d{4,6}$/');
 define('_BRAND_REGEX_', '/^[a-zA-Z0-9\s\-\p{L}]{1,50}+$/u');
 define('_MODEL_REGEX_', '/^[a-zA-Z0-9\s\-\p{L}]{1,100}+$/u');
+define('_ID_REGEX_', '/^[0-9]{1,}/');
 
 
 function slugify($text, string $divider = '-')
