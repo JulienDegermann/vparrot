@@ -74,7 +74,7 @@ function get_user_by_email(PDO $bdd, string $email) {
 
 function get_employees(PDO $bdd) {
   $role='employee';
-  $sql = "SELECT * FROM users WHERE role = 'employee';";
+  $sql = "SELECT * FROM users WHERE role = 'employee' ORDER BY id DESC;";
   $stmt = $bdd->prepare($sql);
   // $stmt->bindParam(':role', $role, PDO::PARAM_STR);
   $stmt->execute();

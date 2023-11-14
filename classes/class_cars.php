@@ -1,10 +1,21 @@
 <?php
 function get_main_picture(PDO $bdd, int $car_id, bool|int $is_main = true)
 {
-  $sql = "SELECT * FROM images WHERE car_id = :car_id AND is_main = :is_main;";
+  $sql = "SELECT images.file_name FROM images WHERE car_id = :car_id AND is_main = :is_main;";
   $stmt = $bdd->prepare($sql);
   $stmt->bindParam(':car_id', $car_id, PDO::PARAM_INT);
   $stmt->bindParam(':is_main', $is_main, PDO::PARAM_INT);
+  $stmt->execute();
+  $result = $stmt->fetch(PDO::FETCH_ASSOC);
+  $stmt = null;
+  return $result;
+}
+
+function delete_images_by_id(PDO $bdd, int $car_id)
+{
+  $sql = "DELETE FROM images WHERE car_id = :car_id;";
+  $stmt = $bdd->prepare($sql);
+  $stmt->bindParam(':car_id', $car_id, PDO::PARAM_INT);
   $stmt->execute();
   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
   $stmt = null;
@@ -97,7 +108,7 @@ function get_car_by_id(PDO $bdd, int $id)
 
 function get_all_cars(PDO $bdd)
 {
-  $sql = "SELECT cars.*, images.file_name FROM cars JOIN images ON cars.id = images.car_id;";
+  $sql = "SELECT cars.*, images.file_name FROM cars JOIN images ON cars.id = images.car_id ORDER BY cars.id DESC;";
   $stmt = $bdd->prepare($sql);
   $stmt->execute();
   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -211,7 +222,7 @@ function get_filter(
     $sql .= "AND mileage <= :mileage_max ";
   }
 
-  $sql .= ";";
+  $sql .= "ORDER BY cars.id DESC;";
   $stmt = $bdd->prepare($sql);
 
   if ($year_min) {

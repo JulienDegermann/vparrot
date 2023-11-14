@@ -226,11 +226,6 @@ if (isset($_POST['new_car'])) {
   $active = 'cars';
 }
 
-
-
-
-
-
 if (isset($_POST['update_car'])) {
   $id = isset($_POST['id']) ? intval($_POST['id']) : null;
   $brand = isset($_POST['brand']) ? $_POST['brand'] : null;
@@ -376,6 +371,10 @@ if (isset($_GET['admin'])) {
         case 'cars':
           switch ($action) {
             case 'delete':
+              $img = get_main_picture($bdd, $id);
+              var_dump($img);
+              unlink(_UPLOAD_IMAGES_ . $img['file_name']);
+              $delete_image = delete_images_by_id($bdd, $id);
               $delete_car = delete_car_by_id($bdd, $id);
               if ($delete_car) {
                 $infos[] = 'Véhicule supprimé avec succès';

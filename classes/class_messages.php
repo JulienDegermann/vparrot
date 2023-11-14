@@ -55,7 +55,7 @@ function delete_message_by_id($bdd, $id)
 function get_all_new_messages(PDO $bdd)
 {
   $sql = "SELECT messages.*, users.id AS user_id, users.first_name, users.last_name, users.tel, users.email FROM messages 
-            JOIN users ON users.id = messages.user_id ";
+            JOIN users ON users.id = messages.user_id ORDER BY id DESC";
   $stmt = $bdd->prepare($sql);
   $stmt->execute();
   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
