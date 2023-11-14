@@ -372,7 +372,6 @@ if (isset($_GET['admin'])) {
           switch ($action) {
             case 'delete':
               $img = get_main_picture($bdd, $id);
-              var_dump($img);
               unlink(_UPLOAD_IMAGES_ . $img['file_name']);
               $delete_image = delete_images_by_id($bdd, $id);
               $delete_car = delete_car_by_id($bdd, $id);

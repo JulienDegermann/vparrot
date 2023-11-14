@@ -218,7 +218,7 @@ $services = get_services($bdd);
                     </label>
                   </fieldset>
                   <p class="requirements">
-                    * Le mot de passe doit contenir au moins : 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial
+                    * Le mot de passe doit contenir au moins : 12 caractères, 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial
                   </p>
                   <input class="button" type="submit" value="Enregistrer" name="new_employee">
                 </form>
