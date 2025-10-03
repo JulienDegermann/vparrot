@@ -19,11 +19,12 @@ function delete_images_by_id(PDO $bdd, int $car_id)
   $stmt->execute();
   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
   $stmt = null;
+  
   return $result;
 }
 
 
-function update_main_picture(PDO $bdd, int $car_id, string $file_name,bool|int $is_main = true)
+function update_main_picture(PDO $bdd, int $car_id, string $file_name, bool|int $is_main = true)
 {
   $sql = "UPDATE images SET file_name = :file_name WHERE car_id = :car_id AND is_main = :is_main;";
   $stmt = $bdd->prepare($sql);
