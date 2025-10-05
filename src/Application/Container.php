@@ -5,25 +5,19 @@ namespace App\Application;
 use PDO;
 use ReflectionClass;
 use InvalidArgumentException;
+use App\Application\InterfaceBinding;
 use App\Config\DataBase\DatabaseConnect;
-use App\Domaine\CarAds\Repositories\CarRepository;
-use App\Domaine\CarAds\Interfaces\CarRepositoryInterface;
 
 final class Container
 {
     /**
      * matches interfaces to corresponding classes
-     * @param string $interface - namespace of the interface
-     * @return string $class - corresponding class
+     * @param string $interface namespace of the interface
+     * @return string $class corresponding class
      */
     private static function interfaceBinding(string $interface): string
     {
-
-        $binding = [
-            CarRepositoryInterface::class => CarRepository::class,
-        ];
-
-
+        $binding = InterfaceBinding::getBindings();
         $class = $binding[$interface] ?? null;
         if (!$class) {
             throw new InvalidArgumentException("ERROR : corresponding class for $interface not found");
@@ -34,16 +28,14 @@ final class Container
 
     /**
      * Get class for dependency injection
-     * @param string $class - namespace of the class to inject
+     * @param string $class namespace of the class to inject
      * @return object 
      */
     public static function getClass(string $class): object
     {
-
         if ($class === PDO::class) {
             return (new DatabaseConnect())->connect();
         }
-
 
         if (interface_exists($class)) {
             $class = self::interfaceBinding($class);

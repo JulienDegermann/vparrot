@@ -15,7 +15,7 @@ final class Router
 {
     /**
      * Define the routes of the application
-     * @var array $routes - the routes of the application
+     * @var array $routes the routes of the application
      */
     private array $routes = [
         '/' => [HomeController::class, 'index'],
@@ -25,7 +25,7 @@ final class Router
 
     /**
      * Get the current URI
-     * @return string $uri - the current URI
+     * @return string $uri the current URI
      */
     private function getUri(): string
     {

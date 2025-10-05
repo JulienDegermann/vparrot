@@ -12,7 +12,7 @@ final class CarBrandRepository extends AbstractRepository
 
     /**
      * Save the current Car in the database
-     * @param Car $datas - datas Car to save in database
+     * @param Car $datas datas Car to save in database
      * @return void
      */
     public function save(Car $datas): void

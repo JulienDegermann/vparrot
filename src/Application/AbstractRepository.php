@@ -3,18 +3,23 @@
 namespace App\Application;
 
 use PDO;
+use App\Application\SessionInterface;
+
 
 abstract class AbstractRepository
 {
     protected string $table;
 
     public function __construct(
-        protected readonly PDO $pdo
-    ) {}
+        protected readonly PDO $pdo,
+        protected readonly SessionInterface $session
+    ) {
+        $this->session->setSession();
+    }
 
     /**
      * find all items from the table
-     * @return array|null - items with of the item or null if not found
+     * @return array|null items with of the item or null if not found
      */
     public function findAll(): array
     {
@@ -27,8 +32,8 @@ abstract class AbstractRepository
 
     /**
      * find one item by its id
-     * @param int $id - id of the item
-     * @return array|null - datas of the item or null if not found
+     * @param int $id id of the item
+     * @return array|null datas of the item or null if not found
      */
     public function findOneById(int $id)
     {
