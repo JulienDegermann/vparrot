@@ -1,27 +1,22 @@
 <?php
-// DB
-require_once 'data_base/data_base_connect.php';
-require_once 'classes/class_company.php';
-require_once 'config/functions.php';
 
-$company = get_all_informations($bdd);
-
-// SESSION
-ini_set('session.save_path', 'session_files/');
-session_start();
-if (!isset($_SESSION['user']['role'])) {
-  $_SESSION['user']['role'] = 'client';
-}
-if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 60 * 15)) {
-  session_unset();
-  session_destroy();
-} else {
-  $_SESSION['last_activity'] = time();
-}
+/**
+ * check session settings : create directory and files
+ */
+// ini_set('session.save_path', 'session_files/');
+// session_start();
+// if (!isset($_SESSION['user']['role'])) {
+//   $_SESSION['user']['role'] = 'client';
+// }
+// if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 60 * 15)) {
+//   session_unset();
+//   session_destroy();
+// } else {
+//   $_SESSION['last_activity'] = time();
+// }
 
 $errors = [];
 $infos = [];
-require_once 'config/config.php';
 ?>
 
 
