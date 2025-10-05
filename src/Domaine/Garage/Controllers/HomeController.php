@@ -10,11 +10,12 @@ final class HomeController extends AbstractController
     public function index(
         CarRepositoryInterface $carRepository
     ) {
-
         $cars = $carRepository->findAll();
         $content = __DIR__ . './../templates/home.php';
+
         $this->render(ROOT_DIR . '/templates/base.php', [
-            'content' => $content
+            'content' => $content,
+            'cars' => $cars
         ]);
     }
 }

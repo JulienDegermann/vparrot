@@ -43,11 +43,7 @@ $infos = [];
   <!-- CUSTOM CSS -->
   <!-- PAGE SPECEFIC CSS -->
   <link rel="stylesheet" href="assets/css/index.css">
-  <link rel="stylesheet" href="assets/css/<?php echo $current_page ?>.css">
-  <?php if ($current_page == 'used_car') : echo ('<link rel="stylesheet" href="assets/css/contact_form.css">');
-  endif ?>
-
-  <title><?= $title ?? 'Garage Vincent Parrot'?></title>
+  <title><?= $title ?? 'Garage Automobile Vincent Parrot' ?></title>
 </head>
 
 <body> <!------------------------------------------------------------ HEADER START-->
@@ -85,6 +81,11 @@ $infos = [];
       </div>
     </div>
   </header>
+
+  <?php if (isset($flashes)) {
+    include_once ROOT_DIR . '/templates/_partials/_flashes.php';
+  } ?>
+
   <!------------------------------------------------------------- HEADER END -->
 
   <!------------------------------------------------------------- MAIN START -->
