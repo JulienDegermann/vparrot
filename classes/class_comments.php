@@ -66,7 +66,7 @@ function get_all_new_comments(PDO $bdd)
 {
   $sql = "SELECT comments.*, users.id AS user_id, users.first_name, users.last_name FROM comments 
           JOIN users ON users.id = comments.user_id 
-          WHERE is_checked IS NULL;";
+          WHERE is_checked IS NULL ORDER BY comments.id DESC;";
   $stmt = $bdd->prepare($sql);
   $stmt->execute();
   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -77,7 +77,7 @@ function get_all_new_comments(PDO $bdd)
 function get_all_valid_comments(PDO $bdd)
 {
   $sql = "SELECT comments.*, users.id AS user_id, users.first_name, users.last_name FROM comments 
-  JOIN users ON users.id = comments.user_id WHERE is_checked = 1;";
+  JOIN users ON users.id = comments.user_id WHERE is_checked = 1 ORDER BY comments.id DESC;";
   $stmt = $bdd->prepare($sql);
   $stmt->execute();
   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
