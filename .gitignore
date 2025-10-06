@@ -16,5 +16,5 @@ session_files/*
 # uploaded files
 public/upload/images/*
 
-/config/SessionFiles/*
+config/SessionFiles/*
 DatabaseConnect.php
