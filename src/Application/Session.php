@@ -2,19 +2,17 @@
 
 namespace App\Application;
 
-use App\Application\SessionInterface;
-use DateTime;
 use DateTimeImmutable;
 
-final class Session implements SessionInterface
+final class Session
 {
-    protected $session;
-
-    public function setSession(): void
+    public static function setSession(): void
     {
         ini_set('session.save_path', ROOT_DIR . 'config/SessionFiles/');
-        session_start();
-        $this->session = $_SESSION;
+
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
 
         /**
          * @var int $now now in timestamp in secondes
@@ -26,17 +24,22 @@ final class Session implements SessionInterface
          */
         $delay =  60 * 30;
 
+        if (!isset($_SESSION['flash'])) {
+            $_SESSION['flash'] = [];
+        }
+
         if (
-            isset($this->session['last_activity']) &&
-            $now - $this->session['last_activity'] > $delay
+            isset($_SESSION['last_activity']) &&
+            $now - $_SESSION['last_activity'] > $delay
         ) {
         }
-        $this->session['last_activity'] = $now;
+        $_SESSION['last_activity'] = $now;
     }
 
-    public function destroySession(): void
+    public static function destroySession(): void
     {
         session_unset();
         session_destroy();
+        session_start();
     }
 }

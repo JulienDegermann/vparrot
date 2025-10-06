@@ -3,19 +3,14 @@
 namespace App\Application;
 
 use PDO;
-use App\Application\SessionInterface;
-
 
 abstract class AbstractRepository
 {
     protected string $table;
 
     public function __construct(
-        protected readonly PDO $pdo,
-        protected readonly SessionInterface $session
-    ) {
-        $this->session->setSession();
-    }
+        protected readonly PDO $pdo
+    ) {}
 
     /**
      * find all items from the table
