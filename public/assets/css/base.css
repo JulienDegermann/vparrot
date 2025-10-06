@@ -27,11 +27,17 @@ main {
     position: relative;
 }
 
+.flash-wrapper {
+    position: absolute;
+    top: 120px;
+    z-index: 2000;
+}
+
 .flash {
     border: 1px solid;
     border-radius: 4px;
     padding: 1rem;
-    margin-top: .5rem;
+    margin-top: 0.5rem;
     width: max-content;
 
     &.error {
@@ -178,10 +184,12 @@ header {
     text-transform: uppercase;
     background: hsla(189.47, 61.29%, 18.24%, 0.4);
 }
+
 header .container,
 header .row {
     height: 100%;
 }
+
 header .row > a {
     display: inline-block;
     height: 100%;

@@ -1,7 +1,7 @@
 <section id="section-1">
     <!-- HERO BANNER BACKGROUND -->
     <!-- <figure> -->
-    <img src="assets/images/pictures/repair.jpeg" alt="hero banner">
+    <img src="/assets/images/pictures/repair.jpeg" alt="hero banner">
     <!-- </figure> -->
     <div class="container">
         <div class="row">
@@ -45,10 +45,12 @@
 
             <div class=" comments-slider">
                 <?php
-                $comments = get_all_valid_comments($bdd);
-                foreach ($comments as $comment) {
-                    $current_comment = new Comments($comment['id'], $comment['first_name'], $comment['last_name'], $comment['note'], $comment['comment']);
-                    $current_comment->display_item();
+                if (isset($comments)) {
+                    $comments = get_all_valid_comments($bdd);
+                    foreach ($comments as $comment) {
+                        $current_comment = new Comments($comment['id'], $comment['first_name'], $comment['last_name'], $comment['note'], $comment['comment']);
+                        $current_comment->display_item();
+                    }
                 }
                 ?>
             </div>

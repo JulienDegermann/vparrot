@@ -1,17 +1,29 @@
-<div class="car-vignette">
-  <div class="img">
-    <img src="<?= _UPLOAD_IMAGES_ . $this->pictures; ?>" alt="photo <?= $this->brand . ' ' . $this->model; ?>">
-  </div>
-  <div class="text">
-    <h2><?php echo $this->brand . " " . $this->model; ?></h2>
+<a
+  class="car-vignette"
+  href="/nos-vehicules/<?= $car['id'] ?? 1 ?>">
+
+  <?php
+  if (isset($car['id'])) {
+  ?>
+    <div class="img">
+      <img src="<?= _UPLOAD_IMAGES_ . $car->pictures; ?>" alt="photo <?= $car->brand . ' ' . $car->model; ?>">
+    </div>
+
     <div>
       <ul>
-        <li>Année: <?php echo $this->year; ?></li>
-        <li>Kilométrage: <?php echo $this->mileage; ?> kms</li>
-        <li class="price"><?php echo $this->price; ?> €</li>
+        <li>Année: <?= $car->year; ?></li>
+        <li>Kilométrage: <?= $car->mileage; ?> kms</li>
+        <li class="price"><?= $car->price; ?> €</li>
       </ul>
-      <a href="used_car.php?id=<?php echo $this->id ?>" class="button">+ d'infos</a>
+      <a href="/nos-vehicules/<?= $car->id ?>" class="button">+ d'infos</a>
 
     </div>
+  <?php }
+  ?>
+  <img class="img" src="/uploads/images/2VolkswagenGolf0.jpeg" alt="photo <?= $car['brand'] . ' ' . $car['model']; ?>">
+
+
+  <div class="text">
+    <h2><?= $car['brand'] . " " . $car['model']; ?></h2>
   </div>
-</div>
+</a>

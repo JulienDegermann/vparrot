@@ -1,4 +1,4 @@
-<div class="container">
+<div class="flash-wrapper">
   <?php
   foreach ($flashes as $flash) { ?>
     <div class="flash <?= $flash['type'] ?>">

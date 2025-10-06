@@ -1,20 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    <section>
-        <h2>Nos véhicules</h2>
-
+<section>
+    <h2>Nos véhicules</h2>
+    <div class="car-wrapper">
         <?php foreach ($cars as $car):
-            include __DIR__ . '/_partials/_cars.php';
+            include __DIR__ . '/_partials/_car_card.php';
         endforeach; ?>
-    </section>
-</body>
-
-</html>
+    </div>
+</section>

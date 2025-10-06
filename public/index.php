@@ -5,10 +5,13 @@ include_once __DIR__ . '/../src/Application/Container.php';
 
 
 use App\Application\Router;
+use App\Application\Session;
 use App\Application\Container;
-use App\Config\DataBase\DatabaseConnect;
 
+define('ROOT_DIR', __DIR__ . '/../');
+define('UPLOADS_DIR', '/uploads');
+
+Session::setSession();
 
 $router = Container::getClass(Router::class);
 $router->routeDispatch();
-// DatabaseConnect::connect();

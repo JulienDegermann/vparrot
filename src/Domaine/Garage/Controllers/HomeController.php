@@ -13,9 +13,12 @@ final class HomeController extends AbstractController
         $cars = $carRepository->findAll();
         $content = __DIR__ . './../templates/home.php';
 
+        $home = true;
+
         $this->render(ROOT_DIR . '/templates/base.php', [
             'content' => $content,
-            'cars' => $cars
+            'cars' => $cars,
+            'home' => $home
         ]);
     }
 }
