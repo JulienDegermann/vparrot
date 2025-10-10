@@ -4,18 +4,6 @@ namespace App\Application;
 
 abstract class AbstractController
 {
-
-    // public function __construct()
-    // {
-    //     if (isset($_SESSION['flash'])) {
-    //         $sessionFlash = $_SESSION['flash'] ?? null;
-    //         if ($sessionFlash) {
-    //             $this->addFlash($sessionFlash['type'], $sessionFlash['message']);
-    //             $_SESSION['flash'] = null;
-    //         }
-    //     }
-    // }
-
     /**
      * @var array $flashes array containing flash messages
      */
