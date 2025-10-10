@@ -2,8 +2,12 @@
 
 namespace Domaine\CarAds\Entities;
 
+use App\Application\Traits\CreatedUpdatedTrait;
+
 final class CarModel
 {
+    use CreatedUpdatedTrait;
+    
     private int $id;
     private string $model;
 

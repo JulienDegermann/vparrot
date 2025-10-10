@@ -60,7 +60,7 @@
               </a>
             </li>
             <li>
-              <a href="/contact" class="header-nav-link">
+              <a href="/nous-contacter" class="header-nav-link">
                 <p>Contact</p>
               </a>
             </li>

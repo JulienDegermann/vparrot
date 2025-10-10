@@ -6,6 +6,7 @@ use ReflectionMethod;
 
 use App\Application\Container;
 use App\Application\NotFoundController;
+use App\Domaine\Contact\Controllers\ContactController;
 use App\Domaine\CarAds\Controllers\CarController;
 use App\Domaine\Garage\Controllers\HomeController;
 
@@ -21,8 +22,8 @@ final class Router
     private array $routes = [
         '/' => [HomeController::class, 'index'],
         '/nos-vehicules' => [CarController::class, 'index'],
-        '/nos-vehicules/{id}' => [CarController::class, 'carDetails']
-        // 'nous-contacter' => ContactController::class,
+        '/nos-vehicules/{id}' => [CarController::class, 'carDetails'],
+        '/nous-contacter' => [ContactController::class, 'index'],
     ];
 
     /**
@@ -35,40 +36,6 @@ final class Router
 
         return $uri === '/' ? $uri : rtrim($uri, '/');
     }
-
-    // /**
-    //  * Dispatch the route from current URI
-    //  * @return void
-    //  */
-    // public function routeDispatch(): void
-    // {
-
-
-    //     $route = $this->routes[$this->getUri()] ?? [NotFoundController::class, 'index'];
-
-
-    //     [$controllerClass, $method] = $route;
-
-    //     $controller = Container::getClass($controllerClass);
-
-    //     $methodResolver = new ReflectionMethod($controllerClass, $method);
-    //     $methodArgs = [];
-
-    //     foreach ($methodResolver->getParameters() as $param) {
-    //         $type = $param->getType()?->getName();
-
-    //         if (!$type) {
-    //             throw new \Exception("Cannot autowire method parameter '{$param->getName()}' in {$controllerClass}::{$method}. Ensure all method parameters are typed (class/interface).");
-    //         }
-
-    //         $methodArgs[] = Container::getClass($type);
-    //     }
-
-    //     $controller->$method(...$methodArgs);
-    // }
-
-
-
 
     /**
      * Dispatch the route from current URI

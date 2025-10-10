@@ -1,8 +1,12 @@
 <?php
 
+use App\Application\Traits\CreatedUpdatedTrait;
+
 
 final class CarEnergy
 {
+    use CreatedUpdatedTrait;
+    
     private int $id;
     private string $energy;
 

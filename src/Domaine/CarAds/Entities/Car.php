@@ -1,13 +1,12 @@
 <?php
 
+use App\Application\Traits\CreatedUpdatedTrait;
 use Application\Domain\CarAds\Entities\CarBrand;
-
-
-
-
 
 final class Car
 {
+    use CreatedUpdatedTrait;
+    
     private int $id;
     private CarBrand $carBrand;
     private CarModel $carModel;
