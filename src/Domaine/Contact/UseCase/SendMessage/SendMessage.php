@@ -10,6 +10,7 @@ use App\Domaine\UserManagement\UseCases\CreateUserInterface;
 use App\Domaine\Contact\Repositories\MessageRepositoryInterface;
 use App\Domaine\UserManagement\Repositories\UserRepositoryInterface;
 use DateTimeImmutable;
+use InvalidArgumentException;
 
 final class SendMessage implements SendMessageInterface
 {
@@ -31,6 +32,14 @@ final class SendMessage implements SendMessageInterface
                 $messageDTO->getPhone() ?? null
             );
             $user = ($this->createUser)($userDTO);
+        }
+
+        if (strlen($messageDTO->getMessage()) < 20 || strlen($messageDTO->getMessage()) > 500) {
+            throw new InvalidArgumentException('Message invalide (20 caractères minimum).');
+        }
+
+        if (!preg_match(MESSAGE_REGEX, $messageDTO->getMessage())) {
+            throw new InvalidArgumentException('Message invalide (caractères non autorisés).');
         }
 
         $message = new Message();
