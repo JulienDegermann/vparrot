@@ -1,84 +1,89 @@
 h3 {
-  text-align: center;
-  margin: auto;
-  margin-bottom: 1em;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 1em;
 }
 
 form {
-  display: flex;
-  width: 100%;
-  flex-wrap: wrap;
-  position: relative;
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    position: relative;
 }
 
 label {
-  display: inline-block;
-  padding: 5px;
+    display: inline-block;
+    padding: 5px;
 }
 @media screen and (max-width: 1023px) {
-  label {
-    width: 100%;
-    max-width: 100%;
-  }
+    label {
+        width: 100%;
+        max-width: 100%;
+    }
 }
 @media screen and (min-width: 1024px) {
-  label {
-    width: 50%;
-    max-width: 50%;
-  }
+    label {
+        width: 50%;
+        max-width: 50%;
+    }
 }
-label input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid hsla(189.47, 61.29%, 18.24%, 0.7);
+label input,
+input,
+select {
+    width: auto;
+    padding: 10px;
+    border: 1px solid hsla(189.47, 61.29%, 18.24%, 0.7);
 }
 
-label[for=message] {
-  max-width: 100%;
-  width: 100%;
+
+
+label[for="message"] {
+    max-width: 100%;
+    width: 100%;
 }
-label[for=message] textarea {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid hsla(189.47, 61.29%, 18.24%, 0.7);
+label[for="message"] textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid hsla(189.47, 61.29%, 18.24%, 0.7);
 }
 
 .tos {
-  color: hsla(189.47, 61.29%, 18.24%, 0.7);
-  width: auto;
-  max-width: 100%;
+    color: hsla(189.47, 61.29%, 18.24%, 0.7);
+    width: auto;
+    max-width: 100%;
 }
 .tos input {
-  width: auto;
-  vertical-align: baseline;
+    width: auto;
+    vertical-align: baseline;
 }
 .tos a {
-  font-weight: bold;
-  color: hsl(189.47, 61.29%, 18.24%);
+    font-weight: bold;
+    color: hsl(189.47, 61.29%, 18.24%);
 }
 
-input::-moz-placeholder, textarea::-moz-placeholder {
-  color: hsla(189.47, 61.29%, 18.24%, 0.4);
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+    color: hsla(189.47, 61.29%, 18.24%, 0.4);
 }
 
 input::placeholder,
 textarea::placeholder {
-  color: hsla(189.47, 61.29%, 18.24%, 0.4);
+    color: hsla(189.47, 61.29%, 18.24%, 0.4);
 }
 
 input:focus,
 textarea:focus {
-  background: hsla(48.76, 100%, 49.22%, 0.1);
-  color: hsl(189.47, 61.29%, 18.24%);
-  border: 1px solid hsl(189.47, 61.29%, 18.24%);
+    background: hsla(48.76, 100%, 49.22%, 0.1);
+    color: hsl(189.47, 61.29%, 18.24%);
+    border: 1px solid hsl(189.47, 61.29%, 18.24%);
 }
 
 input:focus-visible,
 textarea:focus-visible {
-  outline: none;
+    outline: none;
 }
 
-input[type=submit] {
-  margin-left: 100%;
-  transform: translateX(-100%);
-}/*# sourceMappingURL=contact_form.css.map */
+input[type="submit"] {
+    margin-left: 100%;
+    transform: translateX(-100%);
+} /*# sourceMappingURL=contact_form.css.map */

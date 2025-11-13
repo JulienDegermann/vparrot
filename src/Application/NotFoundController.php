@@ -8,7 +8,7 @@ final class NotFoundController extends AbstractController
     {
         $content = ROOT_DIR . '/templates/404.php';
 
-        $this->render(ROOT_DIR . '/templates/base.php', [
+        $this->render([
             'content' => $content
         ]);
     }

@@ -1,197 +1,229 @@
 @media screen and (min-width: 520px) {
-  .mobile_only {
-    display: none;
-  }
+    .mobile_only {
+        display: none;
+    }
 }
 @media screen and (max-width: 519px) {
-  .desktop_only {
-    display: none;
-  }
-  .mobile_only {
-    padding: 0 1em;
-  }
+    .desktop_only {
+        display: none;
+    }
+    .mobile_only {
+        padding: 0 1em;
+    }
 }
 header {
-  position: relative;
-  z-index: 1;
+    position: relative;
+    z-index: 1;
 }
 
 .logout {
-  top: 50%;
-  right: 0;
+    top: 50%;
+    right: 0;
 }
 @media screen and (max-width: 519px) {
-  .logout {
-    max-width: 55%;
-  }
+    .logout {
+        max-width: 55%;
+    }
 }
 .logout p {
-  text-transform: capitalize;
-  text-align: center;
-  margin-bottom: 0.5em;
+    text-transform: capitalize;
+    text-align: center;
+    margin-bottom: 0.5em;
 }
 
 .active {
-  background-color: hsl(48.76, 100%, 49.22%);
-  font-weight: bold;
+    background-color: hsl(48.76, 100%, 49.22%);
+    font-weight: bold;
 }
 
 h2 {
-  margin-top: 1em;
-  margin-bottom: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
 
 .bloc-4 {
-  height: 100%;
-  margin-top: 1em;
-  position: static;
+    height: 100%;
+    margin-top: 1em;
+    position: static;
 }
 @media screen and (min-width: 1024px) {
-  .bloc-4 {
-    position: sticky;
-    top: 0;
-  }
+    .bloc-4 {
+        position: sticky;
+        top: 0;
+    }
 }
 .bloc-4 ul {
-  margin-top: 1em;
-  margin-bottom: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
 .bloc-4 li {
-  padding: 1em;
-  border: 1px solid hsla(189.47, 61.29%, 18.24%, 0.7);
+    padding: 1em;
+    border: 1px solid hsla(189.47, 61.29%, 18.24%, 0.7);
 }
 .bloc-4 li:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .bloc-3-4 > * {
-  display: none;
+    display: none;
 }
-.bloc-3-4.garage > .garage, .bloc-3-4.employees > .employees, .bloc-3-4.messages > .messages, .bloc-3-4.comments > .comments, .bloc-3-4.cars > .cars {
-  display: block;
+.bloc-3-4 > .garage,
+.bloc-3-4 > .employees,
+.bloc-3-4 > .messages,
+.bloc-3-4 > .comments,
+.bloc-3-4 > .cars {
+    display: block;
 }
 .bloc-3-4 form {
-  width: 100%;
-  flex-wrap: wrap;
-  position: relative;
+    width: 100%;
+    flex-wrap: wrap;
+    position: relative;
 }
 .bloc-3-4 form .requirements {
-  font-size: 14px;
-  color: hsla(189.47, 61.29%, 18.24%, 0.7);
-  font-style: italic;
+    font-size: 14px;
+    color: hsla(189.47, 61.29%, 18.24%, 0.7);
+    font-style: italic;
 }
 .bloc-3-4 form img {
-  max-width: 150px;
+    max-width: 150px;
 }
 .bloc-3-4 fieldset {
-  width: 100%;
-  max-width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  padding: 1em;
-  border: none;
-  margin-top: 1em;
-  margin-bottom: 1em;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1em;
+    border: none;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
 .bloc-3-4 label {
-  width: 50%;
-  max-width: 50%;
-  display: inline-block;
-  padding: 5px;
+    width: 50%;
+    max-width: 50%;
+    display: inline-block;
+    padding: 5px;
 }
 .bloc-3-4 label input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid hsla(189.47, 61.29%, 18.24%, 0.7);
+    width: 100%;
+    padding: 10px;
+    border: 1px solid hsla(189.47, 61.29%, 18.24%, 0.7);
 }
 .bloc-3-4 .service_style label,
 .bloc-3-4 .service_style textarea {
-  width: 100%;
-  max-width: 100%;
-  padding: 10px;
+    width: 100%;
+    max-width: 100%;
+    padding: 10px;
 }
 .bloc-3-4 .service_style textarea {
-  height: 200px;
+    height: 200px;
 }
 .bloc-3-4 .service_style input {
-  width: 50%;
+    width: 50%;
 }
 
 .button {
-  width: -moz-max-content;
-  width: max-content;
-  height: -moz-max-content;
-  height: max-content;
-  align-self: center;
-  border: none;
+    width: -moz-max-content;
+    width: max-content;
+    height: -moz-max-content;
+    height: max-content;
+    align-self: center;
+    border: none;
 }
 
 table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: center;
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
 }
 table tr {
-  height: 2em;
+    height: 2em;
 }
 table th,
 table td {
-  border: 1px solid hsla(189.47, 61.29%, 18.24%, 0.7);
-  padding: 0 1em;
-  width: auto;
+    border: 1px solid hsla(189.47, 61.29%, 18.24%, 0.7);
+    padding: 0 1em;
+    width: auto;
 }
 table .center {
-  text-align: center;
+    text-align: center;
 }
 table span {
-  max-width: 45%;
-  display: inline-block;
+    max-width: 45%;
+    display: inline-block;
 }
 table span svg {
-  cursor: pointer;
-  width: 100%;
+    cursor: pointer;
+    width: 100%;
 }
 table img {
-  width: 100%;
-  height: 100%;
-  -o-object-fit: contain;
-     object-fit: contain;
+    width: 100%;
+    height: 100%;
+    -o-object-fit: contain;
+    object-fit: contain;
 }
 
 .comments .save {
-  fill: green;
+    fill: green;
 }
 .comments .cancel {
-  fill: hsl(0, 100%, 49.8%);
+    fill: hsl(0, 100%, 49.8%);
 }
 .comments .checked .save {
-  display: none;
+    display: none;
 }
 
 #opening_setting .warning {
-  color: hsla(189.47, 61.29%, 18.24%, 0.7);
-  background: hsla(48.76, 100%, 49.22%, 0.1);
-  padding: 1em;
-  border: 1px solid hsl(48.76, 100%, 49.22%);
-  border-radius: 5px;
-  margin-top: -1em;
-  font-size: 0.8em;
-  margin-bottom: 1em;
-  text-align: left;
+    color: hsla(189.47, 61.29%, 18.24%, 0.7);
+    background: hsla(48.76, 100%, 49.22%, 0.1);
+    padding: 1em;
+    border: 1px solid hsl(48.76, 100%, 49.22%);
+    border-radius: 5px;
+    margin-top: 1em;
+    font-size: 0.8em;
+    margin-bottom: 1em;
+    text-align: left;
 }
 #opening_setting p {
-  width: 100%;
-  text-align: center;
+    width: 100%;
+    text-align: center;
 }
 #opening_setting p span {
-  display: inline-block;
-  width: 12%;
-  text-align: right;
+    display: inline-block;
+    width: 12%;
+    text-align: right;
 }
 #opening_setting p label {
-  width: 20%;
-  font-size: 0.7em;
+    width: 20%;
+    font-size: 0.7em;
 }
 #opening_setting p label input {
-  width: 100%;
-}/*# sourceMappingURL=admin.css.map */
+    width: 100%;
+}
+
+.hidden-labels {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+#add-opening {
+    width: 2em;
+    height: 2em;
+    aspect-ratio: 1 / 1;
+    padding: 0;
+    text-align: center;
+    margin: 0 1rem;
+    border-radius: 50%;
+}
+.openings-inputs {
+    display: flex;
+    width: 100%;
+    margin: .25em 0;
+}
+#openings :is(select, input) {
+    width: auto;
+}

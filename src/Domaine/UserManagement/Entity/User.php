@@ -41,7 +41,7 @@ final class User
     /**
      * @var string $phone 
      */
-    private string $phone;
+    private ?string $phone;
 
     /**
      * @var string $role 
@@ -98,7 +98,7 @@ final class User
      * @param string $phone User's phone
      * @return static
      */
-    public function setPhone(string $phone): static
+    public function setPhone(?string $phone): static
     {
         $this->phone = $phone;
 

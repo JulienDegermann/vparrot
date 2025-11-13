@@ -25,31 +25,36 @@ abstract class AbstractRepository
     /**
      * @var string $entity corresponding Entity
      */
-    protected string $entity;
+    protected string $entity = '';
 
     /**
      * Hydrate entity with datas from database
      * @param array $datas datas recieved from database
-     * @return array array of hydrated entities
+     * @return object hydrated entity
      */
-    protected function hydrate(array $datas): object
+    protected function hydrate(array $datas, ?string $entityClass = null): object|null
     {
-        $entity = new $this->entity($datas['id']);
+        $entity = $entityClass ?? $this->entity;
 
-        foreach ($datas as $column => $data) {
-            if ($column !== 'id') {
-                if ($column === "createdAt" || $column === "updatedAt") {
-                    $value = new DateTimeImmutable($data);
-                } else {
-                    $value = $data ?? null;
+        if ($entityClass !== "") {
+            $entity = new $entity($datas['id']);
+
+            foreach ($datas as $column => $data) {
+                if ($column !== 'id') {
+                    if ($column === "createdAt" || $column === "updatedAt") {
+                        $value = new DateTimeImmutable($data);
+                    } else {
+                        $value = $data ?? null;
+                    }
+
+                    $setter = "set" . ucfirst($column);
+                    $entity->$setter($value);
                 }
-
-                $setter = "set" . ucfirst($column);
-                $entity->$setter($value);
             }
-        }
 
-        return $entity;
+            return $entity;
+        }
+        return null;
     }
 
     public function __construct(
@@ -71,7 +76,16 @@ abstract class AbstractRepository
         $stmt = $this->pdo->prepare($request);
         $stmt->execute();
         $datas = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $datas;
+        $stmt = null;
+        $result = [];
+
+        if (count($datas) > 0) {
+            foreach ($datas as $data) {
+                $entity = $this->hydrate($data);
+                $result[] = $entity;
+            }
+        }
+        return $result;
     }
 
     /**
@@ -79,7 +93,7 @@ abstract class AbstractRepository
      * @param int $id id of the item
      * @return array|null datas of the item or null if not found
      */
-    public function findOneById(int $id): ?array
+    public function findOneById(int $id): ?object
     {
         $request = "SELECT * FROM " . $this->table . " WHERE id = :id";
 
@@ -87,7 +101,9 @@ abstract class AbstractRepository
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
         $datas = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt = null;
+        $result = $datas ? $this->hydrate($datas) : null;
 
-        return $datas;
+        return $result;
     }
 }

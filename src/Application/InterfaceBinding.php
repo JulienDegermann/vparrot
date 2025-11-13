@@ -2,17 +2,21 @@
 
 namespace App\Application;
 
-use App\Application\Session;
-
 use App\Domaine\CarAds\Repositories\CarRepository;
 use App\Domaine\UserManagement\UseCases\CreateUser;
 use App\Domaine\Contact\Repositories\MessageRepository;
+use App\Domaine\UserManagement\UseCases\CreateEmployee;
 use App\Domaine\Contact\UseCase\SendMessage\SendMessage;
 use App\Domaine\CarAds\Interfaces\CarRepositoryInterface;
+use App\Domaine\CarAds\UseCases\UpdateCompanyDatas;
+use App\Domaine\CarAds\UseCases\UpdateCompanyDatasInterface;
 use App\Domaine\UserManagement\Repositories\UserRepository;
 use App\Domaine\UserManagement\UseCases\CreateUserInterface;
 use App\Domaine\Contact\Repositories\MessageRepositoryInterface;
+use App\Domaine\UserManagement\UseCases\CreateEmployeeInterface;
 use App\Domaine\Contact\UseCase\SendMessage\SendMessageInterface;
+use App\Domaine\Garage\Repositories\CompanyRepository;
+use App\Domaine\Garage\Repositories\CompanyRepositoryInterface;
 use App\Domaine\UserManagement\Repositories\AuthenticateRepository;
 use App\Domaine\UserManagement\Repositories\UserRepositoryInterface;
 use App\Domaine\UserManagement\Repositories\AuthenticateRepositoryInterface;
@@ -29,8 +33,10 @@ final class InterfaceBinding
         UserRepositoryInterface::class => UserRepository::class,
         SendMessageInterface::class => SendMessage::class,
         AuthenticateRepositoryInterface::class => AuthenticateRepository::class,
-        CreateUserInterface::class => CreateUser::class
-
+        CreateUserInterface::class => CreateUser::class,
+        CreateEmployeeInterface::class => CreateEmployee::class,
+        CompanyRepositoryInterface::class => CompanyRepository::class,
+        UpdateCompanyDatasInterface::class => UpdateCompanyDatas::class,
     ];
 
 

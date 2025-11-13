@@ -19,6 +19,20 @@ define('ROOT_DIR', __DIR__ . '/../');
  */
 define('UPLOADS_DIR', '/uploads');
 
+/**
+ * @var string base template file
+ */
+define('BASE_TEMPLATE', ROOT_DIR . "/templates/base.php");
+
+/**
+ * @var string email extension
+ */
+define('EMAIL_EXTENSION', '@example.com');
+
+
+
+
+
 // =============================================================================
 /**
  * Regex -- input validation

@@ -5,31 +5,10 @@
 <footer>
   <div class="container">
     <div class="row">
-
       <div class="planning">
         <h2>Horaires d'ouverture</h2>
 
-        <?php
-        // $req = "SELECT * FROM openings ;";
-        $openings = get_openings($bdd);
-        foreach ($openings as $opening) {
 
-          $am_opening = date('H:i', strtotime($opening['am_opening']));
-          $am_closure = date('H:i', strtotime($opening['am_closure']));
-          $pm_opening = date('H:i', strtotime($opening['pm_opening']));
-          $pm_closure = date('H:i', strtotime($opening['pm_closure']));
-
-          if ($am_opening === $am_closure && $pm_opening === $pm_closure) {
-            echo $opening['day'] . ' : fermé <br>';
-          } elseif ($am_opening === $am_closure) {
-            echo $opening['day'] . ' : fermé // ' . $pm_opening . ' - ' .  $pm_closure . '<br>';
-          } elseif ($pm_opening === $pm_closure) {
-            echo $opening['day'] . ' : ' . $am_opening . ' - ' .  $am_closure . ' // fermé <br>';
-          } else {
-            echo $opening['day'] . ' : ' . $am_opening . ' - ' .  $am_closure . ' // ' . $pm_opening . ' - ' .  $pm_closure . '<br>';
-          }
-        }
-        ?>
       </div>
 
       <div class="copyrights">
@@ -43,7 +22,7 @@
       <div class="contact">
         <a href="contact.php" class="button contact-button">
           Contactez-nous
-          <a href="tel:<?= $company['phone']; ?>" class="phone"><?= $company['phone']; ?></a>
+          <a href="tel:01938421" class="phone">01938421</a>
       </div>
     </div>
   </div>
@@ -57,13 +36,14 @@
 <!-- Slick JS (sliders) -->
 <script type="text/javascript" src="assets/js/slick-1.8.1/slick/slick.min.js"></script>
 <!--  -->
-<script src="assets/js/index.js"></script>
 <!-- page scpecific JS -->
 <?php
 if (file_exists("assets/js/$current_page.js")) :
   echo '<script src="assets/js/' . $current_page . '.js"></script>';
 endif;
 ?>
+<script src="assets/js/index.js" type="module"></script>
+
 
 </body>
 

@@ -2,13 +2,14 @@
 
 namespace App\Application;
 
-use ReflectionMethod;
 
+use ReflectionMethod;
 use App\Application\Container;
 use App\Application\NotFoundController;
-use App\Domaine\Contact\Controllers\ContactController;
 use App\Domaine\CarAds\Controllers\CarController;
 use App\Domaine\Garage\Controllers\HomeController;
+use App\Domaine\CarAds\AdminController;
+use App\Domaine\Contact\Controllers\ContactController;
 
 // define('ROOT_DIR', __DIR__ . '/../../');
 // define('UPLOADS_DIR', ROOT_DIR . 'public/uploads');
@@ -24,6 +25,7 @@ final class Router
         '/nos-vehicules' => [CarController::class, 'index'],
         '/nos-vehicules/{id}' => [CarController::class, 'carDetails'],
         '/nous-contacter' => [ContactController::class, 'index'],
+        '/admin' => [AdminController::class, 'index'],
     ];
 
     /**

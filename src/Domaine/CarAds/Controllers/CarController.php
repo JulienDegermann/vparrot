@@ -42,7 +42,7 @@ final class CarController extends AbstractController
 
         $content = __DIR__ . '/../templates/cars.php';
 
-        $this->render(ROOT_DIR . '/templates/base.php', [
+        $this->render([
             'content' => $content,
             'cars' => $cars
         ]);
@@ -71,7 +71,7 @@ final class CarController extends AbstractController
 
         $content = __DIR__ . '/../templates/car_details.php';
 
-        $this->render(ROOT_DIR . '/templates/base.php', [
+        $this->render([
             'content' => $content,
             'car' => $car
         ]);

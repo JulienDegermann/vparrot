@@ -30,6 +30,7 @@ final class AuthenticateRepository extends AbstractRepository implements Authent
         $stmt->bindValue(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt = null;
 
         return $result;
     }

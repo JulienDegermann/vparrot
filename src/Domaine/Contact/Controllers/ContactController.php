@@ -37,7 +37,7 @@ final class ContactController extends AbstractController
         }
         $content = __DIR__ . '/../templates/contact.php';
 
-        $this->render(ROOT_DIR . '/templates/base.php', [
+        $this->render([
             'content' => $content
         ]);
     }

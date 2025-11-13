@@ -6,10 +6,12 @@ use PDO;
 
 use App\Application\AbstractRepository;
 use App\Domaine\Contact\Entity\Message;
+use App\Domaine\UserManagement\Entity\User;
 
 final class MessageRepository extends AbstractRepository implements MessageRepositoryInterface
 {
     protected string $table = 'messages';
+    protected string $entity = Message::class;
 
     protected array $fields = [
         'id',
@@ -29,7 +31,52 @@ final class MessageRepository extends AbstractRepository implements MessageRepos
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(':email', $email, \PDO::PARAM_STR);
         $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $datas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = null;
+
+        $result = [];
+
+        foreach ($datas as $data) {
+            $message = $this->hydrate($data);
+            $result[] = $message;
+        }
+
+        return $result;
+    }
+
+    public function findAllMessages(): ?array
+    {
+        // update to find messages from a specific author
+        $sql = "SELECT  m.id, m.content, m.status, u.id AS author_id, u.firstName, u.lastName, u.email, u.phone FROM messages m
+                JOIN users u ON m.author = u.id;";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $datas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = null;
+
+        $result = [];
+        foreach ($datas as $data) {
+            $author = [];
+            $author['id'] = $data['author_id'];
+            $author['firstName'] = $data['firstName'];
+            $author['lastName'] = $data['lastName'];
+            $author['email'] = $data['email'];
+            $author['phone'] = $data['phone'];
+
+            $data['author'] = $author;
+            $author = $this->hydrate($author, User::class);
+
+            $newMessage = [
+                "author" => $author,
+                "content" => $data['content'],
+                "status" => $data['status'],
+                "id" => $data['id'],
+            ];
+
+            $data['author'] = $author;
+            $message = $this->hydrate($newMessage);
+            $result[] = $message;
+        }
 
         return $result;
     }

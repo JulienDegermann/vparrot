@@ -39,6 +39,26 @@ final class UserRepository extends AbstractRepository implements UserRepositoryI
         return $result;
     }
 
+    public function findAllEmployees(): ?array
+    {
+        $role = "ROLE_EMPLOYEE";
+        $sql = "SELECT * FROM users WHERE role = :role;";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':role', $role, \PDO::PARAM_STR);
+        $stmt->execute();
+        $datas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+        $result = [];
+
+        foreach ($datas as $data) {
+            $user  = $data ? $this->hydrate($data) : null;
+            $result[] = $user;
+        }
+
+        return $result;
+    }
+
     /**
      * @param User $user user to save in database
      * @return bool
