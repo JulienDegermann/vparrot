@@ -1,14 +1,36 @@
-console.log("umpoer");
-const openings = document.querySelectorAll("#opening_setting .openings-inputs");
-const openingSection = document.querySelectorAll("#opening_setting");
-const addOpening = document.querySelector("#opening_setting #add-opening");
+import OpeningTemplate from "./opening_template.js";
+const openingSection = document.querySelector("#opening_setting");
+const addOpening = document.querySelector("#add-opening");
+const openingInputsContainer = document.querySelector(
+    "#opening_setting #opening_inputs_container"
+);
+
+const removeOpenings = () => {
+    const removeOpenings = document.querySelectorAll(".remove-opening");
+
+    removeOpenings.forEach((element) => {
+        console.log(element);
+        element.addEventListener("click", (e) => {
+            console.log(e.parentNode);
+            e.target.parentNode.remove();
+        });
+    });
+};
 
 const addOpeningHandler = () => {
-    console.log("fonctionne");
-    const newOpening = openings[0].cloneNode(true);
-    openings[0].parentNode.prepend(newOpening);
-  };
-  
-  export const addNewOpening = () => {
+    const openings = document.querySelectorAll(
+        "#opening_setting .openings-inputs"
+    );
+    const node = document.createElement("div");
+    node.classList.add("openings-input");
+    node.innerHTML = OpeningTemplate(openings.length);
+    openingInputsContainer.append(node);
+
+    removeOpenings();
+};
+
+removeOpenings();
+
+export const addNewOpening = () => {
     addOpening.addEventListener("click", addOpeningHandler);
 };

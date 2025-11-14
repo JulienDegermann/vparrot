@@ -5,6 +5,7 @@ namespace App\Domaine\Garage\Repositories;
 use PDO;
 use App\Application\AbstractRepository;
 use App\Domaine\Garage\Entities\Company;
+use App\Domaine\Garage\Entities\Opening;
 
 final class CompanyRepository extends AbstractRepository implements CompanyRepositoryInterface
 {
@@ -20,26 +21,55 @@ final class CompanyRepository extends AbstractRepository implements CompanyRepos
         'city',
         'zipCode',
         'createdAt',
-        'updatedAt'
+        'updatedAt',
+        'openings'
     ];
 
 
     public function findCompanyDatas(): ?Company
     {
-        // $sql = "SELECT c.*, o.id AS opening_id, o.openTime, o.closureTime, o.day FROM companies c JOIN
-        //     openings o ON c.id = o.company WHERE c.id = 1;";
-        $sql = "SELECT c.*, o.day, o.openTime, o.closureTime, o.id AS opening_id FROM companies c 
-        LEFT JOIN openings o ON c.id = o.company WHERE c.id = 1;";
-        $sql = "SELECT * FROM companies WHERE id = 1;";
+        $sql = "SELECT c.*, o.id AS opening_id, o.openTime, o.closureTime, o.day FROM companies c LEFT JOIN
+            openings o ON c.id = o.company WHERE c.id = 1;";
 
         $stmt = $this->pdo->prepare($sql);
 
-        // $stmt->bindValue(':id', 1, PDO::PARAM_INT);
         $stmt->execute();
-        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        $datas = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $stmt = null;
 
-        $result = $this->hydrate($data);
+
+        $openings = [];
+        $company = [];
+
+
+        $company = [];
+
+        $openings = [];
+        foreach ($datas as $key => $data) {
+            if ($key === 0 && !isset($company['id'])) {
+                foreach ($this->fields as $field) {
+                    if ($field !== 'openings') {
+                        $company[$field] = $data[$field];
+                    }
+                }
+            }
+            if ($data["opening_id"] !== null) {
+                $openings[] = [
+                    'id' => $data['opening_id'],
+                    'day' => $data['day'],
+                    'openTime' => $data['openTime'],
+                    'closureTime' => $data['closureTime']
+                ];
+            }
+        }
+        
+        $openingDatas = [];
+        foreach ($openings as $opening) {
+            $openingDatas[] = $this->hydrate($opening, Opening::class);
+        }
+        
+        $company['openings'] = $openingDatas;
+        $result = $this->hydrate($company);
 
         return $result;
     }

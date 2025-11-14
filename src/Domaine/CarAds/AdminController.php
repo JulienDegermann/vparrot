@@ -4,10 +4,12 @@ namespace App\Domaine\CarAds;
 
 use Throwable;
 use App\Application\AbstractController;
-use App\Domaine\CarAds\Interfaces\CarRepositoryInterface;
 use App\Domaine\CarAds\UseCases\CompanyDatasDTO;
-use App\Domaine\CarAds\UseCases\UpdateCompanyDatasInterface;
+use App\Domaine\CarAds\UseCases\UpdateOpeningsDTO;
+use App\Domaine\CarAds\UseCases\UpdateOpeningsInterface;
+use App\Domaine\CarAds\Interfaces\CarRepositoryInterface;
 use App\Domaine\UserManagement\UseCases\CreateEmployeeDTO;
+use App\Domaine\CarAds\UseCases\UpdateCompanyDatasInterface;
 use App\Domaine\Garage\Repositories\CompanyRepositoryInterface;
 use App\Domaine\Contact\Repositories\MessageRepositoryInterface;
 use App\Domaine\UserManagement\UseCases\CreateEmployeeInterface;
@@ -17,7 +19,6 @@ final class AdminController extends AbstractController
 {
     public function __construct(
         private readonly UserRepositoryInterface $userRepo,
-        private readonly CarRepositoryInterface $carRepo,
         private readonly MessageRepositoryInterface $messageRepo,
         // private readonly CommentRepositoryInterface $commentRepo,
     ) {}
@@ -29,10 +30,9 @@ final class AdminController extends AbstractController
     public function index(
         CreateEmployeeInterface $createEmployee,
         CompanyRepositoryInterface $companyRepo,
-        UpdateCompanyDatasInterface $updateCompanyDatas
-
+        UpdateCompanyDatasInterface $updateCompanyDatas,
+        UpdateOpeningsInterface $updateOpenings
     ) {
-
         $company = $companyRepo->findOneById(1);
         $company = $companyRepo->findCompanyDatas();
 
@@ -53,14 +53,13 @@ final class AdminController extends AbstractController
             }
         }
 
-        if (isset($_POST['update_info'])) {
+        if (isset($_POST['admin_company_informations'])) {
             $datas = [
                 'company_name' => $_POST['company_name'],
                 'company_address' => $_POST['company_address'],
                 'company_zip_code' => $_POST['company_zip_code'],
                 'company_phone' => $_POST['company_phone'],
                 'company_email' => $_POST['company_email'],
-                'company_openings' => $_POST['company_openings']
             ];
 
 
@@ -70,7 +69,7 @@ final class AdminController extends AbstractController
                 $datas['company_zip_code'],
                 $datas['company_phone'],
                 $datas['company_email'],
-                $datas['company_openings']
+                $_POST['company_city']
             );
 
 
@@ -78,6 +77,12 @@ final class AdminController extends AbstractController
             $this->addFlash('success', 'Les informations de l\'entreprise ont été mises à jour avec succès.');
         }
 
+
+        if (isset($_POST['admin_company_openings'])) {
+            $datas = isset($_POST['company_openings']) ? new UpdateOpeningsDTO($_POST['company_openings']) : new UpdateOpeningsDTO([]);
+            $company->setOpenings($updateOpenings($datas));
+            $this->addFlash('success', 'Les horaires d\'ouverture ont été mises à jour avec succès.');
+        }
 
 
         $employees = $this->userRepo->findAllEmployees();

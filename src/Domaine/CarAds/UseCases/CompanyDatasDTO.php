@@ -11,7 +11,7 @@ final class CompanyDatasDTO
     private readonly string $zipCode,
     private readonly ?string $phone,
     private readonly ?string $email,
-    private readonly array $openings
+    private readonly ?string $city
   ) {}
 
 
@@ -39,9 +39,8 @@ final class CompanyDatasDTO
   {
     return $this->email;
   }
-
-  public function getOpenings(): array
+  public function getCity(): ?string
   {
-    return $this->openings;
+    return $this->city;
   }
 }

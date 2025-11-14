@@ -28,18 +28,11 @@
 
                 <section class="garage">
                     <h1>Informations générales</h1>
-                    <form action="/admin" method="post">
-                        <?php include_once __DIR__ . '/_partials/_admin_company_informations.php';
-                        include_once __DIR__ . '/_partials/_admin_openings.php';
-                        include_once __DIR__ . '/_partials/_admin_company_services.php';
-                        ?>
+                    <?php include_once __DIR__ . '/_partials/_admin_company_informations.php';
+                    include_once __DIR__ . '/_partials/_admin_openings.php';
+                    include_once __DIR__ . '/_partials/_admin_company_services.php';
+                    ?>
 
-
-
-
-                        <input class="button" type="submit" value="Enregistrer" name="update_info">
-
-                    </form>
 
                 </section>
                 <!-- --------------------------------------------------------------- -->

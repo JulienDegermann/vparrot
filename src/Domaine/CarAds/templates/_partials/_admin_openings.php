@@ -1,40 +1,35 @@
-<fieldset id="opening_setting">
+<form action="/admin" method="post" id="opening_setting">
     <legend>
         Horaires d'ouverture :
     </legend>
-    <?php
-    foreach ($company->getOpenings() as $opening) { ?>
-        <label for="day_<?= strtolower($opening->getDay()); ?>"><?= $opening->getDay(); ?> :
-            <input type="time" name="open_<?= strtolower($opening->getDay()); ?>" id="open_<?= strtolower($opening->getDay()); ?>" value="<?= $opening->getOpenTime(); ?>">
-            <input type="time" name="close_<?= strtolower($opening->getDay()); ?>" id="close_<?= strtolower($opening->getDay()); ?>" value="<?= $opening->getClosureTime(); ?>">
-        </label>
-    <?php } ?>
 
-    <?php
-    if (empty($company->getOpenings())) { ?>
-        <div class="openings-inputs">
+    <div id="opening_inputs_container">
+        <?php
+        foreach ($company->getOpenings() as $key => $opening) { ?>
+            <div class="openings-inputs">
+                <label for="company_openings_day_<?= $key; ?>" class="hidden-labels">Jour d'ouverture</label>
+                <select name="company_openings[<?= $key ?>][day]" id="company_openings_day_<?= $key; ?>">
+                    <option value="monday" <?= $opening->getDay() === "monday" ? "selected" : "" ?>>Lundi</option>
+                    <option value="tuesday" <?= $opening->getDay() === "tuesday" ? "selected" : "" ?>>Mardi</option>
+                    <option value="wednesday" <?= $opening->getDay() === "wednesday" ? "selected" : "" ?>>Mercredi</option>
+                    <option value="thursday" <?= $opening->getDay() === "thursday" ? "selected" : "" ?>>Jeudi</option>
+                    <option value="friday" <?= $opening->getDay() === "friday" ? "selected" : "" ?>>Vendredi</option>
+                    <option value="saturday" <?= $opening->getDay() === "saturday" ? "selected" : "" ?>>Samedi</option>
+                    <option value="sunday" <?= $opening->getDay() === "sunday" ? "selected" : "" ?>>Dimanche</option>
+                </select>
 
-            <label for="company_openings[day][]" class="hidden-labels">Jour d'ouverture</label>
-            <select name="company_openings[day][]" id="company_openings[day][]">
-                <option value="monday" selected>Lundi</option>
-                <option value="tuesday">Mardi</option>
-                <option value="wednesday">Mercredi</option>
-                <option value="thursday">Jeudi</option>
-                <option value="friday">Vendredi</option>
-                <option value="saturday">Samedi</option>
-                <option value="sunday">Dimanche</option>
-            </select>
+                <label for="company_openings_open_time_<?= $key; ?>" class="hidden-labels">Heure d'ouverture</label>
+                <input type="time" name="company_openings[<?= $key ?>][open_time]" id="company_openings_open_time_<?= $key; ?>" value="<?= $opening->getOpenTime() ?>">
+                <label for="company_openings_closure_time_<?= $key; ?>" class="hidden-labels">Heure de fermeture</label>
+                <input type="time" name="company_openings[<?= $key ?>][closure_time]" id="company_openings_closure_time_<?= $key; ?>" value="<?= $opening->getClosureTime() ?>">
 
-            <label for="company_openings[opening_time][]" class="hidden-labels">Heure d'ouverture</label>
-            <input type="time" name="company_openings[opening_time][]" id="company_openings[opening_time][]" value="08:00">
-            <label for="company_openings[closure_time][]" class="hidden-labels">Heure de fermeture</label>
-            <input type="time" name="company_openings[closure_time][]" id="company_openings[closure_time][]" value="18:00">
-        </div>
-    <?php
-
-    }
-    ?>
+                <button type="button" class="button remove-opening">remove opening</button>
+            </div>
+        <?php
+        } ?>
+    </div>
 
     <button class="button" type="button" id="add-opening" aria-label="Ajouter une plage horaire" aria-controls="button"> + </button>
+    <input type="submit" name="admin_company_openings" id="admin_company_openings" value="Mettre à jour les horaires" class="button">
 
-</fieldset>
+</form>

@@ -117,9 +117,9 @@ final class Company
         return $this->openings;
     }
 
-    public function setOpenings(Opening $opening): static
+    public function setOpenings(array $openings): static
     {
-        $this->openings[] = $opening;
+        $this->openings = $openings;
         return $this;
     }
 }
