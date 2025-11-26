@@ -52,8 +52,14 @@ final class Opening
         $this->company = $company;
         return $this;
     }
+
     public function getCompany(): Company
     {
         return $this->company;
+    }
+
+    public function __construct(?int $id = null)
+    {
+        $this->id = $id ?? null;
     }
 }

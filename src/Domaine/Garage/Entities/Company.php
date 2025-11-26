@@ -122,4 +122,9 @@ final class Company
         $this->openings = $openings;
         return $this;
     }
+    
+    public function __construct(?int $id = null)
+    {
+        $this->id = $id ?? null;
+    }
 }

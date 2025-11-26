@@ -10,8 +10,12 @@ use App\Domaine\CarAds\UseCases\UpdateOpeningsInterface;
 use App\Domaine\CarAds\Interfaces\CarRepositoryInterface;
 use App\Domaine\UserManagement\UseCases\CreateEmployeeDTO;
 use App\Domaine\CarAds\UseCases\UpdateCompanyDatasInterface;
+use App\Domaine\CarAds\UseCases\UpdateServicesDTO;
+use App\Domaine\CarAds\UseCases\UpdateServicesInterface;
 use App\Domaine\Garage\Repositories\CompanyRepositoryInterface;
 use App\Domaine\Contact\Repositories\MessageRepositoryInterface;
+use App\Domaine\Garage\Repositories\ServiceRepository;
+use App\Domaine\Garage\Repositories\ServiceRepositoryInterface;
 use App\Domaine\UserManagement\UseCases\CreateEmployeeInterface;
 use App\Domaine\UserManagement\Repositories\UserRepositoryInterface;
 
@@ -31,10 +35,14 @@ final class AdminController extends AbstractController
         CreateEmployeeInterface $createEmployee,
         CompanyRepositoryInterface $companyRepo,
         UpdateCompanyDatasInterface $updateCompanyDatas,
-        UpdateOpeningsInterface $updateOpenings
+        UpdateOpeningsInterface $updateOpenings,
+        ServiceRepositoryInterface $serviceRepo,
+        UpdateServicesInterface $updateServices
     ) {
         $company = $companyRepo->findOneById(1);
         $company = $companyRepo->findCompanyDatas();
+        $services = $serviceRepo->findAll();
+
 
         if (isset($_POST['new_employee'])) {
             try {
@@ -70,6 +78,7 @@ final class AdminController extends AbstractController
                 $datas['company_phone'],
                 $datas['company_email'],
                 $_POST['company_city']
+
             );
 
 
@@ -85,18 +94,25 @@ final class AdminController extends AbstractController
         }
 
 
+        if (isset($_POST['admin_company_services'])) {
+            $serviceDTO = new UpdateServicesDTO($_POST['company_services']);
+            $services = $updateServices($serviceDTO);
+
+
+            $this->addFlash('success', 'Les services de l\'entreprise ont été mis à jour avec succès.');
+        }
+
         $employees = $this->userRepo->findAllEmployees();
         $messages = $this->messageRepo->findAllMessages();
 
-        // $comments = $this->commentRepo->findAll();
         $content = __DIR__ . "/templates/admin.php";
 
         return $this->render([
             'content' => $content,
             'messages' => $messages,
             'employees' => $employees,
-            'company' => $company
-            // 'comments' => $comments
+            'company' => $company,
+            'services' => $services ?? []
         ]);
     }
 

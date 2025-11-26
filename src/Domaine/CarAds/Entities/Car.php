@@ -6,7 +6,7 @@ use Application\Domain\CarAds\Entities\CarBrand;
 final class Car
 {
     use CreatedUpdatedTrait;
-    
+
     private int $id;
     private CarBrand $carBrand;
     private CarModel $carModel;
@@ -53,5 +53,10 @@ final class Car
     public function getDescription(): ?string
     {
         return $this->description;
+    }
+
+    public function __construct(?int $id = null)
+    {
+        $this->id = $id ?? null;
     }
 }

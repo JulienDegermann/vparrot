@@ -7,7 +7,7 @@ use App\Application\Traits\CreatedUpdatedTrait;
 final class CarModel
 {
     use CreatedUpdatedTrait;
-    
+
     private int $id;
     private string $model;
 
@@ -24,5 +24,10 @@ final class CarModel
     {
         $this->model = $model;
         return $this;
+    }
+    
+    public function __construct(?int $id = null)
+    {
+        $this->id = $id ?? null;
     }
 }

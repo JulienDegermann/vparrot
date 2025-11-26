@@ -9,9 +9,7 @@ const removeOpenings = () => {
     const removeOpenings = document.querySelectorAll(".remove-opening");
 
     removeOpenings.forEach((element) => {
-        console.log(element);
         element.addEventListener("click", (e) => {
-            console.log(e.parentNode);
             e.target.parentNode.remove();
         });
     });
